@@ -52,6 +52,9 @@ ExportedObj/
 # Log files
 *.log
 
+# User Settings
+UserSettings/EditorUserSettings.asset
+
 # Unity3D generated file on crash reports
 sysinfo.txt
 
