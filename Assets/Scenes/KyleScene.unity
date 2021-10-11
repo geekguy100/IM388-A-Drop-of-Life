@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -370,7 +370,7 @@ PrefabInstance:
     - target: {fileID: 7522752573701193628, guid: 2f0c0c510b8dc59458f01e6748f0c9fa, type: 3}
       propertyPath: m_Follow
       value: 
-      objectReference: {fileID: 1454755374}
+      objectReference: {fileID: 6653745159385429867}
     - target: {fileID: 7522752573701193629, guid: 2f0c0c510b8dc59458f01e6748f0c9fa, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -474,6 +474,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
+--- !u!1 &627894599 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6653745159915978130, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
+  m_PrefabInstance: {fileID: 627894598}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &627894606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627894599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc6c42f8ee3cd1541b122f7dc8a252f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1307061323
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,11 +587,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1454755374 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6653745158901227053, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
-  m_PrefabInstance: {fileID: 627894598}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1805103791
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,3 +804,8 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
+--- !u!4 &6653745159385429867 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6653745158901227053, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
+  m_PrefabInstance: {fileID: 627894598}
+  m_PrefabAsset: {fileID: 0}

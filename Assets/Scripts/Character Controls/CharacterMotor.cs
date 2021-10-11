@@ -141,4 +141,14 @@ public class CharacterMotor : MonoBehaviour
     {
         this.jumped = jumped;
     }
+
+    /// <summary>
+    /// Swaps out the current motor data with the
+    /// data provided.
+    /// </summary>
+    /// <param name="data">The motor data to swap to.</param>
+    public void SwapMotorData(CharacterMotorDataSO data)
+    {
+        motorData = data;
+    }
 }
