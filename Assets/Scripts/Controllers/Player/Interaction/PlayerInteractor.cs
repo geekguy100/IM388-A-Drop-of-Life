@@ -42,29 +42,13 @@ namespace GoofyGhosts
 
                 // If we're near a state swapping interactable and it will swap to the state
                 // we're already in, return.
-                if (CheckSameStateOfMatter())
+                if (CheckSameStateOfMatter(interactable as IStateSwapInteractable))
                 {
                     interactableChannel.OnEventRaised(interactable, false);
                     return;
                 }
 
                 interactableChannel.OnEventRaised(interactable, true);
-
-                // <returns> True if our current state of matter is the same
-                // as the state of matter that we'd be swapping to.</returns>
-                bool CheckSameStateOfMatter()
-                {
-                    IStateSwapInteractable stateSwapInteractable = interactable as IStateSwapInteractable;
-                    if (stateSwapInteractable != null)
-                    {
-                        if (matterStateManager.CurrentState == stateSwapInteractable.GetStateOfMatter())
-                        {
-                            return true;
-                        }
-                    }
-
-                    return false;
-                }
             }
         }
 
@@ -82,6 +66,25 @@ namespace GoofyGhosts
         }
 
         /// <summary>
+        /// Returns true if the state we're in is the same 
+        /// as the state we're swapping to.
+        /// </summary>
+        /// <returns>True if the state we're in is the same 
+        /// as the state we're swapping to.</returns>
+        private bool CheckSameStateOfMatter(IStateSwapInteractable stateSwapInteractable)
+        {
+            if (stateSwapInteractable != null)
+            {
+                if (matterStateManager.CurrentState == stateSwapInteractable.GetStateOfMatter())
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// Performs the interaction.
         /// </summary>
         public override void PerformInteraction()
@@ -93,7 +96,7 @@ namespace GoofyGhosts
             // return.
             if (stateSwapInteractable != null)
             {
-                if (matterStateManager.CurrentState == stateSwapInteractable.GetStateOfMatter())
+                if (CheckSameStateOfMatter(stateSwapInteractable))
                 {
                     Debug.Log("Preventing interaction cause of same state swapping.");
                     return;

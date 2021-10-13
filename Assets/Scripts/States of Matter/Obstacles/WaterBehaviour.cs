@@ -2,7 +2,6 @@
 *    Author: Kyle Grenier
 *    Contributors: 
 *    Date Created: 
-*    Brief Description: 
 *******************************************************************/
 using System.Collections;
 using System.Collections.Generic;
@@ -70,6 +69,17 @@ namespace GoofyGhosts
         /// <param name="other">The Collider that exited the trigger.</param>
         private void OnTriggerExit(Collider other)
         {
+            // If the state shifter that exited the trigger
+            // is in the water state, make them perform a little hop.
+            if (other.TryGetComponent(out MatterStateManager matterStateManager) 
+                && other.TryGetComponent(out CharacterMotor motor))
+            {
+                if (matterStateManager.CurrentState == stateToSwapTo)
+                {
+                    motor.SetJumped(true, 0.5f, false);
+                }
+            }
+
             SwapState(StateOfMatterEnum.DEFAULT);
         }
 

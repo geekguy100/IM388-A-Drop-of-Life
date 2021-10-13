@@ -70,6 +70,10 @@ namespace GoofyGhosts
         /// <param name="value">The value of the state to swap to.</param>
         public void SwapState(StateOfMatterEnum value)
         {
+            // Don't swap if we're in the state we're swapping to.
+            if (CurrentState == value)
+                return;
+
             int index = 0;
             foreach (StateOfMatter state in states)
             {
