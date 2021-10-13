@@ -1,6 +1,6 @@
 /*****************************************************************************
 // File Name :         EnemyCharacterController.cs
-// Author :            Kyle Grenier
+// Author :            Kyle Grenier / Tristan Blair
 // Creation Date :     10/1/2021
 //
 // Brief Description : Handles moving an enemy around the game world.
@@ -16,11 +16,19 @@ public class EnemyCharacterController : MonoBehaviour
     private CharacterMotor motor;
 
     /// <summary>
+    /// Waypoint position that enemy patrols around.
+    /// </summary>
+	private GameObject waypoint;
+
+    private Vector3 inputVector;
+
+    /// <summary>
     /// Initialize components.
     /// </summary>
     private void Awake()
     {
         motor = GetComponent<CharacterMotor>();
+        waypoint = GameObject.Find("Waypoint");
     }
 
     /// <summary>
@@ -28,6 +36,13 @@ public class EnemyCharacterController : MonoBehaviour
     /// </summary>
     private void Update()
     {
-        motor.MoveCharacter(Vector3.zero);
+        inputVector = new Vector3(1, 0, 0);
+        //motor.MoveCharacter(Vector3.zero);
+    }
+
+    private void FixedUpdate()
+    {
+        //motor.MoveCharacter(inputVector);
+        transform.RotateAround(waypoint.transform.position, Vector3.right, 20 * Time.deltaTime);
     }
 }
