@@ -975,7 +975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swapStateChannel: {fileID: 11400000, guid: cf5dd6bdef0c30e4eac1dcec60decfb0, type: 2}
-  stateToSwapTo: 0
+  stateToSwapTo: 1
 --- !u!4 &6653745159385429867 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6653745158901227053, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
