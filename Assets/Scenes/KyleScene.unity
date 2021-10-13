@@ -424,10 +424,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 339070174, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 339070177, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 99453053}
+    - target: {fileID: 1053859068, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
+      propertyPath: m_fontColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1053859068, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 201326592
+      objectReference: {fileID: 0}
     - target: {fileID: 6653745159915978130, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
       propertyPath: m_Name
       value: Player

@@ -12,6 +12,7 @@ namespace GoofyGhosts
     /// <summary>
     /// Follows the player when they are able to interact with a nearby Interactable.
     /// </summary>
+    [RequireComponent(typeof(Animator))]
     public class InteractionNotificationBehaviour : MonoBehaviour
     {
         [Tooltip("Channel that invokes interactable-nearby events.")]
@@ -28,6 +29,11 @@ namespace GoofyGhosts
         /// </summary>
         private Transform mainCam;
 
+        /// <summary>
+        /// Reference to the Animator component.
+        /// </summary>
+        private Animator anim;
+
 
         #region -- // Initialization // --
         private void OnEnable()
@@ -38,6 +44,11 @@ namespace GoofyGhosts
         private void OnDisable()
         {
             interactableChannel.OnEventRaised -= OnInteractableChange;
+        }
+
+        private void Awake()
+        {
+            anim = GetComponent<Animator>();
         }
 
         private void Start()
@@ -59,13 +70,23 @@ namespace GoofyGhosts
             if (disp != null && inRange)
             {
                 displayText.text = disp.GetDisplayInfo();
-                canvas.SetActive(true);
+                anim.SetTrigger("Expand");
                 StartCoroutine(Rotate());
             }
             else
             {
-                canvas.SetActive(false);
+                anim.SetTrigger("FadeOut");
             }
+        }
+
+        private void ActivateCanvas()
+        {
+            canvas.SetActive(true);
+        }
+
+        private void DeactivateCanvas()
+        {
+            canvas.SetActive(false);
         }
 
         /// <summary>

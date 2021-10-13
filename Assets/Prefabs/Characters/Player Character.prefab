@@ -123,6 +123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 678134711}
   - component: {fileID: 678134712}
+  - component: {fileID: 1327633429}
   m_Layer: 0
   m_Name: Interaction Notification
   m_TagString: Untagged
@@ -158,9 +159,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableChannel: {fileID: 11400000, guid: b9e3ffd088b2a5c46afcacc06f5c164c, type: 2}
-  displayOffChannel: {fileID: 11400000, guid: 8fb641da6abba224aa8d81db527f2439, type: 2}
   canvas: {fileID: 339070174}
   displayText: {fileID: 1053859068}
+--- !u!95 &1327633429
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678134710}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7aced0c61454b744e9e8666713b864fe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1053859066
 GameObject:
   m_ObjectHideFlags: 0
