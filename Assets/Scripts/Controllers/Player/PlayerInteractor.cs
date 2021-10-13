@@ -22,7 +22,7 @@ namespace GoofyGhosts
         /// <param name="other">The Collider that entered the trigger.</param>
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.layer == whatIsInteractable)
+            if ((1 << other.gameObject.layer & whatIsInteractable) > 0)
             {
                 interactable = other.gameObject.GetComponent<IInteractable>();
                 interactableChannel.OnEventRaised(interactable, true);
@@ -35,7 +35,7 @@ namespace GoofyGhosts
         /// <param name="other">The Collider that entered the trigger.</param>
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.layer == whatIsInteractable)
+            if ((1 << other.gameObject.layer & whatIsInteractable) > 0)
             {
                 interactableChannel.OnEventRaised(interactable, false);
                 interactable = null;

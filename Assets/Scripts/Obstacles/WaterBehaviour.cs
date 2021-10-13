@@ -14,7 +14,7 @@ namespace GoofyGhosts
     /// Defines the behaviour for how the player interacts with the water
     /// obstacle.
     /// </summary>
-    public class WaterBehaviour : MonoBehaviour, IMatterStateChanger, IInteractable
+    public class WaterBehaviour : MonoBehaviour, IMatterStateChanger, IInteractableDisplay
     {
         [Tooltip("The channel that invokes state swap events.")]
         [SerializeField] private StateEnumChannelSO swapStateChannel;
@@ -40,6 +40,15 @@ namespace GoofyGhosts
         public void SwapState(StateOfMatterEnum value)
         {
             swapStateChannel.RaiseEvent(value);
+        }
+
+        /// <summary>
+        /// Returns the display info.
+        /// </summary>
+        /// <returns>The display info.</returns>
+        public string GetDisplayInfo()
+        {
+            return "Press 'E' to transform into a liquid.";
         }
     }
 }

@@ -4,8 +4,6 @@
 *    Date Created: 
 *    Brief Description: 
 *******************************************************************/
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace GoofyGhosts
@@ -29,6 +27,7 @@ namespace GoofyGhosts
         /// </summary>
         private void Awake()
         {
+            controls = new PlayerControls();
             interactor = GetComponent<Interactor>();
         }
 
