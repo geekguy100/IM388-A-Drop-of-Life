@@ -48,7 +48,7 @@ namespace GoofyGhosts
         /// <returns>The display info.</returns>
         public string GetDisplayInfo()
         {
-            return "Press 'E' to transform into a liquid.";
+            return "Press 'LEFT SHIFT' to transform into a liquid.";
         }
     }
 }

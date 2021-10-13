@@ -14,9 +14,6 @@ namespace GoofyGhosts
     /// </summary>
     public class InteractionNotificationBehaviour : MonoBehaviour
     {
-        [Tooltip("The Player's Transform component.")]
-        [SerializeField] private Transform player;
-
         [SerializeField] private Vector3 offset;
 
         [Tooltip("Channel that invokes interactable-nearby events.")]
@@ -28,6 +25,8 @@ namespace GoofyGhosts
         [Tooltip("The TMPro text to display.")]
         [SerializeField] private TextMeshProUGUI displayText;
 
+        private Transform mainCam;
+
 
         #region -- // Initialization // --
         private void OnEnable()
@@ -38,6 +37,11 @@ namespace GoofyGhosts
         private void OnDisable()
         {
             interactableChannel.OnEventRaised -= OnInteractableChange;
+        }
+
+        private void Start()
+        {
+            mainCam = Camera.main.transform;
         }
         #endregion
 
@@ -55,7 +59,7 @@ namespace GoofyGhosts
             {
                 displayText.text = disp.GetDisplayInfo();
                 canvas.SetActive(true);
-                StartCoroutine(FollowPlayer());
+                StartCoroutine(Rotate());
             }
             else
             {
@@ -64,13 +68,14 @@ namespace GoofyGhosts
         }
 
         /// <summary>
-        /// Follows the player with an offset.
+        /// Rotates the display to face the camera.
         /// </summary>
-        private IEnumerator FollowPlayer()
+        private IEnumerator Rotate()
         {
-            while(canvas.activeInHierarchy)
+            while (canvas.activeInHierarchy)
             {
-                canvas.transform.localPosition = player.localPosition + offset;
+                Vector3 dir = transform.root.localPosition - mainCam.localPosition;
+                canvas.transform.rotation = Quaternion.LookRotation(dir, Vector3.up);
 
                 yield return null;
             }
