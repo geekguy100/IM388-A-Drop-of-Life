@@ -81,6 +81,13 @@ public class CharacterMotor : MonoBehaviour
     /// <param name="inputVector">The direction in local space to move the character.</param>
     public void MoveCharacter(Vector3 inputVector)
     {
+        if (motorData.WaterfallMovement)
+        {
+            print("Waterfall movement");
+            transform.Translate(inputVector * motorData.movementSpeed * Time.deltaTime);
+            return;
+        }
+
         // Calculating the velocity to apply to the character.
         Vector3 vel = inputVector * motorData.movementSpeed;
 
@@ -105,8 +112,7 @@ public class CharacterMotor : MonoBehaviour
             }
         }
 
-        // If the player is jumps, calculate the amount of 
-        // upward speed we need to get the player to reach the desired jump height.
+        // Jump if the player wants to jump.
         if (GetJumped())
         {
             Jump();
@@ -145,8 +151,14 @@ public class CharacterMotor : MonoBehaviour
         return jumped;
     }
 
+    /// <summary>
+    /// Performs the jump action.
+    /// </summary>
     private void Jump()
     {
+        // If the player jumps, calculate the amount of 
+        // upward speed we need to get the player to reach the desired jump height.
+
         if (currentJumps < motorData.MaxJumps)
         {
             if (characterController.isGrounded)

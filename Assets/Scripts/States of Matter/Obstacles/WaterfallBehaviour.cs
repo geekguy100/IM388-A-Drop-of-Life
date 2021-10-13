@@ -33,8 +33,6 @@ namespace GoofyGhosts
         {
             base.Interact(interactor);
 
-            //interactor.transform.LookAt(transform);
-
             // Disable mouse look so it doesn't mess w/ our seting of the rotation.
             if (interactor.TryGetComponent(out MouseLook mouseLook))
             {
