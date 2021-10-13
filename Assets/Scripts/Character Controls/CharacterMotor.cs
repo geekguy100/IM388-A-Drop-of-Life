@@ -87,7 +87,7 @@ public class CharacterMotor : MonoBehaviour
         // Transforming the velocity from local space to world space.
         vel = transform.TransformDirection(vel);
 
-        if (characterController.isGrounded)
+        if (characterController.isGrounded || motorData.gravity == 0)
         {
             // If we're grounded, set our desired movement direction
             // to our velocity.
@@ -100,7 +100,6 @@ public class CharacterMotor : MonoBehaviour
             // Set our current jumps to 0 if they are not already.
             if (currentJumps > 0)
             {
-
                 currentJumps = 0;
                 jumpedFromGround = false;
             }
@@ -114,7 +113,7 @@ public class CharacterMotor : MonoBehaviour
         }
 
         // If we're not grounded...       
-        if (!characterController.isGrounded)
+        if (!characterController.isGrounded && motorData.gravity != 0)
         {
             // Take a jump away from the player if they walk
             // off an edge. This prevents the player from
