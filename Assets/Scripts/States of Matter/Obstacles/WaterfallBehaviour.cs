@@ -1,7 +1,7 @@
 /******************************************************************
 *    Author: Kyle Grenier
 *    Contributors: 
-*    Date Created: 
+*    Date Created: 10/13/2021
 *******************************************************************/
 using UnityEngine;
 
@@ -33,9 +33,28 @@ namespace GoofyGhosts
         {
             base.Interact(interactor);
 
+            //interactor.transform.LookAt(transform);
+
+            // Disable mouse look so it doesn't mess w/ our seting of the rotation.
+            if (interactor.TryGetComponent(out MouseLook mouseLook))
+            {
+                mouseLook.enabled = false;
+            }
+
+            SetRotation(interactor.transform, transform.forward);
+
             // Enable the waterfall cam.
             movementCamera.SetActive(false);
             waterfallCamera.SetActive(true);
+        }
+
+        /// <summary>
+        /// Sets the interactor's rotation.
+        /// </summary>
+        /// <param name="interactor">The interactor.</param>
+        private void SetRotation(Transform interactor, Vector3 forward)
+        {
+            interactor.forward = forward;
         }
 
         /// <summary>
@@ -46,6 +65,14 @@ namespace GoofyGhosts
         {
             movementCamera.SetActive(true);
             waterfallCamera.SetActive(false);
+
+            // Re-enable mouse look.
+            if (other.TryGetComponent(out MouseLook mouseLook))
+            {
+                mouseLook.enabled = true;
+            }
+
+            SetRotation(other.transform, Vector3.forward);
 
             // If the state shifter that exited the trigger
             // is in the water state, make them perform a little hop.

@@ -254,7 +254,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 201326592
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -495,6 +495,7 @@ MonoBehaviour:
   states:
   - {fileID: 3066512358685167104, guid: 9ba6a2db49b6f9343b5de36e23b97588, type: 3}
   - {fileID: 5239399514205982096, guid: f6f34f6d36babe9439a5e1194b3cee39, type: 3}
+  - {fileID: 5239399514205982096, guid: ac73de517ed6a6a43b29af65ed9d1a13, type: 3}
   swapStateChannel: {fileID: 11400000, guid: cf5dd6bdef0c30e4eac1dcec60decfb0, type: 2}
 --- !u!114 &627894606
 MonoBehaviour:

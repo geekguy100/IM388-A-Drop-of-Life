@@ -12,7 +12,7 @@ namespace GoofyGhosts
     /// An enum representing all of the possible states of matter
     /// that can be shifted to.
     /// </summary>
-    public enum StateOfMatterEnum { DEFAULT, LIQUID, GAS, ICE };
+    public enum StateOfMatterEnum { DEFAULT, LIQUID, WATERFALL, GAS, ICE };
 
     /// <summary>
     /// A channel that carries a state enum value.
