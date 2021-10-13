@@ -14,8 +14,6 @@ namespace GoofyGhosts
     /// </summary>
     public class InteractionNotificationBehaviour : MonoBehaviour
     {
-        [SerializeField] private Vector3 offset;
-
         [Tooltip("Channel that invokes interactable-nearby events.")]
         [SerializeField] private IInteractableChannel interactableChannel;
 
@@ -25,6 +23,9 @@ namespace GoofyGhosts
         [Tooltip("The TMPro text to display.")]
         [SerializeField] private TextMeshProUGUI displayText;
 
+        /// <summary>
+        /// Caching the main camera.
+        /// </summary>
         private Transform mainCam;
 
 
