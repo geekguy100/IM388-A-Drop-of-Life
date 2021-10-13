@@ -4,7 +4,6 @@
 *    Date Created: 10/6/2021
 *******************************************************************/
 using UnityEngine;
-using System.Linq;
 
 namespace GoofyGhosts
 {
@@ -16,6 +15,16 @@ namespace GoofyGhosts
         #region -- // State Fields // --
         [Tooltip("The current state of matter.")]
         [SerializeField] private StateOfMatter currentState;
+        /// <summary>
+        /// The current state of this state swapper.
+        /// </summary>
+        public StateOfMatterEnum CurrentState
+        {
+            get
+            {
+                return currentState.Data.EnumValue;
+            }
+        }
 
         [Tooltip("An array of all of the possible states the character can swap to.")]
         [SerializeField] private StateOfMatter[] states;

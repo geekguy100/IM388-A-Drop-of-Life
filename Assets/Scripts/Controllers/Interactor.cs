@@ -24,7 +24,7 @@ namespace GoofyGhosts
         /// <summary>
         /// Performs the interaction.
         /// </summary>
-        public void PerformInteraction()
+        public virtual void PerformInteraction()
         {
             if (interactable != null)
             {
