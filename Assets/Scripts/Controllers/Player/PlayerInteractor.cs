@@ -1,7 +1,7 @@
 /******************************************************************
 *    Author: Kyle Grenier
 *    Contributors: 
-*    Date Created: 
+*    Date Created: 10/13/2021
 *******************************************************************/
 using UnityEngine;
 
@@ -44,7 +44,6 @@ namespace GoofyGhosts
                 // we're already in, return.
                 if (CheckSameStateOfMatter())
                 {
-                    interactable = null;
                     return;
                 }
 
@@ -74,12 +73,6 @@ namespace GoofyGhosts
         /// <param name="other">The Collider that entered the trigger.</param>
         private void OnTriggerExit(Collider other)
         {
-            // Don't bother running if we have no interactable set.
-            if (interactable == null)
-            {
-                return;
-            }
-
             if ((1 << other.gameObject.layer & whatIsInteractable) > 0)
             {
                 interactableChannel.OnEventRaised(interactable, false);
@@ -101,6 +94,7 @@ namespace GoofyGhosts
             {
                 if (matterStateManager.CurrentState == stateSwapInteractable.GetStateOfMatter())
                 {
+                    Debug.Log("Preventing interaction cause of same state swapping.");
                     return;
                 }
             }

@@ -22,6 +22,15 @@ namespace GoofyGhosts
         [Tooltip("The state to swap to.")]
         [SerializeField] private StateOfMatterEnum stateToSwapTo;
 
+        private Collider col;
+
+        /// <summary>
+        /// Component initialization.
+        /// </summary>
+        private void Awake()
+        {
+            col = GetComponent<Collider>();
+        }
 
         /// <summary>
         /// Swaps the player's state of matter.
@@ -30,7 +39,20 @@ namespace GoofyGhosts
         /// this interactable.</param>
         public void Interact(GameObject interactor)
         {
+            // We need to disable the collider to prevent
+            // the player from quickly exiting the trigger
+            // due to a change in the player's hitbox on state swap.
+
+            col.enabled = false;
             SwapState(stateToSwapTo);
+            StartCoroutine(ReEnableCollider());
+
+            // Reenables the collider at the end of the frame.
+            IEnumerator ReEnableCollider()
+            {
+                yield return new WaitForEndOfFrame();
+                col.enabled = true;
+            }
         }
 
         /// <summary>
@@ -40,6 +62,15 @@ namespace GoofyGhosts
         public void SwapState(StateOfMatterEnum value)
         {
             swapStateChannel.RaiseEvent(value);
+        }
+
+        /// <summary>
+        /// Swaps back to the default state.
+        /// </summary>
+        /// <param name="other">The Collider that exited the trigger.</param>
+        private void OnTriggerExit(Collider other)
+        {
+            SwapState(StateOfMatterEnum.DEFAULT);
         }
 
         /// <summary>
