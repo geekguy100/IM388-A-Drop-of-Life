@@ -49,7 +49,6 @@ namespace GoofyGhosts
         /// </summary>
         public void Activate()
         {
-            print("Switched to state " + data.StateName);
             motor.SwapMotorData(data.MotorData);
             //Instantiate(data.TransitionParticleEffect, transform.position, Quaternion.identity);
         }

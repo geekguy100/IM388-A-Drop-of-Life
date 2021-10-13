@@ -16,7 +16,7 @@ namespace GoofyGhosts
         /// Swaps the current state to the state
         /// at the provided index.
         /// </summary>
-        /// <param name="index">The index of the state to swap to.</param>
-        void SwapState(int index);
+        /// <param name="value">The value of the state to swap to.</param>
+        void SwapState(StateOfMatterEnum value);
     }
 }

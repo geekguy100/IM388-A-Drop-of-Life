@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AimCamera
   - MovementCamera
+  - Water
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Not in Reflection
   - Player
   - Enemy
-  - Obstacle
+  - Interactable
   - 
   - 
   - 

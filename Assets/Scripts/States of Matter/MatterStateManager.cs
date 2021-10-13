@@ -4,6 +4,7 @@
 *    Date Created: 10/6/2021
 *******************************************************************/
 using UnityEngine;
+using System.Linq;
 
 namespace GoofyGhosts
 {
@@ -13,15 +14,14 @@ namespace GoofyGhosts
     public class MatterStateManager : MonoBehaviour, IMatterStateChanger
     {
         #region -- // State Fields // --
-        /// <summary>
-        /// The current state of matter.
-        /// </summary>
+        [Tooltip("The current state of matter.")]
         [SerializeField] private StateOfMatter currentState;
 
-        /// <summary>
-        /// An array of all of the possible states the character can swap to.
-        /// </summary>
+        [Tooltip("An array of all of the possible states the character can swap to.")]
         [SerializeField] private StateOfMatter[] states;
+
+        [Tooltip("The channel that invokes state swap events.")]
+        [SerializeField] private StateEnumChannelSO swapStateChannel;
         #endregion
 
         /// <summary>
@@ -37,17 +37,41 @@ namespace GoofyGhosts
         {
             characterController = GetComponent<CharacterController>();
         }
+
+        /// <summary>
+        /// Event subbing.
+        /// </summary>
+        private void OnEnable()
+        {
+            swapStateChannel.OnEventRaised += SwapState;
+        }
+
+        /// <summary>
+        /// Event unsubbing.
+        /// </summary>
+        private void OnDisable()
+        {
+            swapStateChannel.OnEventRaised -= SwapState;
+        }
         #endregion
 
         /// <summary>
         /// Swaps the current state.
         /// </summary>
-        /// <param name="index">The index of the state to swap to.</param>
-        public void SwapState(int index)
+        /// <param name="value">The value of the state to swap to.</param>
+        public void SwapState(StateOfMatterEnum value)
         {
+            int index = 0;
+            foreach (StateOfMatter state in states)
+            {
+                if (state.Data.EnumValue == value)
+                    break;
+
+                ++index;
+            }
+
             if (index < states.Length)
             {
-                print("Swapping to state at index " + index);
                 Destroy(currentState.gameObject);
                 currentState = Instantiate(states[index], transform);
                 SetCharacterControllerValues(currentState.Data.CharacterControllerData);
@@ -55,8 +79,9 @@ namespace GoofyGhosts
             }
             else
             {
-                Debug.LogWarning("[MatterStateManager]: Cannot swap to state at index " + index + "." +
-                    "It is not set in the states array.");
+                throw new System.IndexOutOfRangeException("[MatterStateManager]: Cannot swap to state " +
+                    "at index " + index + ". It is out of bounds. Ensure you set the enum values of the state you're trying" +
+                    "to swap to!");
             }
 
             // Sets the character controller values to the values associated

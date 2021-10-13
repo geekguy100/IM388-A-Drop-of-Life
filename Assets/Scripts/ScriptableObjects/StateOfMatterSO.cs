@@ -27,6 +27,16 @@ namespace GoofyGhosts
             }
         }
 
+        [Tooltip("The enum value representing this state.")]
+        [SerializeField] private StateOfMatterEnum enumValue;
+        public StateOfMatterEnum EnumValue
+        {
+            get
+            {
+                return enumValue;
+            }
+        }
+
         [Tooltip("The motor data that should be used while in this state.")]
         [SerializeField] private CharacterMotorDataSO motorData;
         /// <summary>

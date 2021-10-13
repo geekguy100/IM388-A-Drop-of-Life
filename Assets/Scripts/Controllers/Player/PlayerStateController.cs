@@ -4,10 +4,12 @@
 *    Date Created: 
 *******************************************************************/
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace GoofyGhosts
 {
+    /// <summary>
+    /// Handles accepting input for swapping states.
+    /// </summary>
     [RequireComponent(typeof(MatterStateManager))]
     public class PlayerStateController : MonoBehaviour
     {
@@ -32,10 +34,10 @@ namespace GoofyGhosts
 
         private void OnEnable()
         {
-            controls.StatesOfMatter.DefaultState.performed += _ => manager.SwapState(0);
-            controls.StatesOfMatter.State1.performed += _ => manager.SwapState(1);
-            controls.StatesOfMatter.State2.performed += _ => manager.SwapState(2);
-            controls.StatesOfMatter.State3.performed += _ => manager.SwapState(3);
+            controls.StatesOfMatter.DefaultState.performed += _ => manager.SwapState(StateOfMatterEnum.DEFAULT);
+            controls.StatesOfMatter.State1.performed += _ => manager.SwapState(StateOfMatterEnum.LIQUID);
+            controls.StatesOfMatter.State2.performed += _ => manager.SwapState(StateOfMatterEnum.GAS);
+            controls.StatesOfMatter.State3.performed += _ => manager.SwapState(StateOfMatterEnum.ICE);
 
             controls.StatesOfMatter.Enable();
         }
