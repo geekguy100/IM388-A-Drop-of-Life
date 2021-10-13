@@ -18,6 +18,8 @@ namespace GoofyGhosts
         [Tooltip("The virtual camera associated with player movement.")]
         [SerializeField] private GameObject movementCamera;
 
+        private bool swappedStates;
+
         protected override void Start()
         {
             base.Start();
@@ -44,6 +46,8 @@ namespace GoofyGhosts
             // Enable the waterfall cam.
             movementCamera.SetActive(false);
             waterfallCamera.SetActive(true);
+
+            swappedStates = true;
         }
 
         /// <summary>
@@ -70,7 +74,12 @@ namespace GoofyGhosts
                 mouseLook.enabled = true;
             }
 
-            SetRotation(other.transform, Vector3.forward);
+            // Only rotate the player if they actually swapped states.
+            if (swappedStates)
+            {
+                SetRotation(other.transform, Vector3.forward);
+                swappedStates = false;
+            }
 
             // If the state shifter that exited the trigger
             // is in the water state, make them perform a little hop.

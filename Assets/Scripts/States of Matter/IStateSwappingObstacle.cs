@@ -33,6 +33,10 @@ namespace GoofyGhosts
 
         public abstract string GetDisplayInfo();
 
+        /// <summary>
+        /// Returns the state to swap to.
+        /// </summary>
+        /// <returns>The state to swap to.</returns>
         public StateOfMatterEnum GetStateOfMatter()
         {
             return stateToSwapTo;

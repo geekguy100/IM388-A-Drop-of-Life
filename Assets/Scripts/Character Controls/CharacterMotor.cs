@@ -83,7 +83,6 @@ public class CharacterMotor : MonoBehaviour
     {
         if (motorData.WaterfallMovement)
         {
-            print("Waterfall movement");
             transform.Translate(inputVector * motorData.movementSpeed * Time.deltaTime);
             return;
         }
