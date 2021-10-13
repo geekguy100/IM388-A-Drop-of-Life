@@ -44,6 +44,7 @@ namespace GoofyGhosts
                 // we're already in, return.
                 if (CheckSameStateOfMatter())
                 {
+                    interactableChannel.OnEventRaised(interactable, false);
                     return;
                 }
 
