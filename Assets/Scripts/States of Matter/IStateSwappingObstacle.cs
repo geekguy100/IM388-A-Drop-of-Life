@@ -47,7 +47,7 @@ namespace GoofyGhosts
         /// </summary>
         /// <param name="interactor">The GameObject that interacted with 
         /// this interactable.</param>
-        public virtual void Interact(GameObject interactor)
+        public virtual void Interact(Interactor interactor)
         {
             // We need to disable the collider to prevent
             // the player from quickly exiting the trigger
@@ -70,6 +70,6 @@ namespace GoofyGhosts
             stateSwapChannel.RaiseEvent(value);
         }
 
-        public abstract void OnSwapBack(GameObject interactor);
+        public abstract void OnSwapBack(Interactor interactor);
     }
 }

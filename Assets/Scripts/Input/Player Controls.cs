@@ -277,9 +277,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
             ""id"": ""7594f908-eb4f-4c36-a8c5-80efcf6db6cc"",
             ""actions"": [
                 {
-                    ""name"": ""Interact"",
+                    ""name"": ""InteractStateSwap"",
                     ""type"": ""Button"",
                     ""id"": ""c13a2b99-e2da-40d2-a085-879e0c05ebfe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d9eca18-8dbf-4dca-a1da-b0a2dcae9714"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -290,6 +298,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""e0066238-3fa0-4a90-8a77-2e359d99cc2d"",
                     ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractStateSwap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18cce786-24f9-46d0-837b-7f6510ece529"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -320,6 +339,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_StatesOfMatter_State3 = m_StatesOfMatter.FindAction("State 3", throwIfNotFound: true);
         // Interaction
         m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
+        m_Interaction_InteractStateSwap = m_Interaction.FindAction("InteractStateSwap", throwIfNotFound: true);
         m_Interaction_Interact = m_Interaction.FindAction("Interact", throwIfNotFound: true);
     }
 
@@ -525,11 +545,13 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     // Interaction
     private readonly InputActionMap m_Interaction;
     private IInteractionActions m_InteractionActionsCallbackInterface;
+    private readonly InputAction m_Interaction_InteractStateSwap;
     private readonly InputAction m_Interaction_Interact;
     public struct InteractionActions
     {
         private @PlayerControls m_Wrapper;
         public InteractionActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @InteractStateSwap => m_Wrapper.m_Interaction_InteractStateSwap;
         public InputAction @Interact => m_Wrapper.m_Interaction_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Interaction; }
         public void Enable() { Get().Enable(); }
@@ -540,6 +562,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_InteractionActionsCallbackInterface != null)
             {
+                @InteractStateSwap.started -= m_Wrapper.m_InteractionActionsCallbackInterface.OnInteractStateSwap;
+                @InteractStateSwap.performed -= m_Wrapper.m_InteractionActionsCallbackInterface.OnInteractStateSwap;
+                @InteractStateSwap.canceled -= m_Wrapper.m_InteractionActionsCallbackInterface.OnInteractStateSwap;
                 @Interact.started -= m_Wrapper.m_InteractionActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_InteractionActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_InteractionActionsCallbackInterface.OnInteract;
@@ -547,6 +572,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
             m_Wrapper.m_InteractionActionsCallbackInterface = instance;
             if (instance != null)
             {
+                @InteractStateSwap.started += instance.OnInteractStateSwap;
+                @InteractStateSwap.performed += instance.OnInteractStateSwap;
+                @InteractStateSwap.canceled += instance.OnInteractStateSwap;
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
@@ -575,6 +603,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     }
     public interface IInteractionActions
     {
+        void OnInteractStateSwap(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }
 }

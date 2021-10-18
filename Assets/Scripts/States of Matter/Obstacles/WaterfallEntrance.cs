@@ -12,6 +12,8 @@ namespace GoofyGhosts
         [SerializeField] private WaterfallBehaviour parentWaterfall;
         private bool canSwapBack;
 
+        private Interactor currentInteractor;
+
         public override string GetDisplayInfo()
         {
             return parentWaterfall.GetDisplayInfo();
@@ -22,8 +24,9 @@ namespace GoofyGhosts
             this.canSwapBack = canSwapBack;
         }
 
-        public override void Interact(GameObject interactor)
+        public override void Interact(Interactor interactor)
         {
+            currentInteractor = interactor;
             parentWaterfall.Interact(interactor);
         }
 
@@ -35,14 +38,15 @@ namespace GoofyGhosts
                 if (other.TryGetComponent(out MatterStateManager manager) && manager.CurrentState == GetStateOfMatter())
                 {
                     print("Swapping back from waterfall entrance");
-                    OnSwapBack(other.gameObject);
+                    OnSwapBack(currentInteractor);
                     canSwapBack = false;
                 }
             }
         }
 
-        public override void OnSwapBack(GameObject interactor)
+        public override void OnSwapBack(Interactor interactor)
         {
+            currentInteractor = null;
             parentWaterfall.OnSwapBack(interactor);
         }
     }

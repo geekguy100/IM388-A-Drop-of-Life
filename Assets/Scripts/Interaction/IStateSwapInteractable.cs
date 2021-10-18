@@ -23,6 +23,6 @@ namespace GoofyGhosts
         /// this interactable put it in.
         /// </summary>
         /// <param name="interactor">The interactor GameObject.</param>
-        void OnSwapBack(GameObject interactor);
+        void OnSwapBack(Interactor interactor);
     }
 }

@@ -38,17 +38,7 @@ namespace GoofyGhosts
         {
             if ((1 << other.gameObject.layer & whatIsInteractable) > 0)
             {
-                interactable = other.gameObject.GetComponent<IInteractable>();
-
-                // If we're near a state swapping interactable and it will swap to the state
-                // we're already in, return.
-                if (CheckSameStateOfMatter(interactable as IStateSwapInteractable))
-                {
-                    interactableChannel.OnEventRaised(interactable, false);
-                    return;
-                }
-
-                interactableChannel.OnEventRaised(interactable, true);
+                AssignInteractable(other.GetComponent<IInteractable>());
             }
         }
 
@@ -60,8 +50,7 @@ namespace GoofyGhosts
         {
             if ((1 << other.gameObject.layer & whatIsInteractable) > 0)
             {
-                interactableChannel.OnEventRaised(interactable, false);
-                interactable = null;
+                UnassignInteractable();
             }
         }
 
@@ -89,6 +78,14 @@ namespace GoofyGhosts
         /// </summary>
         public override void PerformInteraction()
         {
+            base.PerformInteraction();
+        }
+
+        /// <summary>
+        /// Performs an interaction with a state swapping interactable.
+        /// </summary>
+        public override void PerformStateSwapInteraction()
+        {
             IStateSwapInteractable stateSwapInteractable = interactable as IStateSwapInteractable;
 
             // If we're trying to interact with a state swapping interactable
@@ -101,9 +98,30 @@ namespace GoofyGhosts
                     Debug.Log("Preventing interaction cause of same state swapping.");
                     return;
                 }
+
+                base.PerformInteraction();
+            }
+        }
+
+        public override void AssignInteractable(IInteractable other)
+        {
+            interactable = other;
+
+            // If we're near a state swapping interactable and it will swap to the state
+            // we're already in, return.
+            if (CheckSameStateOfMatter(interactable as IStateSwapInteractable))
+            {
+                interactableChannel.OnEventRaised(interactable, false);
+                return;
             }
 
-            base.PerformInteraction();
+            interactableChannel.OnEventRaised(interactable, true);
+        }
+
+        public override void UnassignInteractable()
+        {
+            interactableChannel.OnEventRaised(interactable, false);
+            interactable = null;
         }
     }
 }

@@ -20,6 +20,8 @@ namespace GoofyGhosts
 
         [SerializeField] private WaterfallEntrance waterfallEntrance;
 
+        private Interactor currentInteractor;
+
         private bool swappedStates;
 
         protected override void Start()
@@ -33,8 +35,9 @@ namespace GoofyGhosts
             return "Press 'LEFT SHIFT' to climb the waterfall.";
         }
 
-        public override void Interact(GameObject interactor)
+        public override void Interact(Interactor interactor)
         {
+            currentInteractor = interactor;
             base.Interact(interactor);
 
             // Disable mouse look so it doesn't mess w/ our seting of the rotation.
@@ -75,15 +78,19 @@ namespace GoofyGhosts
         /// <param name="other">The Collider that exited the trigger.</param>
         private void OnTriggerExit(Collider other)
         {
-            OnSwapBack(other.gameObject);
-            waterfallEntrance.SetSwapBack(false);
+            if (currentInteractor != null)
+            {
+                OnSwapBack(currentInteractor);
+                waterfallEntrance.SetSwapBack(false);
+                currentInteractor = null;
+            }
         }
 
         /// <summary>
         /// Invoked when the player exists the waterfall.
         /// </summary>
         /// <param name="other">The interactor GameObject.</param>
-        public override void OnSwapBack(GameObject other)
+        public override void OnSwapBack(Interactor other)
         {
             movementCamera.SetActive(true);
             waterfallCamera.SetActive(false);
