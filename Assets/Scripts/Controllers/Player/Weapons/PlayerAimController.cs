@@ -6,7 +6,6 @@
 // Brief Description : Controls transitioning between cameras when Moving or ADSing
 *****************************************************************************/
 using UnityEngine;
-using UnityEngine.Serialization;
 using System.Collections;
 
 [RequireComponent(typeof(MouseLook))]
