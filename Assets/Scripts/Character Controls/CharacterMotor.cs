@@ -17,6 +17,17 @@ public class CharacterMotor : MonoBehaviour
     [SerializeField] private CharacterMotorDataSO motorData;
 
     /// <summary>
+    /// True if the character is on the ground.
+    /// </summary>
+    public bool IsGrounded
+    {
+        get
+        {
+            return characterController.isGrounded;
+        }
+    }
+
+    /// <summary>
     /// Reference to the CharacterController component.
     /// </summary>
     private CharacterController characterController;
@@ -43,12 +54,25 @@ public class CharacterMotor : MonoBehaviour
     private bool jumpedFromGround;
 
     /// <summary>
+    /// Multiplier that affects jump height.
+    /// </summary>
+    private float heightMultiplier;
+
+    /// <summary>
+    /// True if the current jump count should be subtracted
+    /// when the character jumps.
+    /// </summary>
+    private bool takeJumpAway;
+
+    /// <summary>
     /// Getting components.
     /// </summary>
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         currentJumps = 0;
+        heightMultiplier = 1;
+        takeJumpAway = true;
     }
 
     /// <summary>
@@ -57,13 +81,19 @@ public class CharacterMotor : MonoBehaviour
     /// <param name="inputVector">The direction in local space to move the character.</param>
     public void MoveCharacter(Vector3 inputVector)
     {
+        if (motorData.WaterfallMovement)
+        {
+            transform.Translate(inputVector * motorData.movementSpeed * Time.deltaTime);
+            return;
+        }
+
         // Calculating the velocity to apply to the character.
         Vector3 vel = inputVector * motorData.movementSpeed;
 
         // Transforming the velocity from local space to world space.
         vel = transform.TransformDirection(vel);
 
-        if (characterController.isGrounded)
+        if (characterController.isGrounded || motorData.gravity == 0)
         {
             // If we're grounded, set our desired movement direction
             // to our velocity.
@@ -76,32 +106,19 @@ public class CharacterMotor : MonoBehaviour
             // Set our current jumps to 0 if they are not already.
             if (currentJumps > 0)
             {
-
                 currentJumps = 0;
                 jumpedFromGround = false;
             }
         }
 
-        // If the player is jumps, calculate the amount of 
-        // upward speed we need to get the player to reach the desired jump height.
+        // Jump if the player wants to jump.
         if (GetJumped())
         {
-            if (currentJumps < motorData.MaxJumps)
-            {
-                if (characterController.isGrounded)
-                {
-                    jumpedFromGround = true;
-                }
-
-                movementDirection.y = Mathf.Sqrt(2 * motorData.gravity * motorData.jumpHeight);
-                ++currentJumps;
-            }
-
-            jumped = false;
+            Jump();
         }
 
         // If we're not grounded...       
-        if (!characterController.isGrounded)
+        if (!characterController.isGrounded && motorData.gravity != 0)
         {
             // Take a jump away from the player if they walk
             // off an edge. This prevents the player from
@@ -134,11 +151,50 @@ public class CharacterMotor : MonoBehaviour
     }
 
     /// <summary>
+    /// Performs the jump action.
+    /// </summary>
+    private void Jump()
+    {
+        // If the player jumps, calculate the amount of 
+        // upward speed we need to get the player to reach the desired jump height.
+
+        if (currentJumps < motorData.MaxJumps)
+        {
+            if (characterController.isGrounded)
+            {
+                jumpedFromGround = true;
+            }
+
+            movementDirection.y = Mathf.Sqrt(2 * motorData.gravity * motorData.jumpHeight * heightMultiplier);
+
+            if (takeJumpAway)
+                ++currentJumps;
+
+            heightMultiplier = 1; // Reset height multiplier after jumping in case it was changed.
+            takeJumpAway = true; // Reset takeJumpAway after jumping in case it was changed from default.
+        }
+
+        jumped = false;
+    }
+
+    /// <summary>
     /// Set to true if the character is trying to perform a jump.
     /// </summary>
     /// <param name="jumped">True if the character is trying to perform a jump.</param>
-    public void SetJumped(bool jumped)
+    public void SetJumped(bool jumped, float heightMultiplier = 1, bool takeJumpAway = true)
     {
         this.jumped = jumped;
+        this.heightMultiplier = heightMultiplier;
+        this.takeJumpAway = takeJumpAway;
+    }
+
+    /// <summary>
+    /// Swaps out the current motor data with the
+    /// data provided.
+    /// </summary>
+    /// <param name="data">The motor data to swap to.</param>
+    public void SwapMotorData(CharacterMotorDataSO data)
+    {
+        motorData = data;
     }
 }

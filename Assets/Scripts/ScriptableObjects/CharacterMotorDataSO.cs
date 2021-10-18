@@ -80,4 +80,13 @@ public class CharacterMotorDataSO : ScriptableObject
             return maxJumps;
         }
     }
+
+    [SerializeField] private bool waterfallMovement;
+    public bool WaterfallMovement
+    {
+        get
+        {
+            return waterfallMovement;
+        }
+    }
 }

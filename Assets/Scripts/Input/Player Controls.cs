@@ -187,6 +187,117 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""StatesOfMatter"",
+            ""id"": ""9ea0628a-accf-462e-8b4f-e643881e7d85"",
+            ""actions"": [
+                {
+                    ""name"": ""Default State"",
+                    ""type"": ""Button"",
+                    ""id"": ""b6c97604-80c6-4f3f-8860-272de1acad1e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""State 1"",
+                    ""type"": ""Button"",
+                    ""id"": ""69ebc6b1-caf0-4f7e-9b79-074094ffc886"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""State 2"",
+                    ""type"": ""Button"",
+                    ""id"": ""791638c4-7a59-491c-a6b0-f1030e434f5d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""State 3"",
+                    ""type"": ""Button"",
+                    ""id"": ""3352f00c-ff57-4c3a-94b9-00405c2cc7a2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1aa7637d-7697-4427-81e9-ae548a3e0770"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Default State"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6a1031c-16c9-47cc-9d38-047efec87ed5"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""State 1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""088c65b3-18d6-4666-86fe-a600ef841e2c"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""State 2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d9483c20-73f1-4a1c-a3dc-d4effb38d28d"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""State 3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Interaction"",
+            ""id"": ""7594f908-eb4f-4c36-a8c5-80efcf6db6cc"",
+            ""actions"": [
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""c13a2b99-e2da-40d2-a085-879e0c05ebfe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e0066238-3fa0-4a90-8a77-2e359d99cc2d"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -201,6 +312,15 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_WeaponsHandling_Fire = m_WeaponsHandling.FindAction("Fire", throwIfNotFound: true);
         m_WeaponsHandling_Reload = m_WeaponsHandling.FindAction("Reload", throwIfNotFound: true);
         m_WeaponsHandling_Aim = m_WeaponsHandling.FindAction("Aim", throwIfNotFound: true);
+        // StatesOfMatter
+        m_StatesOfMatter = asset.FindActionMap("StatesOfMatter", throwIfNotFound: true);
+        m_StatesOfMatter_DefaultState = m_StatesOfMatter.FindAction("Default State", throwIfNotFound: true);
+        m_StatesOfMatter_State1 = m_StatesOfMatter.FindAction("State 1", throwIfNotFound: true);
+        m_StatesOfMatter_State2 = m_StatesOfMatter.FindAction("State 2", throwIfNotFound: true);
+        m_StatesOfMatter_State3 = m_StatesOfMatter.FindAction("State 3", throwIfNotFound: true);
+        // Interaction
+        m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
+        m_Interaction_Interact = m_Interaction.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -344,6 +464,96 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         }
     }
     public WeaponsHandlingActions @WeaponsHandling => new WeaponsHandlingActions(this);
+
+    // StatesOfMatter
+    private readonly InputActionMap m_StatesOfMatter;
+    private IStatesOfMatterActions m_StatesOfMatterActionsCallbackInterface;
+    private readonly InputAction m_StatesOfMatter_DefaultState;
+    private readonly InputAction m_StatesOfMatter_State1;
+    private readonly InputAction m_StatesOfMatter_State2;
+    private readonly InputAction m_StatesOfMatter_State3;
+    public struct StatesOfMatterActions
+    {
+        private @PlayerControls m_Wrapper;
+        public StatesOfMatterActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @DefaultState => m_Wrapper.m_StatesOfMatter_DefaultState;
+        public InputAction @State1 => m_Wrapper.m_StatesOfMatter_State1;
+        public InputAction @State2 => m_Wrapper.m_StatesOfMatter_State2;
+        public InputAction @State3 => m_Wrapper.m_StatesOfMatter_State3;
+        public InputActionMap Get() { return m_Wrapper.m_StatesOfMatter; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(StatesOfMatterActions set) { return set.Get(); }
+        public void SetCallbacks(IStatesOfMatterActions instance)
+        {
+            if (m_Wrapper.m_StatesOfMatterActionsCallbackInterface != null)
+            {
+                @DefaultState.started -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnDefaultState;
+                @DefaultState.performed -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnDefaultState;
+                @DefaultState.canceled -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnDefaultState;
+                @State1.started -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState1;
+                @State1.performed -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState1;
+                @State1.canceled -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState1;
+                @State2.started -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState2;
+                @State2.performed -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState2;
+                @State2.canceled -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState2;
+                @State3.started -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState3;
+                @State3.performed -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState3;
+                @State3.canceled -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState3;
+            }
+            m_Wrapper.m_StatesOfMatterActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @DefaultState.started += instance.OnDefaultState;
+                @DefaultState.performed += instance.OnDefaultState;
+                @DefaultState.canceled += instance.OnDefaultState;
+                @State1.started += instance.OnState1;
+                @State1.performed += instance.OnState1;
+                @State1.canceled += instance.OnState1;
+                @State2.started += instance.OnState2;
+                @State2.performed += instance.OnState2;
+                @State2.canceled += instance.OnState2;
+                @State3.started += instance.OnState3;
+                @State3.performed += instance.OnState3;
+                @State3.canceled += instance.OnState3;
+            }
+        }
+    }
+    public StatesOfMatterActions @StatesOfMatter => new StatesOfMatterActions(this);
+
+    // Interaction
+    private readonly InputActionMap m_Interaction;
+    private IInteractionActions m_InteractionActionsCallbackInterface;
+    private readonly InputAction m_Interaction_Interact;
+    public struct InteractionActions
+    {
+        private @PlayerControls m_Wrapper;
+        public InteractionActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Interact => m_Wrapper.m_Interaction_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_Interaction; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InteractionActions set) { return set.Get(); }
+        public void SetCallbacks(IInteractionActions instance)
+        {
+            if (m_Wrapper.m_InteractionActionsCallbackInterface != null)
+            {
+                @Interact.started -= m_Wrapper.m_InteractionActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_InteractionActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_InteractionActionsCallbackInterface.OnInteract;
+            }
+            m_Wrapper.m_InteractionActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+            }
+        }
+    }
+    public InteractionActions @Interaction => new InteractionActions(this);
     public interface IPlayerActions
     {
         void OnMouseMove(InputAction.CallbackContext context);
@@ -355,5 +565,16 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnFire(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+    }
+    public interface IStatesOfMatterActions
+    {
+        void OnDefaultState(InputAction.CallbackContext context);
+        void OnState1(InputAction.CallbackContext context);
+        void OnState2(InputAction.CallbackContext context);
+        void OnState3(InputAction.CallbackContext context);
+    }
+    public interface IInteractionActions
+    {
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
