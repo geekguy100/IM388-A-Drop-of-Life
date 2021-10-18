@@ -18,6 +18,8 @@ namespace GoofyGhosts
         [Tooltip("The virtual camera associated with player movement.")]
         [SerializeField] private GameObject movementCamera;
 
+        [SerializeField] private WaterfallEntrance waterfallEntrance;
+
         private bool swappedStates;
 
         protected override void Start()
@@ -50,6 +52,14 @@ namespace GoofyGhosts
             swappedStates = true;
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.TryGetComponent(out MatterStateManager manager) && manager.CurrentState == GetStateOfMatter())
+            {
+                waterfallEntrance.SetSwapBack(true);
+            }
+        }
+
         /// <summary>
         /// Sets the interactor's rotation.
         /// </summary>
@@ -64,6 +74,16 @@ namespace GoofyGhosts
         /// </summary>
         /// <param name="other">The Collider that exited the trigger.</param>
         private void OnTriggerExit(Collider other)
+        {
+            OnSwapBack(other.gameObject);
+            waterfallEntrance.SetSwapBack(false);
+        }
+
+        /// <summary>
+        /// Invoked when the player exists the waterfall.
+        /// </summary>
+        /// <param name="other">The interactor GameObject.</param>
+        public override void OnSwapBack(GameObject other)
         {
             movementCamera.SetActive(true);
             waterfallCamera.SetActive(false);

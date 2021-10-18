@@ -21,7 +21,7 @@ MonoBehaviour:
     skinWidth: 0.036
     minMoveDistance: 0.001
     center: {x: 0, y: 0, z: 0}
-    radius: 0.36
+    radius: 1
     height: 0.5
   transitionParticleEffect: {fileID: 0}
   transitionTime: 0

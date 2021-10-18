@@ -12,7 +12,7 @@ namespace GoofyGhosts
     /// Abstract class all state swapping obstacles need to inherit.
     /// </summary>
     [RequireComponent(typeof(Collider))]
-    public abstract class IStateSwappingObstacle : MonoBehaviour, IMatterStateChanger, IInteractableDisplay, IStateSwapInteractable
+    public abstract class IStateSwappingObstacle : MonoBehaviour, IInteractableDisplay, IStateSwapInteractable
     {
         [SerializeField] private StateOfMatterEnum stateToSwapTo;
         [SerializeField] private StateEnumChannelSO stateSwapChannel;
@@ -69,5 +69,7 @@ namespace GoofyGhosts
         {
             stateSwapChannel.RaiseEvent(value);
         }
+
+        public abstract void OnSwapBack(GameObject interactor);
     }
 }
