@@ -21,6 +21,11 @@ namespace GoofyGhosts
         /// </summary>
         protected IInteractable interactable;
 
+        public bool HasInteractable()
+        {
+            return interactable != null;
+        }
+
         /// <summary>
         /// Performs the interaction.
         /// </summary>

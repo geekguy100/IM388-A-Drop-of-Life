@@ -552,6 +552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2864a294884f3864cb8d65a0b2a1922b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayChannel: {fileID: 11400000, guid: dc9dc8c556fae104fb01ad9b136bf3b5, type: 2}
   requiredJumps: 3
 --- !u!1001 &9156492664631938111
 PrefabInstance:
