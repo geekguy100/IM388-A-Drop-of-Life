@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 6653745158901227053}
   m_Layer: 10
   m_Name: Follow Target
-  m_TagString: Untagged
+  m_TagString: FollowTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -479,8 +479,8 @@ MonoBehaviour:
   inversePitch: 0
   basePitchLowerAngleLimit: -30
   basePitchUpperAngleLimit: 80
-  adsPitchLowerAngleLimit: -80
-  adsPitchUpperAngleLimit: 80
+  gasPitchLowerAngleLimit: -89
+  gasPitchUpperAngleLimit: 80
 --- !u!114 &627894601
 MonoBehaviour:
   m_ObjectHideFlags: 0

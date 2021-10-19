@@ -4,7 +4,6 @@
 *    Date Created: 
 *******************************************************************/
 using UnityEngine;
-using System.Collections;
 
 namespace GoofyGhosts
 {
@@ -14,6 +13,8 @@ namespace GoofyGhosts
         private CharacterMotor motor;
 
         private PlayerControls controls;
+
+        private MouseLook mouseLook;
 
         private GameObject gasCamera;
         private GameObject movementCamera;
@@ -27,6 +28,7 @@ namespace GoofyGhosts
         {
             base.Awake();
             motor = GetComponent<CharacterMotor>();
+            mouseLook = GetComponent<MouseLook>();
             controls = new PlayerControls();
         }
 
@@ -66,13 +68,17 @@ namespace GoofyGhosts
         public override void SwapState(StateOfMatterEnum value)
         {
             base.SwapState(value);
+
+            // Toggling cameras
             if (value == StateOfMatterEnum.GAS)
             {
+                mouseLook?.EnableGasStateRotation();
                 movementCamera.SetActive(false);
                 gasCamera.SetActive(true);
             }
             else
             {
+                mouseLook?.EnableBaseRotation();
                 movementCamera.SetActive(true);
                 gasCamera.SetActive(false);
             }
