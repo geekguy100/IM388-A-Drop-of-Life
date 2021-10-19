@@ -14,7 +14,7 @@ namespace GoofyGhosts
             return "Press 'E' to water the flower.";
         }
 
-        public string GetName()
+        public string ToString()
         {
             return gameObject.name;
         }

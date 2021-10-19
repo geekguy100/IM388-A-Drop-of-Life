@@ -76,6 +76,6 @@ namespace GoofyGhosts
 
         public abstract void OnSwapBack(Interactor interactor);
 
-        public abstract string GetName();
+        public abstract string ToString();
     }
 }

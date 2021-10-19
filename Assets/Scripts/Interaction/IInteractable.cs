@@ -19,6 +19,6 @@ namespace GoofyGhosts
         /// this interactable.</param>
         void Interact(Interactor interactor);
 
-        string GetName();
+        string ToString();
     }
 }

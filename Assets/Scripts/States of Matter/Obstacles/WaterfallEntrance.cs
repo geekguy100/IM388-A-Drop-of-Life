@@ -64,7 +64,7 @@ namespace GoofyGhosts
             parentWaterfall.OnSwapBack(interactor);
         }
 
-        public override string GetName()
+        public override string ToString()
         {
             return gameObject.name;
         }

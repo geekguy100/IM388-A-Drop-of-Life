@@ -127,7 +127,7 @@ namespace GoofyGhosts
             SwapState(StateOfMatterEnum.DEFAULT);
         }
 
-        public override string GetName()
+        public override string ToString()
         {
             return gameObject.name;
         }
