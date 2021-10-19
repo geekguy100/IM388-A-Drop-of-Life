@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableChannel: {fileID: 11400000, guid: b9e3ffd088b2a5c46afcacc06f5c164c, type: 2}
+  displayChannel: {fileID: 11400000, guid: dc9dc8c556fae104fb01ad9b136bf3b5, type: 2}
   canvas: {fileID: 339070174}
   displayText: {fileID: 1053859068}
 --- !u!95 &1327633429
@@ -391,6 +392,7 @@ GameObject:
   - component: {fileID: 627894606}
   - component: {fileID: 7674815510472926113}
   - component: {fileID: 8394573526196220280}
+  - component: {fileID: 1333163448283947344}
   m_Layer: 10
   m_Name: Player Character
   m_TagString: Player
@@ -496,6 +498,7 @@ MonoBehaviour:
   - {fileID: 3066512358685167104, guid: 9ba6a2db49b6f9343b5de36e23b97588, type: 3}
   - {fileID: 5239399514205982096, guid: f6f34f6d36babe9439a5e1194b3cee39, type: 3}
   - {fileID: 5239399514205982096, guid: ac73de517ed6a6a43b29af65ed9d1a13, type: 3}
+  - {fileID: 5239399514205982096, guid: 83f4fbfc6d6bdc44d925060de62392c2, type: 3}
   swapStateChannel: {fileID: 11400000, guid: cf5dd6bdef0c30e4eac1dcec60decfb0, type: 2}
 --- !u!114 &627894606
 MonoBehaviour:
@@ -537,6 +540,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1c33cfe12e02a24fa6b49a40ab1fe65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1333163448283947344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653745159915978130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2864a294884f3864cb8d65a0b2a1922b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredJumps: 3
 --- !u!1001 &9156492664631938111
 PrefabInstance:
   m_ObjectHideFlags: 0
