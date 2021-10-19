@@ -18,5 +18,7 @@ namespace GoofyGhosts
         /// <param name="interactor">The GameObject that interacted with 
         /// this interactable.</param>
         void Interact(Interactor interactor);
+
+        string GetName();
     }
 }

@@ -14,6 +14,11 @@ namespace GoofyGhosts
             return "Press 'E' to water the flower.";
         }
 
+        public string GetName()
+        {
+            return gameObject.name;
+        }
+
         public void Interact(Interactor interactor)
         {
             interactor.UnassignInteractable();

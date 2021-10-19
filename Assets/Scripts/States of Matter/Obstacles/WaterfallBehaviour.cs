@@ -81,8 +81,6 @@ namespace GoofyGhosts
             if (currentInteractor != null)
             {
                 OnSwapBack(currentInteractor);
-                waterfallEntrance.SetSwapBack(false);
-                currentInteractor = null;
             }
         }
 
@@ -92,6 +90,13 @@ namespace GoofyGhosts
         /// <param name="other">The interactor GameObject.</param>
         public override void OnSwapBack(Interactor other)
         {
+            waterfallEntrance.SetSwapBack(false);
+            waterfallEntrance.CurrentInteractor = null;
+            currentInteractor = null;
+
+            // Turn the parent collider back off.
+            ToggleCollider(false);
+
             movementCamera.SetActive(true);
             waterfallCamera.SetActive(false);
 
@@ -120,6 +125,11 @@ namespace GoofyGhosts
             }
 
             SwapState(StateOfMatterEnum.DEFAULT);
+        }
+
+        public override string GetName()
+        {
+            return gameObject.name;
         }
     }
 }

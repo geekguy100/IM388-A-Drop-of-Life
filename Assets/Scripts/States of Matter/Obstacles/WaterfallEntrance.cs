@@ -13,6 +13,17 @@ namespace GoofyGhosts
         private bool canSwapBack;
 
         private Interactor currentInteractor;
+        public Interactor CurrentInteractor
+        {
+            get
+            {
+                return currentInteractor;
+            }
+            set
+            {
+                currentInteractor = value;
+            }
+        }
 
         public override string GetDisplayInfo()
         {
@@ -28,6 +39,9 @@ namespace GoofyGhosts
         {
             currentInteractor = interactor;
             parentWaterfall.Interact(interactor);
+
+            // Turn the parent waterfall's collider on.
+            parentWaterfall.ToggleCollider(true);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -48,6 +62,11 @@ namespace GoofyGhosts
         {
             currentInteractor = null;
             parentWaterfall.OnSwapBack(interactor);
+        }
+
+        public override string GetName()
+        {
+            return gameObject.name;
         }
     }
 }

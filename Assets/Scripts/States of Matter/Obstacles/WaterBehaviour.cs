@@ -112,5 +112,10 @@ namespace GoofyGhosts
         {
             return stateToSwapTo;
         }
+
+        public string GetName()
+        {
+            return gameObject.name;
+        }
     }
 }

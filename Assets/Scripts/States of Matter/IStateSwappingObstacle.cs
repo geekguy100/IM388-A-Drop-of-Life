@@ -18,6 +18,10 @@ namespace GoofyGhosts
         [SerializeField] private StateEnumChannelSO stateSwapChannel;
 
         private Collider col;
+        public void ToggleCollider(bool active)
+        {
+            col.enabled = active;
+        }
 
         #region -- // Initialization // --
         protected virtual void Awake()
@@ -71,5 +75,7 @@ namespace GoofyGhosts
         }
 
         public abstract void OnSwapBack(Interactor interactor);
+
+        public abstract string GetName();
     }
 }

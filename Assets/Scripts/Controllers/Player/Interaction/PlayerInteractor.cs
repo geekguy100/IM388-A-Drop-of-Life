@@ -48,7 +48,7 @@ namespace GoofyGhosts
         /// <param name="other">The Collider that entered the trigger.</param>
         private void OnTriggerExit(Collider other)
         {
-            if ((1 << other.gameObject.layer & whatIsInteractable) > 0)
+            if ((1 << other.gameObject.layer & whatIsInteractable) > 0 && other.GetComponent<IInteractable>() == interactable)
             {
                 UnassignInteractable();
             }
@@ -93,8 +93,10 @@ namespace GoofyGhosts
             // swap back.
             if (stateSwapInteractable != null)
             {
+                print("State swap interactable not null. Interactable name is " + interactable.ToString());
                 if (CheckSameStateOfMatter(stateSwapInteractable))
                 {
+                    print("Same state of matter.");
                     stateSwapInteractable.OnSwapBack(this);
                     UnassignInteractable();
                     return;
