@@ -43,6 +43,6 @@ public class EnemyCharacterController : MonoBehaviour
     private void FixedUpdate()
     {
         //motor.MoveCharacter(inputVector);
-        transform.RotateAround(waypoint.transform.position, Vector3.right, 20 * Time.deltaTime);
+        //transform.RotateAround(waypoint.transform.position, Vector3.right, 20 * Time.deltaTime);
     }
 }
