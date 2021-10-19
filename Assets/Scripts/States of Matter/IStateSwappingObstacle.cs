@@ -76,6 +76,8 @@ namespace GoofyGhosts
 
         public abstract void OnSwapBack(Interactor interactor);
 
-        public abstract string ToString();
+        public override abstract string ToString();
+
+        public abstract bool CanSwapFrom(StateOfMatterEnum fromState);
     }
 }

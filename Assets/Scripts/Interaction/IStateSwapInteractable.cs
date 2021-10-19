@@ -24,5 +24,14 @@ namespace GoofyGhosts
         /// </summary>
         /// <param name="interactor">The interactor GameObject.</param>
         void OnSwapBack(Interactor interactor);
+
+        /// <summary>
+        /// Returns true if this state can be swapped to from
+        /// the provided fromState.
+        /// </summary>
+        /// <param name="fromState">The state to swap from.</param>
+        /// <returns>True if this state can be swapped to from
+        /// the provided fromState.</returns>
+        bool CanSwapFrom(StateOfMatterEnum fromState);
     }
 }

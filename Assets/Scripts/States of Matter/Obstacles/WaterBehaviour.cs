@@ -113,9 +113,20 @@ namespace GoofyGhosts
             return stateToSwapTo;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             return gameObject.name;
+        }
+
+        public bool CanSwapFrom(StateOfMatterEnum fromState)
+        {
+            switch(fromState)
+            {
+                case StateOfMatterEnum.GAS:
+                    return false;
+                default:
+                    return true;
+            }
         }
     }
 }

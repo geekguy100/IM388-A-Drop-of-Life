@@ -93,10 +93,8 @@ namespace GoofyGhosts
             // swap back.
             if (stateSwapInteractable != null)
             {
-                print("State swap interactable not null. Interactable name is " + interactable.ToString());
                 if (CheckSameStateOfMatter(stateSwapInteractable))
                 {
-                    print("Same state of matter.");
                     stateSwapInteractable.OnSwapBack(this);
                     UnassignInteractable();
                     return;
@@ -108,11 +106,22 @@ namespace GoofyGhosts
 
         public override void AssignInteractable(IInteractable other)
         {
+            IStateSwapInteractable currentStateSwapInteractable = interactable as IStateSwapInteractable;
+            IStateSwapInteractable nextStateSwapInteractable = other as IStateSwapInteractable;
+
+            // If we cannot swap to the next state from the current, return.
+            if (interactable != null && !nextStateSwapInteractable.CanSwapFrom(currentStateSwapInteractable.GetStateOfMatter()))
+            {
+                interactableChannel.OnEventRaised(interactable, false);
+                return;
+            }
+
+
             interactable = other;
 
             // If we're near a state swapping interactable and it will swap to the state
             // we're already in, return.
-            if (CheckSameStateOfMatter(interactable as IStateSwapInteractable))
+            if (CheckSameStateOfMatter(nextStateSwapInteractable))
             {
                 interactableChannel.OnEventRaised(interactable, false);
                 return;
