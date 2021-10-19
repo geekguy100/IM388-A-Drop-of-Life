@@ -90,12 +90,13 @@ namespace GoofyGhosts
 
             // If we're trying to interact with a state swapping interactable
             // and our current state is the same as the state we're trying to swap to,
-            // return.
+            // swap back.
             if (stateSwapInteractable != null)
             {
                 if (CheckSameStateOfMatter(stateSwapInteractable))
                 {
-                    Debug.Log("Preventing interaction cause of same state swapping.");
+                    stateSwapInteractable.OnSwapBack(this);
+                    UnassignInteractable();
                     return;
                 }
 

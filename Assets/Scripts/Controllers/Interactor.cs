@@ -41,7 +41,6 @@ namespace GoofyGhosts
 
         public virtual void PerformStateSwapInteraction()
         {
-
         }
     }
 }

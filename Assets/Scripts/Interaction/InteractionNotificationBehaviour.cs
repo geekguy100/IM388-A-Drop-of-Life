@@ -70,6 +70,7 @@ namespace GoofyGhosts
             if (disp != null && inRange)
             {
                 displayText.text = disp.GetDisplayInfo();
+                anim.ResetTrigger("FadeOut");
                 anim.SetTrigger("Expand");
                 StartCoroutine(Rotate());
             }

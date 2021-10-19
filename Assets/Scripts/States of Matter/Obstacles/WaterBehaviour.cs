@@ -72,8 +72,11 @@ namespace GoofyGhosts
         /// <param name="other">The Collider that exited the trigger.</param>
         private void OnTriggerExit(Collider other)
         {
-            OnSwapBack(currentInteractor);
-            currentInteractor = null;
+            if (currentInteractor != null)
+            {
+                OnSwapBack(currentInteractor);
+                currentInteractor = null;
+            }
         }
 
         public void OnSwapBack(Interactor other)
