@@ -50,14 +50,14 @@ public class MouseLook : MonoBehaviour
     [SerializeField] private float basePitchUpperAngleLimit = 80f;
 
     [FoldoutGroup("Rotation Limits")]
-    [VerticalGroup("Rotation Limits/ADS")]
-    [BoxGroup("Rotation Limits/ADS/ADS Rotation Limits")]
-    [SerializeField] private float adsPitchLowerAngleLimit = -80f;
+    [VerticalGroup("Rotation Limits/Gas State")]
+    [BoxGroup("Rotation Limits/Gas State/Gas State Rotation Limits")]
+    [SerializeField] private float gasPitchLowerAngleLimit = -80f;
 
     [FoldoutGroup("Rotation Limits")]
-    [VerticalGroup("Rotation Limits/ADS")]
-    [BoxGroup("Rotation Limits/ADS/ADS Rotation Limits")]
-    [SerializeField] private float adsPitchUpperAngleLimit = 80f;
+    [VerticalGroup("Rotation Limits/Gas State")]
+    [BoxGroup("Rotation Limits/Gas State/Gas State Rotation Limits")]
+    [SerializeField] private float gasPitchUpperAngleLimit = 80f;
 
     /// <summary>
     /// The current pitch lower angle limit.
@@ -186,12 +186,12 @@ public class MouseLook : MonoBehaviour
     }
 
     /// <summary>
-    /// Enable ADS rotation limits.
+    /// Enable Gas state rotation limits.
     /// </summary>
-    public void EnableADSRotation()
+    public void EnableGasStateRotation()
     {
-        pitchLowerAngleLimit = adsPitchLowerAngleLimit;
-        pitchUpperAngleLimit = adsPitchUpperAngleLimit;
+        pitchLowerAngleLimit = gasPitchLowerAngleLimit;
+        pitchUpperAngleLimit = gasPitchUpperAngleLimit;
     }
 
     /// <summary>

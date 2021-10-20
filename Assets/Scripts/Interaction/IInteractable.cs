@@ -17,6 +17,8 @@ namespace GoofyGhosts
         /// </summary>
         /// <param name="interactor">The GameObject that interacted with 
         /// this interactable.</param>
-        void Interact(GameObject interactor);
+        void Interact(Interactor interactor);
+
+        string ToString();
     }
 }

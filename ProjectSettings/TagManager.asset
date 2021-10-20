@@ -7,6 +7,8 @@ TagManager:
   - AimCamera
   - MovementCamera
   - Water
+  - GasCamera
+  - FollowTarget
   layers:
   - Default
   - TransparentFX

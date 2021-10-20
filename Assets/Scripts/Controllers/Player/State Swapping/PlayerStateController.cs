@@ -23,6 +23,7 @@ namespace GoofyGhosts
         /// </summary>
         private MatterStateManager manager;
 
+        #region -- // Initialization // --
         /// <summary>
         /// Creating new controls object.
         /// </summary>
@@ -46,5 +47,6 @@ namespace GoofyGhosts
         {
             controls.StatesOfMatter.Disable();
         }
+        #endregion
     }
 }

@@ -74,6 +74,17 @@ namespace GoofyGhosts
         }
 
         [BoxGroup("Transition Fields")]
+        [Tooltip("The particle effects that play when transitioning *from* this state.")]
+        [SerializeField] private GameObject transitionFromParticleEffect;
+        public GameObject TransitionFromParticleEffect
+        {
+            get
+            {
+                return transitionFromParticleEffect;
+            }
+        }
+
+        [BoxGroup("Transition Fields")]
         [Tooltip("The time (in seconds) it takes to complete the transformation to this state.")]
         [SerializeField] private float transitionTime;
         /// <summary>

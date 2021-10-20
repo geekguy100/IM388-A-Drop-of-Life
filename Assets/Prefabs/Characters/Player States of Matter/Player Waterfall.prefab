@@ -41,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2716838348271379321}
-  m_Mesh: {fileID: 6329158148709259305, guid: a2954e00b75b4d540b5be2a5b4601c08, type: 3}
+  m_Mesh: {fileID: 6329158148709259305, guid: ae1f1ed8d6f95c5419d5dee4b54e597c, type: 3}
 --- !u!23 &8021778521801290888
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a3cef896b4b8557449966550914e23ed, type: 2}
+  - {fileID: -6766782243100232976, guid: ae1f1ed8d6f95c5419d5dee4b54e597c, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,7 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a40c396c45409224b9714cb8d674f902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 56273260755a2644980186bea901e4aa, type: 3}
+  audioSourcePrefab: {fileID: 7734414494952367337, guid: 1bc039fe8d9af4648b644b5f1ac88214, type: 3}
   data: {fileID: 11400000, guid: bd27fc2aa80bc734aaac3adfa5821b5c, type: 2}
+  particleSpawnOffset: {x: 0, y: 0, z: 0}
 --- !u!95 &858926496
 Animator:
   serializedVersion: 3
