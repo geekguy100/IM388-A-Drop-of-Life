@@ -41,14 +41,26 @@ namespace GoofyGhosts
         private void Start()
         {
             gasCamera = GameObject.FindGameObjectWithTag("GasCamera");
-            gasCamera.SetActive(false);
+            if (gasCamera == null)
+            {
+                Debug.LogWarning("[PlayerGasStateController]: Could not find GameObject tagged GasCamera.");
+            }
+            else
+            {
+                gasCamera.SetActive(false);
+            }
 
             movementCamera = GameObject.FindGameObjectWithTag("MovementCamera");
+            if (movementCamera == null)
+            {
+                Debug.LogWarning("[PlayerGasStateController]: Could not find GameObject tagged MovementCamera.");
+            }
         }
 
         private void OnEnable()
         {
             motor.OnJumpCountChange += ChangeCurrentJumpCount;
+            motor.OnJumpAttempt += TrySwapToGas;
 
             controls.Interaction.InteractStateSwap.performed += _ => SwapToDefault();
             controls.Interaction.InteractStateSwap.Enable();
@@ -57,25 +69,40 @@ namespace GoofyGhosts
         private void OnDisable()
         {
             motor.OnJumpCountChange -= ChangeCurrentJumpCount;
+            motor.OnJumpAttempt -= TrySwapToGas;
 
             controls.Interaction.InteractStateSwap.Disable();
         }
         #endregion
 
 
+        /// <summary>
+        /// Invoked whenever the player's jump count changes.
+        /// </summary>
+        /// <param name="currentJumps">The number of times the player has currently jumped.</param>
         private void ChangeCurrentJumpCount(int currentJumps)
         {
             this.currentJumps = currentJumps;
+            if (currentJumps == 0)
+            {
+                displayChannel.RaiseEvent(new DisplayNotif("", false));
+            }
+        }
 
+        /// <summary>
+        /// Invoked when the player presses the 'Jump' button.
+        /// </summary>
+        private void TrySwapToGas()
+        {
             if (currentJumps > 0)
             {
                 SwapToGas();
 
-                if (currentJumps == requiredJumps - 1)
+                if (currentJumps == requiredJumps - 1 && manager.CurrentState == StateOfMatterEnum.DEFAULT)
                 {
                     displayChannel.RaiseEvent(new DisplayNotif("Press 'SPACEBAR' to transform into a gas.", true));
                 }
-                else if (currentJumps == requiredJumps)
+                else if (currentJumps == requiredJumps && manager.CurrentState == StateOfMatterEnum.GAS)
                 {
                     displayChannel.RaiseEvent(new DisplayNotif("", false));
                 }
@@ -108,7 +135,7 @@ namespace GoofyGhosts
         // Gas
         protected override bool CheckGasCondition()
         {
-            return currentJumps >= requiredJumps;
+            return currentJumps >= requiredJumps && manager.CurrentState == StateOfMatterEnum.DEFAULT;
         }
 
 
