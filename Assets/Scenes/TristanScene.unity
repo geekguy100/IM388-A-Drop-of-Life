@@ -481,8 +481,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1331468752}
     m_Modifications:
-<<<<<<< Updated upstream
-=======
     - target: {fileID: 678134711, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -491,7 +489,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
->>>>>>> Stashed changes
     - target: {fileID: 6653745158901227052, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
       propertyPath: m_IsActive
       value: 0
