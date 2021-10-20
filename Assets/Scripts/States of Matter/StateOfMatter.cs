@@ -29,6 +29,8 @@ namespace GoofyGhosts
             }
         }
 
+        [SerializeField] private Vector3 particleSpawnOffset;
+
         /// <summary>
         /// Reference to the CharacterMotor component.
         /// </summary>
@@ -50,7 +52,10 @@ namespace GoofyGhosts
         public void Activate()
         {
             motor.SwapMotorData(data.MotorData);
-            //Instantiate(data.TransitionParticleEffect, transform.position, Quaternion.identity);
+
+            // Instantiate particles if not null.
+            if (data.TransitionParticleEffect != null)
+                Instantiate(data.TransitionParticleEffect, transform.position + particleSpawnOffset, data.TransitionParticleEffect.transform.rotation);
         }
     }
 }

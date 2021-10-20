@@ -23,5 +23,5 @@ MonoBehaviour:
     center: {x: 0, y: 0, z: 0}
     radius: 1
     height: 0.5
-  transitionParticleEffect: {fileID: 0}
+  transitionParticleEffect: {fileID: 4999280569367385343, guid: f384841b9b6f03845bfe6c8482f09288, type: 3}
   transitionTime: 0

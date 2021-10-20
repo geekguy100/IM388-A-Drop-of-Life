@@ -80,8 +80,7 @@ namespace GoofyGhosts
                     displayChannel.RaiseEvent(new DisplayNotif("", false));
                 }
             }
-            // Only turn off the display if we don't have an interactable.
-            else if (interactor.HasInteractable())
+            else
             {
                 displayChannel.RaiseEvent(new DisplayNotif("", false));
             }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3491040316778908204}
   - component: {fileID: 3491040316778908205}
   - component: {fileID: 3491040316778908202}
+  - component: {fileID: 1432692982}
   m_Layer: 0
   m_Name: Gas Shift Test PS (_)
   m_TagString: Untagged
@@ -48,7 +49,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -4873,3 +4874,16 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &1432692982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3491040316778908203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bf92b4682f29f14790ee28e94ebc4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 1

@@ -47,7 +47,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1886846038}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -131,7 +131,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017356426127039852}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -348,6 +348,7 @@ Transform:
   - {fileID: 1017356426624280027}
   - {fileID: 1017356426127039855}
   - {fileID: 1886846039}
+  - {fileID: 1147619380736321590}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -56.379, y: 0, z: 0}
@@ -366,7 +367,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017356426715646121}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -431,3 +432,77 @@ MonoBehaviour:
   waterfallCamera: {fileID: 1017356426624280025}
   movementCamera: {fileID: 0}
   waterfallEntrance: {fileID: 1017356426127039843}
+--- !u!1001 &857554565442492821
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1017356426715646124}
+    m_Modifications:
+    - target: {fileID: 291481539266654626, guid: 9c122b84f7dac544d95232ad992c61ac, type: 3}
+      propertyPath: ForceModule.z.scalar
+      value: -35
+      objectReference: {fileID: 0}
+    - target: {fileID: 291481539266654627, guid: 9c122b84f7dac544d95232ad992c61ac, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 291481539266654627, guid: 9c122b84f7dac544d95232ad992c61ac, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 291481539266654627, guid: 9c122b84f7dac544d95232ad992c61ac, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 291481539266654627, guid: 9c122b84f7dac544d95232ad992c61ac, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 291481539266654627, guid: 9c122b84f7dac544d95232ad992c61ac, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 291481539266654627, guid: 9c122b84f7dac544d95232ad992c61ac, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.501
+      objectReference: {fileID: 0}
+    - target: {fileID: 291481539266654627, guid: 9c122b84f7dac544d95232ad992c61ac, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9597808
+      objectReference: {fileID: 0}
+    - target: {fileID: 291481539266654627, guid: 9c122b84f7dac544d95232ad992c61ac, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.28075045
+      objectReference: {fileID: 0}
+    - target: {fileID: 291481539266654627, guid: 9c122b84f7dac544d95232ad992c61ac, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 291481539266654627, guid: 9c122b84f7dac544d95232ad992c61ac, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 291481539266654627, guid: 9c122b84f7dac544d95232ad992c61ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 32.61
+      objectReference: {fileID: 0}
+    - target: {fileID: 291481539266654627, guid: 9c122b84f7dac544d95232ad992c61ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 291481539266654627, guid: 9c122b84f7dac544d95232ad992c61ac, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 291481539266654628, guid: 9c122b84f7dac544d95232ad992c61ac, type: 3}
+      propertyPath: m_Name
+      value: Waterfall PS
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c122b84f7dac544d95232ad992c61ac, type: 3}
+--- !u!4 &1147619380736321590 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 291481539266654627, guid: 9c122b84f7dac544d95232ad992c61ac, type: 3}
+  m_PrefabInstance: {fileID: 857554565442492821}
+  m_PrefabAsset: {fileID: 0}

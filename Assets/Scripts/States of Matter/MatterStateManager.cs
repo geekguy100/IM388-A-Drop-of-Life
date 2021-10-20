@@ -4,6 +4,7 @@
 *    Date Created: 10/6/2021
 *******************************************************************/
 using UnityEngine;
+using System.Collections;
 
 namespace GoofyGhosts
 {
@@ -96,7 +97,36 @@ namespace GoofyGhosts
                 Destroy(currentState.gameObject);
                 currentState = Instantiate(states[index], transform);
                 SetCharacterControllerValues(currentState.Data.CharacterControllerData);
+
                 currentState.Activate();
+                return;
+
+                // The transition time into the next state.
+                float transitionTime = states[index].Data.TransitionTime;
+
+                // Start a coroutine only if we need to.
+                // Else, just perform the transition.
+                if (transitionTime > 0)
+                {
+                    StartCoroutine(WaitThenTransition());
+                }
+                else
+                {
+                    PerformTransition();
+                }
+
+                // Waits the transition time then performs the transition.
+                IEnumerator WaitThenTransition()
+                {
+                    yield return new WaitForSeconds(transitionTime);
+                    PerformTransition();
+                }
+
+                // Performs the state change transition.
+                void PerformTransition()
+                {
+ 
+                }
             }
             else
             {
