@@ -13,11 +13,6 @@ namespace GoofyGhosts
     /// </summary>
     public class MatterStateManager : MonoBehaviour, IMatterStateChanger
     {
-        // TODO: Maybe have each IStateSwapInteractable implement an
-        // OnSwapBack() method that is called when the player should swap back.
-        // Could help with exiting the waterfall by pressing Shift instead of only
-        // being able to exit it by leaving it.
-
         #region -- // State Fields // --
         [Tooltip("The current state of matter.")]
         [SerializeField] private StateOfMatter currentState;

@@ -16,6 +16,10 @@ namespace GoofyGhosts
         // and have each state of matter derive from it, 
         // cause I need to control each state change ability directly.
 
+        [SerializeField] private AudioClip audioClip;
+
+        [SerializeField] private AudioSource audioSourcePrefab;
+
         [Tooltip("The data about this state of matter.")]
         [SerializeField] private StateOfMatterSO data;
         /// <summary>
@@ -56,6 +60,13 @@ namespace GoofyGhosts
             // Instantiate particles if not null.
             if (data.TransitionParticleEffect != null)
                 Instantiate(data.TransitionParticleEffect, transform.position + particleSpawnOffset, data.TransitionParticleEffect.transform.rotation);
+
+            if (audioSourcePrefab != null && audioClip != null)
+            {
+                AudioSource a = Instantiate(audioSourcePrefab, transform.position, Quaternion.identity);
+                a.clip = audioClip;
+                a.Play();
+            }
         }
     }
 }

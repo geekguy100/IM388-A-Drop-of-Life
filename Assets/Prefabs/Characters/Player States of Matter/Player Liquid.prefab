@@ -96,7 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a40c396c45409224b9714cb8d674f902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: 56273260755a2644980186bea901e4aa, type: 3}
+  audioSourcePrefab: {fileID: 7734414494952367337, guid: 1bc039fe8d9af4648b644b5f1ac88214, type: 3}
   data: {fileID: 11400000, guid: 4edf85484ef0793409be6243e7c4d29b, type: 2}
+  particleSpawnOffset: {x: 0, y: 0, z: 0}
 --- !u!95 &858926496
 Animator:
   serializedVersion: 3
