@@ -89,12 +89,11 @@ namespace GoofyGhosts
 
             if (index < states.Length)
             {
-                currentState.Deactivate();
-                currentState = Instantiate(states[index], transform);
-                SetCharacterControllerValues(currentState.Data.CharacterControllerData);
+                //currentState.Deactivate();
+                //currentState = Instantiate(states[index], transform);
+                //SetCharacterControllerValues(currentState.Data.CharacterControllerData);
 
-                currentState.Activate();
-                return;
+                //currentState.Activate();
 
                 // The transition time into the next state.
                 float transitionTime = states[index].Data.TransitionTime;
@@ -120,7 +119,11 @@ namespace GoofyGhosts
                 // Performs the state change transition.
                 void PerformTransition()
                 {
- 
+                    currentState.Deactivate();
+                    currentState = Instantiate(states[index], transform);
+                    SetCharacterControllerValues(currentState.Data.CharacterControllerData);
+
+                    currentState.Activate();
                 }
             }
             else

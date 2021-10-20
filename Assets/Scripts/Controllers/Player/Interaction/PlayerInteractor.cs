@@ -110,7 +110,7 @@ namespace GoofyGhosts
             IStateSwapInteractable nextStateSwapInteractable = other as IStateSwapInteractable;
 
             // If we cannot swap to the next state from the current, return.
-            if (interactable != null && !nextStateSwapInteractable.CanSwapFrom(currentStateSwapInteractable.GetStateOfMatter()))
+            if (interactable != null && (!nextStateSwapInteractable.CanSwapFrom(currentStateSwapInteractable.GetStateOfMatter()) || !nextStateSwapInteractable.CanSwapFrom(matterStateManager.CurrentState)))
             {
                 interactableChannel.OnEventRaised(interactable, false);
                 return;

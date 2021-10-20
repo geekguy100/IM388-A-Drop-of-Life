@@ -49,8 +49,6 @@ namespace GoofyGhosts
             {
                 Debug.LogWarning("[PlayerSolidStateController]: Could not find GameObject tagged MovementCamera.");
             }
-
-            //controls.Interaction.InteractStateSwap.Dispose();
         }
 
         private void OnEnable()

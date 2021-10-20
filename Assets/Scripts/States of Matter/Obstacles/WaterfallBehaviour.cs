@@ -37,6 +37,12 @@ namespace GoofyGhosts
 
         public override void Interact(Interactor interactor)
         {
+            if (!CanSwapFrom(interactor.GetComponent<MatterStateManager>().CurrentState))
+            {
+                interactor.UnassignInteractable();
+                return;
+            }
+            
             currentInteractor = interactor;
             base.Interact(interactor);
 
@@ -137,6 +143,7 @@ namespace GoofyGhosts
             switch (fromState)
             {
                 case StateOfMatterEnum.GAS:
+                case StateOfMatterEnum.ICE:
                     return false;
                 default:
                     return true;

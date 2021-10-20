@@ -52,7 +52,11 @@ namespace GoofyGhosts
                 if (other.TryGetComponent(out MatterStateManager manager) && manager.CurrentState == GetStateOfMatter())
                 {
                     print("Swapping back from waterfall entrance");
-                    OnSwapBack(currentInteractor);
+                    if (currentInteractor == null)
+                        OnSwapBack(other.GetComponent<Interactor>());
+                    else
+                        OnSwapBack(currentInteractor);
+
                     canSwapBack = false;
                 }
             }
