@@ -94,12 +94,8 @@ namespace GoofyGhosts
                 {
                     displayChannel.RaiseEvent(new DisplayNotif("Press 'LEFT SHIFT' to transform into a solid.", true));
                 }
-                else if (manager.CurrentState == StateOfMatterEnum.ICE)
-                {
-                    displayChannel.RaiseEvent(new DisplayNotif("Press 'LEFT SHIFT' to transform back.", true));
-                }
             }
-            else
+            else if (manager.CurrentState != StateOfMatterEnum.ICE)
             {
                 displayChannel.RaiseEvent(new DisplayNotif("", false));
             }
@@ -129,9 +125,15 @@ namespace GoofyGhosts
         private void CheckSwap(InputAction.CallbackContext context)
         {
             if (manager.CurrentState == StateOfMatterEnum.DEFAULT)
+            {
+                displayChannel.RaiseEvent(new DisplayNotif("Press 'LEFT SHIFT' to transform back.", true));
                 SwapToSolid();
+            }
             else
+            {
+                displayChannel.RaiseEvent(new DisplayNotif("", false));
                 SwapToDefault();
+            }
         }
 
         // Solid
