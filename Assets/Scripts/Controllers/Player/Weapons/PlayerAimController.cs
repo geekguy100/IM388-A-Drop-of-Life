@@ -83,7 +83,7 @@ public class PlayerAimController : MonoBehaviour
         movementCamera.SetActive(false);
         aimCamera.SetActive(true);
 
-        mouseLook.EnableADSRotation();
+        mouseLook.EnableGasStateRotation();
         mouseLook.EnableADSSensitivity();
 
         if (aimReticle != null)

@@ -21,6 +21,11 @@ namespace GoofyGhosts
         /// </summary>
         protected IInteractable interactable;
 
+        public bool HasInteractable()
+        {
+            return interactable != null;
+        }
+
         /// <summary>
         /// Performs the interaction.
         /// </summary>
@@ -28,12 +33,19 @@ namespace GoofyGhosts
         {
             if (interactable != null)
             {
-                interactable.Interact(gameObject);
+                interactable.Interact(this);
             }
             else
             {
                 Debug.Log("[" + gameObject.name + "]: Interactor has no interactable; Cannot perform interaction.");
             }
+        }
+
+        public abstract void UnassignInteractable();
+        public abstract void AssignInteractable(IInteractable interactable);
+
+        public virtual void PerformStateSwapInteraction()
+        {
         }
     }
 }

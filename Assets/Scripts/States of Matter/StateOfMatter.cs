@@ -16,6 +16,10 @@ namespace GoofyGhosts
         // and have each state of matter derive from it, 
         // cause I need to control each state change ability directly.
 
+        [SerializeField] private AudioClip audioClip;
+
+        [SerializeField] private AudioSource audioSourcePrefab;
+
         [Tooltip("The data about this state of matter.")]
         [SerializeField] private StateOfMatterSO data;
         /// <summary>
@@ -28,6 +32,8 @@ namespace GoofyGhosts
                 return data;
             }
         }
+
+        [SerializeField] private Vector3 particleSpawnOffset;
 
         /// <summary>
         /// Reference to the CharacterMotor component.
@@ -50,7 +56,27 @@ namespace GoofyGhosts
         public void Activate()
         {
             motor.SwapMotorData(data.MotorData);
-            //Instantiate(data.TransitionParticleEffect, transform.position, Quaternion.identity);
+
+            // Instantiate particles if not null.
+            if (data.TransitionParticleEffect != null)
+                Instantiate(data.TransitionParticleEffect, transform.position + particleSpawnOffset, data.TransitionParticleEffect.transform.rotation);
+
+            if (audioSourcePrefab != null && audioClip != null)
+            {
+                AudioSource a = Instantiate(audioSourcePrefab, transform.position, Quaternion.identity);
+                a.clip = audioClip;
+                a.Play();
+            }
+        }
+
+        public void Deactivate()
+        {
+            if (data.TransitionFromParticleEffect != null)
+            {
+                Instantiate(data.TransitionFromParticleEffect, transform.position + particleSpawnOffset, data.TransitionFromParticleEffect.transform.rotation);
+            }
+
+            Destroy(gameObject);
         }
     }
 }

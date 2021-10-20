@@ -17,6 +17,7 @@ namespace GoofyGhosts
     {
         [Tooltip("Channel that invokes interactable-nearby events.")]
         [SerializeField] private IInteractableChannel interactableChannel;
+        [SerializeField] private DisplayNotifChannelSO displayChannel;
 
         [Tooltip("The Canvas that displays the notification.")]
         [SerializeField] private GameObject canvas;
@@ -39,11 +40,13 @@ namespace GoofyGhosts
         private void OnEnable()
         {
             interactableChannel.OnEventRaised += OnInteractableChange;
+            displayChannel.OnEventRaised += DisplayNotif;
         }
 
         private void OnDisable()
         {
             interactableChannel.OnEventRaised -= OnInteractableChange;
+            displayChannel.OnEventRaised -= DisplayNotif;
         }
 
         private void Awake()
@@ -70,6 +73,22 @@ namespace GoofyGhosts
             if (disp != null && inRange)
             {
                 displayText.text = disp.GetDisplayInfo();
+                anim.ResetTrigger("FadeOut");
+                anim.SetTrigger("Expand");
+                StartCoroutine(Rotate());
+            }
+            else
+            {
+                anim.SetTrigger("FadeOut");
+            }
+        }
+
+        private void DisplayNotif(DisplayNotif notif)
+        {
+            if (notif.display)
+            {
+                displayText.text = notif.notification;
+                anim.ResetTrigger("FadeOut");
                 anim.SetTrigger("Expand");
                 StartCoroutine(Rotate());
             }

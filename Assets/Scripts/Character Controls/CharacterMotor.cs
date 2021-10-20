@@ -6,6 +6,7 @@
 // Brief Description : Script responsible for applying movement to characters.
 *****************************************************************************/
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Script responsible for applying movement to characters.
@@ -15,6 +16,9 @@ public class CharacterMotor : MonoBehaviour
 {
     [Tooltip("The character's motor data.")]
     [SerializeField] private CharacterMotorDataSO motorData;
+
+    public UnityAction<int> OnJumpCountChange;
+    public UnityAction OnJumpAttempt;
 
     /// <summary>
     /// True if the character is on the ground.
@@ -93,7 +97,7 @@ public class CharacterMotor : MonoBehaviour
         // Transforming the velocity from local space to world space.
         vel = transform.TransformDirection(vel);
 
-        if (characterController.isGrounded || motorData.gravity == 0)
+        if (characterController.isGrounded)
         {
             // If we're grounded, set our desired movement direction
             // to our velocity.
@@ -108,6 +112,7 @@ public class CharacterMotor : MonoBehaviour
             {
                 currentJumps = 0;
                 jumpedFromGround = false;
+                OnJumpCountChange?.Invoke(currentJumps);
             }
         }
 
@@ -118,7 +123,7 @@ public class CharacterMotor : MonoBehaviour
         }
 
         // If we're not grounded...       
-        if (!characterController.isGrounded && motorData.gravity != 0)
+        if (!characterController.isGrounded)
         {
             // Take a jump away from the player if they walk
             // off an edge. This prevents the player from
@@ -136,6 +141,9 @@ public class CharacterMotor : MonoBehaviour
 
         // Subtracting gravity from the movement direction; taking gravity into account.
         movementDirection.y -= motorData.gravity * Time.deltaTime;
+
+        if (motorData.gravity < 0)
+            movementDirection.y = -motorData.gravity;
 
         // Apply the movement to the character.
         characterController.Move(movementDirection * Time.deltaTime);
@@ -172,7 +180,11 @@ public class CharacterMotor : MonoBehaviour
 
             heightMultiplier = 1; // Reset height multiplier after jumping in case it was changed.
             takeJumpAway = true; // Reset takeJumpAway after jumping in case it was changed from default.
+
+            OnJumpCountChange?.Invoke(currentJumps);
         }
+
+        OnJumpAttempt?.Invoke();
 
         jumped = false;
     }

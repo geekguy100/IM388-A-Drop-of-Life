@@ -4,6 +4,7 @@
 *    Date Created: 10/6/2021
 *******************************************************************/
 using UnityEngine;
+using System.Collections;
 
 namespace GoofyGhosts
 {
@@ -12,11 +13,6 @@ namespace GoofyGhosts
     /// </summary>
     public class MatterStateManager : MonoBehaviour, IMatterStateChanger
     {
-        // TODO: Maybe have each IStateSwapInteractable implement an
-        // OnSwapBack() method that is called when the player should swap back.
-        // Could help with exiting the waterfall by pressing Shift instead of only
-        // being able to exit it by leaving it.
-
         #region -- // State Fields // --
         [Tooltip("The current state of matter.")]
         [SerializeField] private StateOfMatter currentState;
@@ -93,10 +89,39 @@ namespace GoofyGhosts
 
             if (index < states.Length)
             {
-                Destroy(currentState.gameObject);
+                currentState.Deactivate();
                 currentState = Instantiate(states[index], transform);
                 SetCharacterControllerValues(currentState.Data.CharacterControllerData);
+
                 currentState.Activate();
+                return;
+
+                // The transition time into the next state.
+                float transitionTime = states[index].Data.TransitionTime;
+
+                // Start a coroutine only if we need to.
+                // Else, just perform the transition.
+                if (transitionTime > 0)
+                {
+                    StartCoroutine(WaitThenTransition());
+                }
+                else
+                {
+                    PerformTransition();
+                }
+
+                // Waits the transition time then performs the transition.
+                IEnumerator WaitThenTransition()
+                {
+                    yield return new WaitForSeconds(transitionTime);
+                    PerformTransition();
+                }
+
+                // Performs the state change transition.
+                void PerformTransition()
+                {
+ 
+                }
             }
             else
             {
