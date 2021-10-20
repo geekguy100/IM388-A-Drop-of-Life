@@ -89,7 +89,7 @@ namespace GoofyGhosts
 
             if (index < states.Length)
             {
-                Destroy(currentState.gameObject);
+                currentState.Deactivate();
                 currentState = Instantiate(states[index], transform);
                 SetCharacterControllerValues(currentState.Data.CharacterControllerData);
 

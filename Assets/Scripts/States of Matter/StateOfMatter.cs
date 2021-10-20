@@ -68,5 +68,15 @@ namespace GoofyGhosts
                 a.Play();
             }
         }
+
+        public void Deactivate()
+        {
+            if (data.TransitionFromParticleEffect != null)
+            {
+                Instantiate(data.TransitionFromParticleEffect, transform.position + particleSpawnOffset, data.TransitionFromParticleEffect.transform.rotation);
+            }
+
+            Destroy(gameObject);
+        }
     }
 }
