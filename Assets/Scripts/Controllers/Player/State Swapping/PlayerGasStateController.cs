@@ -79,10 +79,8 @@ namespace GoofyGhosts
         private void ChangeCurrentJumpCount(int currentJumps)
         {
             this.currentJumps = currentJumps;
-            if (currentJumps == 0)
-            {
+            if (currentJumps == 0 && manager.CurrentState == StateOfMatterEnum.DEFAULT)
                 displayChannel.RaiseEvent(new DisplayNotif("", false));
-            }
         }
 
         /// <summary>
@@ -98,10 +96,10 @@ namespace GoofyGhosts
                 {
                     displayChannel.RaiseEvent(new DisplayNotif("Press 'SPACEBAR' to transform into a gas.", true));
                 }
-                else if (currentJumps == requiredJumps && manager.CurrentState == StateOfMatterEnum.GAS)
-                {
-                    displayChannel.RaiseEvent(new DisplayNotif("", false));
-                }
+                //else if (currentJumps == requiredJumps && manager.CurrentState == StateOfMatterEnum.GAS)
+                //{
+                //    displayChannel.RaiseEvent(new DisplayNotif("", false));
+                //}
             }
             else
             {
@@ -116,12 +114,14 @@ namespace GoofyGhosts
             // Toggling cameras
             if (value == StateOfMatterEnum.GAS)
             {
+                displayChannel.RaiseEvent(new DisplayNotif("Press 'LEFT SHIFT' to transform back.", true));
                 mouseLook?.EnableGasStateRotation();
                 movementCamera.SetActive(false);
                 gasCamera.SetActive(true);
             }
             else
             {
+                displayChannel.RaiseEvent(new DisplayNotif("", false));
                 mouseLook?.EnableBaseRotation();
                 movementCamera.SetActive(true);
                 gasCamera.SetActive(false);

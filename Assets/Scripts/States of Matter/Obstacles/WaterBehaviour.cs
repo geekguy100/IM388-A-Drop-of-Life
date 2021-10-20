@@ -39,7 +39,6 @@ namespace GoofyGhosts
         /// this interactable.</param>
         public void Interact(Interactor interactor)
         {
-            print(interactor.gameObject.GetComponent<MatterStateManager>().CurrentState);
             if (!CanSwapFrom(interactor.GetComponent<MatterStateManager>().CurrentState))
             {
                 interactor.UnassignInteractable();
