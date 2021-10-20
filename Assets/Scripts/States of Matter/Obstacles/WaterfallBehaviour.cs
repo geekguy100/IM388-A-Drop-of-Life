@@ -20,6 +20,8 @@ namespace GoofyGhosts
 
         [SerializeField] private WaterfallEntrance waterfallEntrance;
 
+        private Interactor currentInteractor;
+
         private bool swappedStates;
 
         protected override void Start()
@@ -33,8 +35,9 @@ namespace GoofyGhosts
             return "Press 'LEFT SHIFT' to climb the waterfall.";
         }
 
-        public override void Interact(GameObject interactor)
+        public override void Interact(Interactor interactor)
         {
+            currentInteractor = interactor;
             base.Interact(interactor);
 
             // Disable mouse look so it doesn't mess w/ our seting of the rotation.
@@ -75,16 +78,25 @@ namespace GoofyGhosts
         /// <param name="other">The Collider that exited the trigger.</param>
         private void OnTriggerExit(Collider other)
         {
-            OnSwapBack(other.gameObject);
-            waterfallEntrance.SetSwapBack(false);
+            if (currentInteractor != null)
+            {
+                OnSwapBack(currentInteractor);
+            }
         }
 
         /// <summary>
         /// Invoked when the player exists the waterfall.
         /// </summary>
         /// <param name="other">The interactor GameObject.</param>
-        public override void OnSwapBack(GameObject other)
+        public override void OnSwapBack(Interactor other)
         {
+            waterfallEntrance.SetSwapBack(false);
+            waterfallEntrance.CurrentInteractor = null;
+            currentInteractor = null;
+
+            // Turn the parent collider back off.
+            ToggleCollider(false);
+
             movementCamera.SetActive(true);
             waterfallCamera.SetActive(false);
 
@@ -113,6 +125,22 @@ namespace GoofyGhosts
             }
 
             SwapState(StateOfMatterEnum.DEFAULT);
+        }
+
+        public override string ToString()
+        {
+            return gameObject.name;
+        }
+
+        public override bool CanSwapFrom(StateOfMatterEnum fromState)
+        {
+            switch (fromState)
+            {
+                case StateOfMatterEnum.GAS:
+                    return false;
+                default:
+                    return true;
+            }
         }
     }
 }

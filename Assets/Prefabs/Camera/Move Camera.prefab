@@ -90,6 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7522752573701193629}
   - component: {fileID: 7522752573701193628}
+  - component: {fileID: 6753107969916245532}
   m_Layer: 0
   m_Name: Move Camera
   m_TagString: MovementCamera
@@ -141,7 +142,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7765957, y: 1}
+    m_SensorSize: {x: 1.6, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -157,3 +158,15 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 7522752572924237076}
+--- !u!114 &6753107969916245532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7522752573701193619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cf2ed1e2eb182c40b0de013b774a1cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

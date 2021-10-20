@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: DefaultState
   m_EditorClassIdentifier: 
   stateName: Default
+  enumValue: 0
   motorData: {fileID: 11400000, guid: 064289693931d214f9edd8fe2c7801eb, type: 2}
   characterControllerData:
     slopeLimit: 45
     slopeOffset: 0.3
     skinWidth: 0.08
     minMoveDistance: 0.001
-    center: {x: 0, y: 0, z: 0}
+    center: {x: 0, y: -0.32, z: 0}
     radius: 0.5
     height: 2
   transitionParticleEffect: {fileID: 0}
+  transitionFromParticleEffect: {fileID: 0}
   transitionTime: 0

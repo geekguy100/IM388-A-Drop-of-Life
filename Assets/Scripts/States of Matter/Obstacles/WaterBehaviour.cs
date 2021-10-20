@@ -22,6 +22,8 @@ namespace GoofyGhosts
 
         private Collider col;
 
+        private Interactor currentInteractor;
+
         /// <summary>
         /// Component initialization.
         /// </summary>
@@ -35,8 +37,10 @@ namespace GoofyGhosts
         /// </summary>
         /// <param name="interactor">The GameObject that interacted with 
         /// this interactable.</param>
-        public void Interact(GameObject interactor)
+        public void Interact(Interactor interactor)
         {
+            currentInteractor = interactor;
+
             // We need to disable the collider to prevent
             // the player from quickly exiting the trigger
             // due to a change in the player's hitbox on state swap.
@@ -68,10 +72,14 @@ namespace GoofyGhosts
         /// <param name="other">The Collider that exited the trigger.</param>
         private void OnTriggerExit(Collider other)
         {
-            OnSwapBack(other.gameObject);
+            if (currentInteractor != null)
+            {
+                OnSwapBack(currentInteractor);
+                currentInteractor = null;
+            }
         }
 
-        public void OnSwapBack(GameObject other)
+        public void OnSwapBack(Interactor other)
         {
             // If the state shifter that exited the trigger
             // is in the water state, make them perform a little hop.
@@ -103,6 +111,22 @@ namespace GoofyGhosts
         public StateOfMatterEnum GetStateOfMatter()
         {
             return stateToSwapTo;
+        }
+
+        public override string ToString()
+        {
+            return gameObject.name;
+        }
+
+        public bool CanSwapFrom(StateOfMatterEnum fromState)
+        {
+            switch(fromState)
+            {
+                case StateOfMatterEnum.GAS:
+                    return false;
+                default:
+                    return true;
+            }
         }
     }
 }
