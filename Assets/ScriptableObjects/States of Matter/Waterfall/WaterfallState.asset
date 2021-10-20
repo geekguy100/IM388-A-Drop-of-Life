@@ -18,7 +18,7 @@ MonoBehaviour:
   characterControllerData:
     slopeLimit: 45
     slopeOffset: 0.3
-    skinWidth: 0.036
+    skinWidth: 0.1
     minMoveDistance: 0.001
     center: {x: 0, y: 0, z: 0}
     radius: 1

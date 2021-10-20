@@ -4,18 +4,17 @@
 *    Date Created: 
 *******************************************************************/
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace GoofyGhosts
 {
     [RequireComponent(typeof(CharacterMotor))]
     [RequireComponent(typeof(Interactor))]
-    public class PlayerGasStateController : GasStateController
+    public class PlayerSolidStateController : SolidStateController
     {
         private CharacterMotor motor;
 
         private PlayerControls controls;
-
-        private MouseLook mouseLook;
 
         private Interactor interactor;
 
@@ -25,7 +24,7 @@ namespace GoofyGhosts
         [SerializeField] private DisplayNotifChannelSO displayChannel;
 
         [Tooltip("The required jumps to enable the gas state.")]
-        [SerializeField][Min(1)] private int requiredJumps;
+        [SerializeField] [Min(1)] private int requiredJumps;
         private int currentJumps;
 
         #region -- // Initialization // --
@@ -33,7 +32,6 @@ namespace GoofyGhosts
         {
             base.Awake();
             motor = GetComponent<CharacterMotor>();
-            mouseLook = GetComponent<MouseLook>();
             controls = new PlayerControls();
             interactor = GetComponent<Interactor>();
         }
@@ -43,29 +41,31 @@ namespace GoofyGhosts
             gasCamera = GameObject.FindGameObjectWithTag("GasCamera");
             if (gasCamera == null)
             {
-                Debug.LogWarning("[PlayerGasStateController]: Could not find GameObject tagged GasCamera.");
+                Debug.LogWarning("[PlayerSolidStateController]: Could not find GameObject tagged GasCamera.");
             }
 
             movementCamera = GameObject.FindGameObjectWithTag("MovementCamera");
             if (movementCamera == null)
             {
-                Debug.LogWarning("[PlayerGasStateController]: Could not find GameObject tagged MovementCamera.");
+                Debug.LogWarning("[PlayerSolidStateController]: Could not find GameObject tagged MovementCamera.");
             }
+
+            //controls.Interaction.InteractStateSwap.Dispose();
         }
 
         private void OnEnable()
         {
             motor.OnJumpCountChange += ChangeCurrentJumpCount;
-            motor.OnJumpAttempt += TrySwapToGas;
+            motor.OnJumpAttempt += DisplayNotif;
 
-            controls.Interaction.InteractStateSwap.performed += _ => SwapToDefault();
+            controls.Interaction.InteractStateSwap.performed += CheckSwap;
             controls.Interaction.InteractStateSwap.Enable();
         }
 
         private void OnDisable()
         {
             motor.OnJumpCountChange -= ChangeCurrentJumpCount;
-            motor.OnJumpAttempt -= TrySwapToGas;
+            motor.OnJumpAttempt -= DisplayNotif;
 
             controls.Interaction.InteractStateSwap.Disable();
         }
@@ -79,28 +79,26 @@ namespace GoofyGhosts
         private void ChangeCurrentJumpCount(int currentJumps)
         {
             this.currentJumps = currentJumps;
-            if (currentJumps == 0)
-            {
-                displayChannel.RaiseEvent(new DisplayNotif("", false));
-            }
+            //if (currentJumps == 0)
+            //{
+            //    displayChannel.RaiseEvent(new DisplayNotif("", false));
+            //}
         }
 
         /// <summary>
         /// Invoked when the player presses the 'Jump' button.
         /// </summary>
-        private void TrySwapToGas()
+        private void DisplayNotif()
         {
             if (currentJumps > 0)
             {
-                SwapToGas();
-
-                if (currentJumps == requiredJumps - 1 && manager.CurrentState == StateOfMatterEnum.DEFAULT)
+                if (currentJumps == requiredJumps && manager.CurrentState == StateOfMatterEnum.DEFAULT)
                 {
-                    displayChannel.RaiseEvent(new DisplayNotif("Press 'SPACEBAR' to transform into a gas.", true));
+                    displayChannel.RaiseEvent(new DisplayNotif("Press 'LEFT SHIFT' to transform into a solid.", true));
                 }
-                else if (currentJumps == requiredJumps && manager.CurrentState == StateOfMatterEnum.GAS)
+                else if (manager.CurrentState == StateOfMatterEnum.ICE)
                 {
-                    displayChannel.RaiseEvent(new DisplayNotif("", false));
+                    displayChannel.RaiseEvent(new DisplayNotif("Press 'LEFT SHIFT' to transform back.", true));
                 }
             }
             else
@@ -114,22 +112,32 @@ namespace GoofyGhosts
             base.SwapState(value);
 
             // Toggling cameras
-            if (value == StateOfMatterEnum.GAS)
+            if (value == StateOfMatterEnum.ICE)
             {
-                mouseLook?.EnableGasStateRotation();
                 movementCamera.SetActive(false);
                 gasCamera.SetActive(true);
+
+                //controls.Interaction.InteractStateSwap.performed += _ => SwapToDefault();
             }
             else
             {
-                mouseLook?.EnableBaseRotation();
                 movementCamera.SetActive(true);
                 gasCamera.SetActive(false);
+
+                //controls.Interaction.InteractStateSwap.performed += _ => SwapToSolid();
             }
         }
 
-        // Gas
-        protected override bool CheckGasCondition()
+        private void CheckSwap(InputAction.CallbackContext context)
+        {
+            if (manager.CurrentState == StateOfMatterEnum.DEFAULT)
+                SwapToSolid();
+            else
+                SwapToDefault();
+        }
+
+        // Solid
+        protected override bool CheckSolidCondition()
         {
             return currentJumps >= requiredJumps && manager.CurrentState == StateOfMatterEnum.DEFAULT;
         }
@@ -138,7 +146,7 @@ namespace GoofyGhosts
         // Default
         protected override bool CheckDefaultCondition()
         {
-            return manager.CurrentState == StateOfMatterEnum.GAS;
+            return manager.CurrentState == StateOfMatterEnum.ICE;
         }
     }
 }
