@@ -39,6 +39,13 @@ namespace GoofyGhosts
         /// this interactable.</param>
         public void Interact(Interactor interactor)
         {
+            print(interactor.gameObject.GetComponent<MatterStateManager>().CurrentState);
+            if (!CanSwapFrom(interactor.GetComponent<MatterStateManager>().CurrentState))
+            {
+                interactor.UnassignInteractable();
+                return;
+            }
+
             currentInteractor = interactor;
 
             // We need to disable the collider to prevent
@@ -123,6 +130,7 @@ namespace GoofyGhosts
             switch(fromState)
             {
                 case StateOfMatterEnum.GAS:
+                case StateOfMatterEnum.ICE:
                     return false;
                 default:
                     return true;
