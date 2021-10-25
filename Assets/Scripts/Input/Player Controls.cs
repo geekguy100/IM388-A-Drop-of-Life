@@ -193,33 +193,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
             ""id"": ""9ea0628a-accf-462e-8b4f-e643881e7d85"",
             ""actions"": [
                 {
-                    ""name"": ""Default State"",
+                    ""name"": ""SwapState"",
                     ""type"": ""Button"",
-                    ""id"": ""b6c97604-80c6-4f3f-8860-272de1acad1e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""State 1"",
-                    ""type"": ""Button"",
-                    ""id"": ""69ebc6b1-caf0-4f7e-9b79-074094ffc886"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""State 2"",
-                    ""type"": ""Button"",
-                    ""id"": ""791638c4-7a59-491c-a6b0-f1030e434f5d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""State 3"",
-                    ""type"": ""Button"",
-                    ""id"": ""3352f00c-ff57-4c3a-94b9-00405c2cc7a2"",
+                    ""id"": ""80675c8c-fee6-4bc6-b651-77ee02fa98c1"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -228,45 +204,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""1aa7637d-7697-4427-81e9-ae548a3e0770"",
-                    ""path"": ""<Keyboard>/1"",
+                    ""id"": ""7faf3203-8ba6-4140-873a-7e969f4e0658"",
+                    ""path"": ""<Keyboard>/shift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Default State"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b6a1031c-16c9-47cc-9d38-047efec87ed5"",
-                    ""path"": ""<Keyboard>/2"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""State 1"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""088c65b3-18d6-4666-86fe-a600ef841e2c"",
-                    ""path"": ""<Keyboard>/3"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""State 2"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""d9483c20-73f1-4a1c-a3dc-d4effb38d28d"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""State 3"",
+                    ""action"": ""SwapState"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -333,10 +276,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_WeaponsHandling_Aim = m_WeaponsHandling.FindAction("Aim", throwIfNotFound: true);
         // StatesOfMatter
         m_StatesOfMatter = asset.FindActionMap("StatesOfMatter", throwIfNotFound: true);
-        m_StatesOfMatter_DefaultState = m_StatesOfMatter.FindAction("Default State", throwIfNotFound: true);
-        m_StatesOfMatter_State1 = m_StatesOfMatter.FindAction("State 1", throwIfNotFound: true);
-        m_StatesOfMatter_State2 = m_StatesOfMatter.FindAction("State 2", throwIfNotFound: true);
-        m_StatesOfMatter_State3 = m_StatesOfMatter.FindAction("State 3", throwIfNotFound: true);
+        m_StatesOfMatter_SwapState = m_StatesOfMatter.FindAction("SwapState", throwIfNotFound: true);
         // Interaction
         m_Interaction = asset.FindActionMap("Interaction", throwIfNotFound: true);
         m_Interaction_InteractStateSwap = m_Interaction.FindAction("InteractStateSwap", throwIfNotFound: true);
@@ -488,18 +428,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     // StatesOfMatter
     private readonly InputActionMap m_StatesOfMatter;
     private IStatesOfMatterActions m_StatesOfMatterActionsCallbackInterface;
-    private readonly InputAction m_StatesOfMatter_DefaultState;
-    private readonly InputAction m_StatesOfMatter_State1;
-    private readonly InputAction m_StatesOfMatter_State2;
-    private readonly InputAction m_StatesOfMatter_State3;
+    private readonly InputAction m_StatesOfMatter_SwapState;
     public struct StatesOfMatterActions
     {
         private @PlayerControls m_Wrapper;
         public StatesOfMatterActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @DefaultState => m_Wrapper.m_StatesOfMatter_DefaultState;
-        public InputAction @State1 => m_Wrapper.m_StatesOfMatter_State1;
-        public InputAction @State2 => m_Wrapper.m_StatesOfMatter_State2;
-        public InputAction @State3 => m_Wrapper.m_StatesOfMatter_State3;
+        public InputAction @SwapState => m_Wrapper.m_StatesOfMatter_SwapState;
         public InputActionMap Get() { return m_Wrapper.m_StatesOfMatter; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -509,34 +443,16 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_StatesOfMatterActionsCallbackInterface != null)
             {
-                @DefaultState.started -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnDefaultState;
-                @DefaultState.performed -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnDefaultState;
-                @DefaultState.canceled -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnDefaultState;
-                @State1.started -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState1;
-                @State1.performed -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState1;
-                @State1.canceled -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState1;
-                @State2.started -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState2;
-                @State2.performed -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState2;
-                @State2.canceled -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState2;
-                @State3.started -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState3;
-                @State3.performed -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState3;
-                @State3.canceled -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnState3;
+                @SwapState.started -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnSwapState;
+                @SwapState.performed -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnSwapState;
+                @SwapState.canceled -= m_Wrapper.m_StatesOfMatterActionsCallbackInterface.OnSwapState;
             }
             m_Wrapper.m_StatesOfMatterActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @DefaultState.started += instance.OnDefaultState;
-                @DefaultState.performed += instance.OnDefaultState;
-                @DefaultState.canceled += instance.OnDefaultState;
-                @State1.started += instance.OnState1;
-                @State1.performed += instance.OnState1;
-                @State1.canceled += instance.OnState1;
-                @State2.started += instance.OnState2;
-                @State2.performed += instance.OnState2;
-                @State2.canceled += instance.OnState2;
-                @State3.started += instance.OnState3;
-                @State3.performed += instance.OnState3;
-                @State3.canceled += instance.OnState3;
+                @SwapState.started += instance.OnSwapState;
+                @SwapState.performed += instance.OnSwapState;
+                @SwapState.canceled += instance.OnSwapState;
             }
         }
     }
@@ -596,10 +512,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     }
     public interface IStatesOfMatterActions
     {
-        void OnDefaultState(InputAction.CallbackContext context);
-        void OnState1(InputAction.CallbackContext context);
-        void OnState2(InputAction.CallbackContext context);
-        void OnState3(InputAction.CallbackContext context);
+        void OnSwapState(InputAction.CallbackContext context);
     }
     public interface IInteractionActions
     {

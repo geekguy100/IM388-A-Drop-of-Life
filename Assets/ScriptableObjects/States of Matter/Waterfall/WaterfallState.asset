@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: WaterfallState
   m_EditorClassIdentifier: 
   stateName: Waterfall
-  enumValue: 2
+  enumValue: 3
+  model: {fileID: 2716838348271379321, guid: ac73de517ed6a6a43b29af65ed9d1a13, type: 3}
   motorData: {fileID: 11400000, guid: 8bd3090e5e3367e47a078a980fac3316, type: 2}
   characterControllerData:
     slopeLimit: 45

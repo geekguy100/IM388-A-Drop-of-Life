@@ -37,6 +37,15 @@ namespace GoofyGhosts
             }
         }
 
+        [SerializeField] private GameObject model;
+        public GameObject Model
+        {
+            get
+            {
+                return model;
+            }
+        }
+
         [Tooltip("The motor data that should be used while in this state.")]
         [SerializeField] private CharacterMotorDataSO motorData;
         /// <summary>

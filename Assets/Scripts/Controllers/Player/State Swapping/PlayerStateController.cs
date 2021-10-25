@@ -35,11 +35,7 @@ namespace GoofyGhosts
 
         private void OnEnable()
         {
-            controls.StatesOfMatter.DefaultState.performed += _ => manager.SwapState(StateOfMatterEnum.DEFAULT);
-            controls.StatesOfMatter.State1.performed += _ => manager.SwapState(StateOfMatterEnum.LIQUID);
-            controls.StatesOfMatter.State2.performed += _ => manager.SwapState(StateOfMatterEnum.GAS);
-            controls.StatesOfMatter.State3.performed += _ => manager.SwapState(StateOfMatterEnum.ICE);
-
+            controls.StatesOfMatter.SwapState.performed += _ => manager.SwapToNextState();
             controls.StatesOfMatter.Enable();
         }
 

@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 3386696722698713539}
   - component: {fileID: 6986372923331318006}
   - component: {fileID: 8021778521801290888}
-  - component: {fileID: 5239399514205982096}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player Gas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,19 +82,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5239399514205982096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2716838348271379321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a40c396c45409224b9714cb8d674f902, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioClip: {fileID: 0}
-  audioSourcePrefab: {fileID: 7734414494952367337, guid: 1bc039fe8d9af4648b644b5f1ac88214, type: 3}
-  data: {fileID: 11400000, guid: f0a785115b5e74949bf8b794554298be, type: 2}
-  particleSpawnOffset: {x: 0, y: 0, z: 0}
