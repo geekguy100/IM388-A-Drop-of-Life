@@ -13,6 +13,7 @@ namespace GoofyGhosts
     public class StateSwapper : MonoBehaviour
     {
         [SerializeField] private StateOfMatterEnum stateToSwapTo;
+        [SerializeField] private string displayText;
 
         /// <summary>
         /// Returns the state to swap to.
@@ -21,6 +22,14 @@ namespace GoofyGhosts
         public StateOfMatterEnum GetState()
         {
             return stateToSwapTo;
+        }
+
+        public DisplayNotif? GetDisplayNotif()
+        {
+            if (displayText == string.Empty)
+                return null;
+            else
+                return new DisplayNotif(displayText);
         }
     }
 }

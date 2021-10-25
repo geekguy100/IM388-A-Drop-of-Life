@@ -657,6 +657,7 @@ MonoBehaviour:
   whatIsStateSwapping:
     serializedVersion: 2
     m_Bits: 8192
+  displayNotifChannel: {fileID: 11400000, guid: dc9dc8c556fae104fb01ad9b136bf3b5, type: 2}
 --- !u!1 &627894604 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1449672241854535731, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
@@ -1281,6 +1282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stateToSwapTo: 2
+  displayText: Press 'LEFT SHIFT' to transform into a liquid.
 --- !u!1001 &2537045222010406726
 PrefabInstance:
   m_ObjectHideFlags: 0

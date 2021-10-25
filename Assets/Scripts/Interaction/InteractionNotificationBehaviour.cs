@@ -83,11 +83,11 @@ namespace GoofyGhosts
             }
         }
 
-        private void DisplayNotif(DisplayNotif notif)
+        private void DisplayNotif(DisplayNotif? notif)
         {
-            if (notif.display)
+            if (notif.Value.display)
             {
-                displayText.text = notif.notification;
+                displayText.text = notif.Value.notification;
                 anim.ResetTrigger("FadeOut");
                 anim.SetTrigger("Expand");
                 StartCoroutine(Rotate());

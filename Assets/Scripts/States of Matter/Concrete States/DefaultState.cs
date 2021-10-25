@@ -15,8 +15,20 @@ namespace GoofyGhosts
     /// </summary>
     public class DefaultState : IMatterState
     {
+        [SerializeField] private DisplayNotifChannelSO displayNotifChannel;
+
         private StateOfMatterEnum nextState = StateOfMatterEnum.NULL;
-        [ShowInInspector][ReadOnly] private bool checkForInteractables = true;
+        [ShowInInspector][ReadOnly] private bool checkForInteractables;
+
+        #region -- // Initialization // --
+        protected override void Awake()
+        {
+            base.Awake();
+            checkForInteractables = true;
+        }
+        #endregion
+
+        #region -- // Activation / Deactivation // --
 
         public override void Activate()
         {
@@ -28,7 +40,9 @@ namespace GoofyGhosts
         {
             base.Deactivate();
             checkForInteractables = false;
+            displayNotifChannel.Disable();
         }
+        #endregion
 
         #region -- // Check for nearby state swappers // --
         /// <summary>
@@ -43,7 +57,9 @@ namespace GoofyGhosts
 
             if (((1 << other.gameObject.layer) & whatIsStateSwapping) > 0)
             {
-                nextState = other.GetComponent<StateSwapper>().GetState();
+                StateSwapper swapper = other.GetComponent<StateSwapper>();
+                nextState = swapper.GetState();
+                displayNotifChannel.RaiseEvent(swapper.GetDisplayNotif());
             }
         }
 
@@ -60,6 +76,7 @@ namespace GoofyGhosts
             if (((1 << other.gameObject.layer) & whatIsStateSwapping) > 0)
             {
                 nextState = StateOfMatterEnum.NULL;
+                displayNotifChannel.Disable();
             }
         }
         #endregion
