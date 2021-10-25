@@ -17,7 +17,7 @@ namespace GoofyGhosts
             throw new System.NotImplementedException();
         }
 
-        public override void Jump()
+        public override void Jump(int count)
         {
             throw new System.NotImplementedException();
         }

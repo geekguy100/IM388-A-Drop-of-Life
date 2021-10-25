@@ -79,9 +79,9 @@ namespace GoofyGhosts
         #endregion
 
         #region -- // Calling State Methods // --
-        public void Jump()
+        public void Jump(int jumpCount)
         {
-            currentState.Jump();
+            currentState.Jump(jumpCount);
         }
 
         public StateOfMatterEnum GetNextState()

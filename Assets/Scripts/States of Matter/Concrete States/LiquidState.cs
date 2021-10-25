@@ -35,7 +35,7 @@ namespace GoofyGhosts
         #endregion
 
 
-        public override void Jump()
+        public override void Jump(int count)
         {
             // Not used
         }
@@ -59,6 +59,19 @@ namespace GoofyGhosts
             if (((1 << other.gameObject.layer) & whatIsStateSwapping) > 0)
             {
                 manager.SwapToNextState();
+            }
+        }
+
+        /// <summary>
+        /// Fills up hydration meter if in trigger.
+        /// </summary>
+        /// <param name="other">The Collider we are colliding with.</param>
+        private void OnTriggerStay(Collider other)
+        {
+            // Only swap back if we exit the liquid trigger.
+            if (((1 << other.gameObject.layer) & whatIsStateSwapping) > 0)
+            {
+                // Fill up hydration meter.
             }
         }
     }

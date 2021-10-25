@@ -12,7 +12,7 @@ namespace GoofyGhosts
     public abstract class IMatterState : MonoBehaviour
     {
         // Abstract methods
-        public abstract void Jump();
+        public abstract void Jump(int jumpCount);
         public abstract StateOfMatterEnum GetNextState();
 
         #region -- // Data // --
@@ -42,8 +42,7 @@ namespace GoofyGhosts
         /// <summary>
         /// Reference to the CharacterMotor component.
         /// </summary>
-        private CharacterMotor motor;
-
+        protected CharacterMotor motor;
 
         #region -- // Initialization // --
         /// <summary>
@@ -66,7 +65,9 @@ namespace GoofyGhosts
 
             // Instantiate particles if not null.
             if (data.TransitionParticleEffect != null)
+            {
                 Instantiate(data.TransitionParticleEffect, transform.position + particleSpawnOffset, data.TransitionParticleEffect.transform.rotation);
+            }
         }
 
         /// <summary>

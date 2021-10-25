@@ -2,7 +2,6 @@
 *    Author: Kyle Grenier
 *    Contributors: 
 *    Date Created: 
-*    Brief Description: 
 *******************************************************************/
 using System.Collections;
 using System.Collections.Generic;
@@ -12,14 +11,17 @@ namespace GoofyGhosts
 {
     public class GasState : IMatterState
     {
+        [SerializeField] private int requiredJumps;
+
         public override StateOfMatterEnum GetNextState()
         {
-            throw new System.NotImplementedException();
+            // Always swap to default.
+            return StateOfMatterEnum.DEFAULT;
         }
 
-        public override void Jump()
+        public override void Jump(int jumpCount)
         {
-            throw new System.NotImplementedException();
+            // Propel player.
         }
     }
 }

@@ -18,7 +18,7 @@ public class CharacterMotor : MonoBehaviour
     [SerializeField] private CharacterMotorDataSO motorData;
 
     public UnityAction<int> OnJumpCountChange;
-    public UnityAction OnJumpAttempt;
+    public UnityAction OnGrounded;
 
     /// <summary>
     /// True if the character is on the ground.
@@ -112,7 +112,7 @@ public class CharacterMotor : MonoBehaviour
             {
                 currentJumps = 0;
                 jumpedFromGround = false;
-                OnJumpCountChange?.Invoke(currentJumps);
+                OnGrounded?.Invoke();
             }
         }
 
@@ -183,8 +183,6 @@ public class CharacterMotor : MonoBehaviour
 
             OnJumpCountChange?.Invoke(currentJumps);
         }
-
-        OnJumpAttempt?.Invoke();
 
         jumped = false;
     }

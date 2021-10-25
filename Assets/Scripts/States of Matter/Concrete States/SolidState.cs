@@ -15,7 +15,7 @@ namespace GoofyGhosts
             return StateOfMatterEnum.DEFAULT;
         }
 
-        public override void Jump()
+        public override void Jump(int count)
         {
             // Not using
         }
