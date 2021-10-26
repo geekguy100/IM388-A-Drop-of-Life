@@ -42,6 +42,8 @@ namespace GoofyGhosts
             {
                 DisplayNotif(gasNotif);
             }
+
+            motor.SetJumped(true, 1f, true);
         }
 
         public override void Deactivate()
@@ -100,8 +102,7 @@ namespace GoofyGhosts
 
         #region -- // Gas State Checking // --
         /// <summary>
-        /// Check if player can swap to gas state given
-        /// amount of jumps.
+        /// Sets the next state to gas since player is in the air.
         /// </summary>
         /// <param name="count">The amount of times the player has jumped.</param>
         public override void Jump(int count)
