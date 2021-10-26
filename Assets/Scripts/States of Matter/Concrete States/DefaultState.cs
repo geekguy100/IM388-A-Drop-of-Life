@@ -68,7 +68,7 @@ namespace GoofyGhosts
             if (!active || inAir)
                 return;
 
-            if ((((1 << other.gameObject.layer) & whatIsStateSwapping) > 0) && hitSwapper == null)
+            if ((((1 << other.gameObject.layer) & whatIsStateSwapping) > 0))
             {
                 SetSwapper(other.GetComponent<StateSwapper>());
             }

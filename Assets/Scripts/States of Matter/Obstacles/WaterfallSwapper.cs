@@ -36,15 +36,24 @@ namespace GoofyGhosts
             movementCamera.SetActive(false);
             waterfallCamera.SetActive(true);
 
+            if (player.TryGetComponent(out MouseLook mouseLook))
+            {
+                mouseLook.enabled = false;
+            }
         }
 
         /// <summary>
         /// Turn waterfall cam off and movement cam on.
         /// </summary>
-        public void Deactivate()
+        public void Deactivate(GameObject player)
         {
             movementCamera.SetActive(true);
             waterfallCamera.SetActive(false);
+
+            if (player.TryGetComponent(out MouseLook mouseLook))
+            {
+                mouseLook.enabled = true;
+            }
         }
     }
 }
