@@ -5,17 +5,20 @@
 *******************************************************************/
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GoofyGhosts
 {
     /// <summary>
     /// Manages swapping between the states of matter.
     /// </summary>
-    public class MatterStateManager : MonoBehaviour, IMatterStateChanger
+    [RequireComponent(typeof(DefaultState))]
+    public class MatterStateManager : MonoBehaviour
     {
         #region -- // State Fields // --
         [Tooltip("The current state of matter.")]
-        [SerializeField] private StateOfMatter currentState;
+        [SerializeField] private IMatterState currentState;
         /// <summary>
         /// The current state of this state swapper.
         /// </summary>
@@ -28,7 +31,7 @@ namespace GoofyGhosts
         }
 
         [Tooltip("An array of all of the possible states the character can swap to.")]
-        [SerializeField] private StateOfMatter[] states;
+        private List<IMatterState> states;
 
         [Tooltip("The channel that invokes state swap events.")]
         [SerializeField] private StateEnumChannelSO swapStateChannel;
@@ -39,6 +42,9 @@ namespace GoofyGhosts
         /// </summary>
         private CharacterController characterController;
 
+        [SerializeField] private GameObject currentModel;
+
+
         #region // -- Initialization -- //
         /// <summary>
         /// Initializing components.
@@ -46,6 +52,13 @@ namespace GoofyGhosts
         private void Awake()
         {
             characterController = GetComponent<CharacterController>();
+            states = new List<IMatterState>();
+
+            // Store all of the states of matter we can swap to in the list.
+            GetComponents(states);
+
+            // Set the current state to the default state.
+            currentState = states.Where(t => t.GetType().Equals(typeof(DefaultState))).First();
         }
 
         /// <summary>
@@ -65,21 +78,34 @@ namespace GoofyGhosts
         }
         #endregion
 
+        #region -- // Calling State Methods // --
+        public void Jump(int jumpCount)
+        {
+            currentState.Jump(jumpCount);
+        }
+
+        public void OnGrounded()
+        {
+            currentState.OnGrounded();
+        }
+
+        public StateOfMatterEnum GetNextState()
+        {
+            return currentState.GetNextState();
+        }
+        #endregion
+
         /// <summary>
         /// Swaps the current state.
         /// </summary>
         /// <param name="value">The value of the state to swap to.</param>
         public void SwapState(StateOfMatterEnum value)
         {
-            // If we're already in the state we want to swap to,
-            // swap back to default.
-            if (CurrentState == value)
-            {
-                value = StateOfMatterEnum.DEFAULT;
-            }
+            if (value == StateOfMatterEnum.NULL)
+                return;
 
             int index = 0;
-            foreach (StateOfMatter state in states)
+            foreach (IMatterState state in states)
             {
                 if (state.Data.EnumValue == value)
                     break;
@@ -87,14 +113,8 @@ namespace GoofyGhosts
                 ++index;
             }
 
-            if (index < states.Length)
+            if (index < states.Count)
             {
-                //currentState.Deactivate();
-                //currentState = Instantiate(states[index], transform);
-                //SetCharacterControllerValues(currentState.Data.CharacterControllerData);
-
-                //currentState.Activate();
-
                 // The transition time into the next state.
                 float transitionTime = states[index].Data.TransitionTime;
 
@@ -119,11 +139,23 @@ namespace GoofyGhosts
                 // Performs the state change transition.
                 void PerformTransition()
                 {
+                    // Getting the hit StateSwapper if there is one.
+                    StateSwapper hitSwapper = currentState.GetSwapper();
+
+                    // Deactivating the current state and destorying
+                    // its model so we can spawn in the new one.
                     currentState.Deactivate();
-                    currentState = Instantiate(states[index], transform);
+                    if (currentModel != null)
+                    {
+                        Destroy(currentModel);
+                    }
+
+                    currentState = states[index];
+
                     SetCharacterControllerValues(currentState.Data.CharacterControllerData);
 
-                    currentState.Activate();
+                    currentModel = Instantiate(currentState.Data.Model, transform);
+                    currentState.Activate(hitSwapper);
                 }
             }
             else
@@ -145,6 +177,16 @@ namespace GoofyGhosts
                 characterController.radius = data.radius;
                 characterController.height = data.height;
             }
+        }
+
+        /// <summary>
+        /// Swaps the current state to the next state.
+        /// </summary>
+        /// <remarks>Next state is obtained from the current state.</remarks>
+        public void SwapToNextState()
+        {
+            //print("Attempting to swap to next state: " + GetNextState() + " from " + currentState.Data.name);
+            SwapState(GetNextState());
         }
     }
 }

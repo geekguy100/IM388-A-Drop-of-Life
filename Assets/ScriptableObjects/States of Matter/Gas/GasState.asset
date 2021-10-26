@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: GasState
   m_EditorClassIdentifier: 
   stateName: Gas
-  enumValue: 3
+  enumValue: 4
+  model: {fileID: 2716838348271379321, guid: 83f4fbfc6d6bdc44d925060de62392c2, type: 3}
   motorData: {fileID: 11400000, guid: eb78aab305b767a4b90db3686761ace5, type: 2}
   characterControllerData:
     slopeLimit: 45

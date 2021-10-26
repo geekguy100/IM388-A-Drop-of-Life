@@ -356,6 +356,11 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 0
       enableBigTilePrepass: 0
       isFptlEnabled: 0
+--- !u!1 &215019780 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1017356426624280025, guid: a874b98d1b19a8a4dbf5365405b0f5da, type: 3}
+  m_PrefabInstance: {fileID: 1017356427484244041}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &438018194
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,6 +662,38 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7522752573701193619, guid: 2f0c0c510b8dc59458f01e6748f0c9fa, type: 3}
   m_PrefabInstance: {fileID: 623665419}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1145126601 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1017356426715646121, guid: a874b98d1b19a8a4dbf5365405b0f5da, type: 3}
+  m_PrefabInstance: {fileID: 1017356427484244041}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1145126602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145126601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9105f463690eba42b8137bb4b11fa2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateToSwapTo: 3
+  displayText: Press 'LEFT SHIFT' to climb the waterfall.
+--- !u!114 &1145126603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145126601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06bffc4f30b1b104ea93f710ff7e4788, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterfallCamera: {fileID: 215019780}
 --- !u!1 &1307061323
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,6 +1088,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1017356426624280025, guid: a874b98d1b19a8a4dbf5365405b0f5da, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1017356426715646120, guid: a874b98d1b19a8a4dbf5365405b0f5da, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1017356426715646120, guid: a874b98d1b19a8a4dbf5365405b0f5da, type: 3}
       propertyPath: movementCamera
       value: 
@@ -1058,6 +1103,14 @@ PrefabInstance:
     - target: {fileID: 1017356426715646121, guid: a874b98d1b19a8a4dbf5365405b0f5da, type: 3}
       propertyPath: m_Name
       value: Waterfall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1017356426715646121, guid: a874b98d1b19a8a4dbf5365405b0f5da, type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1017356426715646123, guid: a874b98d1b19a8a4dbf5365405b0f5da, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1017356426715646124, guid: a874b98d1b19a8a4dbf5365405b0f5da, type: 3}
       propertyPath: m_RootOrder
@@ -1103,7 +1156,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1017356426715646120, guid: a874b98d1b19a8a4dbf5365405b0f5da, type: 3}
+    - {fileID: 1017356426127039843, guid: a874b98d1b19a8a4dbf5365405b0f5da, type: 3}
+    - {fileID: 1392080611, guid: a874b98d1b19a8a4dbf5365405b0f5da, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a874b98d1b19a8a4dbf5365405b0f5da, type: 3}
 --- !u!1001 &2168549314937368271
 PrefabInstance:

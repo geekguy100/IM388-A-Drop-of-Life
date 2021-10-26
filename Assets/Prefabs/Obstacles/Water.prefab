@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 2168549314589276295}
   - component: {fileID: 2168549314589276296}
   - component: {fileID: 2168549314589276297}
-  - component: {fileID: 2168549314589276293}
-  m_Layer: 12
+  - component: {fileID: 2168549314937368273}
+  m_Layer: 13
   m_Name: Water
   m_TagString: Water
   m_Icon: {fileID: 0}
@@ -95,9 +95,9 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 10, y: 6.0582094, z: 10}
-  m_Center: {x: 0, y: 2.529105, z: 0}
---- !u!114 &2168549314589276293
+  m_Size: {x: 10, y: 0.8755082, z: 10}
+  m_Center: {x: 0, y: -0.06224643, z: 0}
+--- !u!114 &2168549314937368273
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,8 +106,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2168549314589276298}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a22f21e691afe6240ab8578263adee7b, type: 3}
+  m_Script: {fileID: 11500000, guid: a9105f463690eba42b8137bb4b11fa2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swapStateChannel: {fileID: 11400000, guid: cf5dd6bdef0c30e4eac1dcec60decfb0, type: 2}
-  stateToSwapTo: 1
+  stateToSwapTo: 2
+  displayText: Press 'LEFT SHIFT' to transform into a liquid.
