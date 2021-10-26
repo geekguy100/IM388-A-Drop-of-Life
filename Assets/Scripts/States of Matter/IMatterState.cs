@@ -12,7 +12,8 @@ namespace GoofyGhosts
     public abstract class IMatterState : MonoBehaviour
     {
         // Abstract methods
-        public abstract void Jump(int jumpCount);
+        public virtual void Jump(int jumpCount) { }
+        protected virtual void OnGrounded() { }
         public abstract StateOfMatterEnum GetNextState();
 
         #region -- // Data // --
@@ -52,6 +53,18 @@ namespace GoofyGhosts
         {
             motor = GetComponent<CharacterMotor>();
             manager = GetComponent<MatterStateManager>();
+        }
+
+        private void OnEnable()
+        {
+            motor.OnJumpCountChange += Jump;
+            motor.OnGrounded += OnGrounded;
+        }
+
+        private void OnDisable()
+        {
+            motor.OnJumpCountChange -= Jump;
+            motor.OnGrounded -= OnGrounded;
         }
         #endregion
 

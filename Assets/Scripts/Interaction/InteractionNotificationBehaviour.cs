@@ -15,9 +15,9 @@ namespace GoofyGhosts
     [RequireComponent(typeof(Animator))]
     public class InteractionNotificationBehaviour : MonoBehaviour
     {
-        [Tooltip("Channel that invokes interactable-nearby events.")]
-        [SerializeField] private IInteractableChannel interactableChannel;
         [SerializeField] private DisplayNotifChannelSO displayChannel;
+
+        private bool isDisplaying;
 
         [Tooltip("The Canvas that displays the notification.")]
         [SerializeField] private GameObject canvas;
@@ -39,13 +39,11 @@ namespace GoofyGhosts
         #region -- // Initialization // --
         private void OnEnable()
         {
-            interactableChannel.OnEventRaised += OnInteractableChange;
             displayChannel.OnEventRaised += DisplayNotif;
         }
 
         private void OnDisable()
         {
-            interactableChannel.OnEventRaised -= OnInteractableChange;
             displayChannel.OnEventRaised -= DisplayNotif;
         }
 
@@ -60,40 +58,19 @@ namespace GoofyGhosts
         }
         #endregion
 
-        /// <summary>
-        /// Invoked when the player goes near or leaves an interactable.
-        /// Only functions if the IInteractable is of type IInteractableDisplay.
-        /// </summary>
-        /// <param name="interactable">The IInteractable nearby / left.</param>
-        /// <param name="inRange">True if the IInteractable is in range and can be interacted with.</param>
-        private void OnInteractableChange(IInteractable interactable, bool inRange)
-        {
-            IInteractableDisplay disp = interactable as IInteractableDisplay;
-
-            if (disp != null && inRange)
-            {
-                displayText.text = disp.GetDisplayInfo();
-                anim.ResetTrigger("FadeOut");
-                anim.SetTrigger("Expand");
-                StartCoroutine(Rotate());
-            }
-            else
-            {
-                anim.SetTrigger("FadeOut");
-            }
-        }
-
         private void DisplayNotif(DisplayNotif? notif)
         {
-            if (notif.Value.display)
+            if (!isDisplaying && notif.Value.display)
             {
+                isDisplaying = true;
                 displayText.text = notif.Value.notification;
                 anim.ResetTrigger("FadeOut");
                 anim.SetTrigger("Expand");
                 StartCoroutine(Rotate());
             }
-            else
+            else if (isDisplaying && !notif.Value.display)
             {
+                isDisplaying = false;
                 anim.SetTrigger("FadeOut");
             }
         }

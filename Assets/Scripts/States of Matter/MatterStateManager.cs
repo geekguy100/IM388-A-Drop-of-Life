@@ -183,7 +183,7 @@ namespace GoofyGhosts
         /// <remarks>Next state is obtained from the current state.</remarks>
         public void SwapToNextState()
         {
-            print("Attempting to swap to next state: " + GetNextState());
+            //print("Attempting to swap to next state: " + GetNextState() + " from " + currentState.Data.name);
             SwapState(GetNextState());
         }
     }
