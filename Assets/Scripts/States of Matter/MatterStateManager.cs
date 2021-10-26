@@ -84,6 +84,11 @@ namespace GoofyGhosts
             currentState.Jump(jumpCount);
         }
 
+        public void OnGrounded()
+        {
+            currentState.OnGrounded();
+        }
+
         public StateOfMatterEnum GetNextState()
         {
             return currentState.GetNextState();
@@ -98,13 +103,6 @@ namespace GoofyGhosts
         {
             if (value == StateOfMatterEnum.NULL)
                 return;
-
-            //// If we're already in the state we want to swap to,
-            //// swap back to default.
-            //if (CurrentState == value)
-            //{
-            //    value = StateOfMatterEnum.DEFAULT;
-            //}
 
             int index = 0;
             foreach (IMatterState state in states)

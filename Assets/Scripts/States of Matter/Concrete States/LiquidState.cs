@@ -34,12 +34,6 @@ namespace GoofyGhosts
         }
         #endregion
 
-
-        public override void Jump(int count)
-        {
-            // Not used
-        }
-
         public override StateOfMatterEnum GetNextState()
         {
             // Always transform back into default state in liquid form.

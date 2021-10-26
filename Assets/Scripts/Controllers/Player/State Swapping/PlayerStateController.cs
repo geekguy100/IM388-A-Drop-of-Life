@@ -11,6 +11,7 @@ namespace GoofyGhosts
     /// Handles accepting input for swapping states.
     /// </summary>
     [RequireComponent(typeof(MatterStateManager))]
+    [RequireComponent(typeof(CharacterMotor))]
     public class PlayerStateController : MonoBehaviour
     {
         /// <summary>
@@ -23,6 +24,8 @@ namespace GoofyGhosts
         /// </summary>
         private MatterStateManager manager;
 
+        private CharacterMotor motor;
+
         #region -- // Initialization // --
         /// <summary>
         /// Creating new controls object.
@@ -31,17 +34,24 @@ namespace GoofyGhosts
         {
             controls = new PlayerControls();
             manager = GetComponent<MatterStateManager>();
+            motor = GetComponent<CharacterMotor>();
         }
 
         private void OnEnable()
         {
             controls.StatesOfMatter.SwapState.performed += _ => manager.SwapToNextState();
             controls.StatesOfMatter.Enable();
+
+            motor.OnJumpCountChange += manager.Jump;
+            motor.OnGrounded += manager.OnGrounded;
         }
 
         private void OnDisable()
         {
             controls.StatesOfMatter.Disable();
+
+            motor.OnJumpCountChange -= manager.Jump;
+            motor.OnGrounded -= manager.OnGrounded;
         }
         #endregion
     }

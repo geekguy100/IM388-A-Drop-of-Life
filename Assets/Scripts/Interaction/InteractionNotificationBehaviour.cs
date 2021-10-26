@@ -62,27 +62,30 @@ namespace GoofyGhosts
         {
             if (!isDisplaying && notif.Value.display)
             {
+                Display();
+            }
+            // If we are displaying and we no longer want to be, 
+            // fade out the notification.
+            else if (isDisplaying && !notif.Value.display)
+            {
+                isDisplaying = false;
+                anim.SetTrigger("FadeOut");
+            }
+            // If we are already displaying but we want to display something new,
+            /// display the new notification.
+            else if (displayText.text != notif.Value.notification)
+            {
+                Display();
+            }
+
+            void Display()
+            {
                 isDisplaying = true;
                 displayText.text = notif.Value.notification;
                 anim.ResetTrigger("FadeOut");
                 anim.SetTrigger("Expand");
                 StartCoroutine(Rotate());
             }
-            else if (isDisplaying && !notif.Value.display)
-            {
-                isDisplaying = false;
-                anim.SetTrigger("FadeOut");
-            }
-        }
-
-        private void ActivateCanvas()
-        {
-            canvas.SetActive(true);
-        }
-
-        private void DeactivateCanvas()
-        {
-            canvas.SetActive(false);
         }
 
         /// <summary>
@@ -98,5 +101,17 @@ namespace GoofyGhosts
                 yield return null;
             }
         }
+
+        #region -- // Animation Events // --
+        private void ActivateCanvas()
+        {
+            canvas.SetActive(true);
+        }
+
+        private void DeactivateCanvas()
+        {
+            canvas.SetActive(false);
+        }
+        #endregion
     }
 }

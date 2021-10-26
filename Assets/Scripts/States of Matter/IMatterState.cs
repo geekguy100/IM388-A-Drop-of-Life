@@ -13,7 +13,7 @@ namespace GoofyGhosts
     {
         // Abstract methods
         public virtual void Jump(int jumpCount) { }
-        protected virtual void OnGrounded() { }
+        public virtual void OnGrounded() { }
         public abstract StateOfMatterEnum GetNextState();
 
         #region -- // Data // --
@@ -53,18 +53,6 @@ namespace GoofyGhosts
         {
             motor = GetComponent<CharacterMotor>();
             manager = GetComponent<MatterStateManager>();
-        }
-
-        private void OnEnable()
-        {
-            motor.OnJumpCountChange += Jump;
-            motor.OnGrounded += OnGrounded;
-        }
-
-        private void OnDisable()
-        {
-            motor.OnJumpCountChange -= Jump;
-            motor.OnGrounded -= OnGrounded;
         }
         #endregion
 

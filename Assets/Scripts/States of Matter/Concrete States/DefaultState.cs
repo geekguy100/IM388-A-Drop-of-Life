@@ -76,7 +76,7 @@ namespace GoofyGhosts
         /// <param name="other">The Collider that exited the trigger.</param>
         private void OnTriggerExit(Collider other)
         {
-            if (!active)
+            if (!active || inAir)
                 return;
 
             // Run only if we exited the trigger of the current swapper.
@@ -116,7 +116,7 @@ namespace GoofyGhosts
         /// <summary>
         /// Invoked when the player lands on the ground.
         /// </summary>
-        protected override void OnGrounded()
+        public override void OnGrounded()
         {
             inAir = false;
             nextState = StateOfMatterEnum.NULL;
