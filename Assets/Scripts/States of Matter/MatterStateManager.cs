@@ -139,7 +139,11 @@ namespace GoofyGhosts
                 // Performs the state change transition.
                 void PerformTransition()
                 {
-                    // Deactivate the current state and activate the new one.
+                    // Getting the hit StateSwapper if there is one.
+                    StateSwapper hitSwapper = currentState.GetSwapper();
+
+                    // Deactivating the current state and destorying
+                    // its model so we can spawn in the new one.
                     currentState.Deactivate();
                     if (currentModel != null)
                     {
@@ -151,7 +155,7 @@ namespace GoofyGhosts
                     SetCharacterControllerValues(currentState.Data.CharacterControllerData);
 
                     currentModel = Instantiate(currentState.Data.Model, transform);
-                    currentState.Activate();
+                    currentState.Activate(hitSwapper);
                 }
             }
             else

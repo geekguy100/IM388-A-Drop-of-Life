@@ -11,10 +11,11 @@ namespace GoofyGhosts
     [RequireComponent(typeof(MatterStateManager))]
     public abstract class IMatterState : MonoBehaviour
     {
-        // Abstract methods
+        // Abstract / Virtual methods
         public virtual void Jump(int jumpCount) { }
         public virtual void OnGrounded() { }
         public abstract StateOfMatterEnum GetNextState();
+        public virtual StateSwapper GetSwapper() { return null; }
 
         #region -- // Data // --
         [Tooltip("The data about this state of matter.")]
@@ -60,7 +61,7 @@ namespace GoofyGhosts
         /// <summary>
         /// Spawning particles / state-specific effects.
         /// </summary>
-        public virtual void Activate()
+        public virtual void Activate(StateSwapper swapper)
         {
             motor.SwapMotorData(data.MotorData);
 
@@ -72,7 +73,7 @@ namespace GoofyGhosts
         }
 
         /// <summary>
-        /// Spawns particles and destroys the current model.
+        /// Spawns particles and performs de-initialization.
         /// </summary>
         public virtual void Deactivate()
         {

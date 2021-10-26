@@ -14,9 +14,9 @@ namespace GoofyGhosts
         private bool canSwap;
 
         #region -- // Activation / Deactivation // --
-        public override void Activate()
+        public override void Activate(StateSwapper swapper)
         {
-            base.Activate();
+            base.Activate(swapper);
             StartCoroutine(WaitThenEnable());
 
 

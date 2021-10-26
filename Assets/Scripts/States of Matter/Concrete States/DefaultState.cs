@@ -21,6 +21,8 @@ namespace GoofyGhosts
         [ShowInInspector] [ReadOnly] private bool active;
         private bool inAir;
 
+        private StateSwapper hitSwapper;
+
         #region -- // Initialization // --
         protected override void Awake()
         {
@@ -32,9 +34,9 @@ namespace GoofyGhosts
         #endregion
 
         #region -- // Activation / Deactivation // --
-        public override void Activate()
+        public override void Activate(StateSwapper swapper)
         {
-            base.Activate();
+            base.Activate(swapper);
             active = true;
 
             // Display the gas notif if not grounded.
@@ -50,6 +52,7 @@ namespace GoofyGhosts
         {
             base.Deactivate();
             active = false;
+            hitSwapper = null;
             HideNotif();
         }
         #endregion
@@ -65,7 +68,7 @@ namespace GoofyGhosts
             if (!active || inAir)
                 return;
 
-            if ((((1 << other.gameObject.layer) & whatIsStateSwapping) > 0))
+            if ((((1 << other.gameObject.layer) & whatIsStateSwapping) > 0) && hitSwapper == null)
             {
                 SetSwapper(other.GetComponent<StateSwapper>());
             }
@@ -85,6 +88,7 @@ namespace GoofyGhosts
             if ((((1 << other.gameObject.layer) & whatIsStateSwapping) > 0))
             {
                 nextState = StateOfMatterEnum.NULL;
+                hitSwapper = null;
                 HideNotif();
             }
         }
@@ -97,6 +101,7 @@ namespace GoofyGhosts
         {
             nextState = swapper.GetState();
             DisplayNotif(swapper.GetDisplayNotif());
+            hitSwapper = swapper;
         }
         #endregion
 
@@ -142,6 +147,11 @@ namespace GoofyGhosts
         public override StateOfMatterEnum GetNextState()
         {
             return nextState;
+        }
+
+        public override StateSwapper GetSwapper()
+        {
+            return hitSwapper;
         }
     }
 }

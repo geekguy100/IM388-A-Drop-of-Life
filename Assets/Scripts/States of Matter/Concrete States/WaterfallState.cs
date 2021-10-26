@@ -2,7 +2,6 @@
 *    Author: Kyle Grenier
 *    Contributors: 
 *    Date Created: 
-*    Brief Description: 
 *******************************************************************/
 using System.Collections;
 using System.Collections.Generic;
@@ -11,15 +10,29 @@ using UnityEngine;
 namespace GoofyGhosts
 {
     public class WaterfallState : IMatterState
-    { 
-        public override StateOfMatterEnum GetNextState()
+    {
+        private WaterfallSwapper waterfall;
+
+        #region -- // Activation / Deactivation // --
+        public override void Activate(StateSwapper swapper)
         {
-            throw new System.NotImplementedException();
+            base.Activate(swapper);
+            waterfall = swapper.GetComponent<WaterfallSwapper>();
+            waterfall.Activate(gameObject);
         }
 
-        public override void Jump(int count)
+        public override void Deactivate()
         {
-            throw new System.NotImplementedException();
+            base.Deactivate();
+            waterfall.Deactivate();
+            waterfall = null;
+        }
+        #endregion
+
+        public override StateOfMatterEnum GetNextState()
+        {
+            // Always swap back to default state.
+            return StateOfMatterEnum.DEFAULT;
         }
     }
 }

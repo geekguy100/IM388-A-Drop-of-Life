@@ -32,9 +32,9 @@ namespace GoofyGhosts
         #endregion
 
         #region -- // Activation / Deactivation // --
-        public override void Activate()
+        public override void Activate(StateSwapper swapper)
         {
-            base.Activate();
+            base.Activate(swapper);
             movementCamera.SetActive(false);
             gasCamera.SetActive(true);
         }
