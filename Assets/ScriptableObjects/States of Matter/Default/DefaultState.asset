@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: DefaultState
   m_EditorClassIdentifier: 
   stateName: Default
-  enumValue: 0
+  enumValue: 1
+  model: {fileID: 7713576174678479884, guid: 9ba6a2db49b6f9343b5de36e23b97588, type: 3}
   motorData: {fileID: 11400000, guid: 064289693931d214f9edd8fe2c7801eb, type: 2}
   characterControllerData:
     slopeLimit: 45

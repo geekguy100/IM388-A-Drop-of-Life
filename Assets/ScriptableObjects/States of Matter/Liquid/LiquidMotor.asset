@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd9e1231d9e9fbb4aa7da13ce4798124, type: 3}
   m_Name: LiquidMotor
   m_EditorClassIdentifier: 
-  _movementSpeed: 18
+  _movementSpeed: 10
   _jumpHeight: 2
   _gravity: 20
   _airControl: 5
-  maxJumps: 1
+  maxJumps: 0
   waterfallMovement: 0

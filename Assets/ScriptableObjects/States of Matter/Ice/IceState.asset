@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: IceState
   m_EditorClassIdentifier: 
   stateName: Ice
-  enumValue: 4
+  enumValue: 5
+  model: {fileID: 2932675270383994660, guid: 5d5651aa7ed52fd4f9379424e66491bb, type: 3}
   motorData: {fileID: 11400000, guid: 74980f6eaa9391d48866987661e8476d, type: 2}
   characterControllerData:
     slopeLimit: 45
