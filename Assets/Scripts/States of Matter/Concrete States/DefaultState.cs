@@ -27,7 +27,7 @@ namespace GoofyGhosts
         protected override void Awake()
         {
             base.Awake();
-            nextState = StateOfMatterEnum.NULL;
+            nextState = StateOfMatterEnum.ICE;
             active = true;
             gasNotif = new DisplayNotif("Press 'LEFT SHIFT' to transform into a gas.");
         }
@@ -87,7 +87,7 @@ namespace GoofyGhosts
             // Run only if we exited the trigger of the current swapper.
             if ((((1 << other.gameObject.layer) & whatIsStateSwapping) > 0))
             {
-                nextState = StateOfMatterEnum.NULL;
+                nextState = StateOfMatterEnum.ICE;
                 hitSwapper = null;
                 HideNotif();
             }
@@ -125,7 +125,7 @@ namespace GoofyGhosts
         public override void OnGrounded()
         {
             inAir = false;
-            nextState = StateOfMatterEnum.NULL;
+            nextState = StateOfMatterEnum.ICE;
 
             if (active)
                 HideNotif();
