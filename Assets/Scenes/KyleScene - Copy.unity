@@ -18372,6 +18372,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.6
       objectReference: {fileID: 0}
+    - target: {fileID: 1017356426624280024, guid: a874b98d1b19a8a4dbf5365405b0f5da, type: 3}
+      propertyPath: m_LookAt
+      value: 
+      objectReference: {fileID: 1797738132}
     - target: {fileID: 1017356426624280027, guid: a874b98d1b19a8a4dbf5365405b0f5da, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -18380,6 +18384,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 8.57
       objectReference: {fileID: 0}
+    - target: {fileID: 1017356426715646120, guid: a874b98d1b19a8a4dbf5365405b0f5da, type: 3}
+      propertyPath: movementCamera
+      value: 
+      objectReference: {fileID: 1632275206}
     - target: {fileID: 1017356426715646121, guid: a874b98d1b19a8a4dbf5365405b0f5da, type: 3}
       propertyPath: m_Name
       value: Waterfall
@@ -20895,6 +20903,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f14146ae8928de4797fb9dbb0d04016, type: 3}
+--- !u!1 &1632275206 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7522752573701193619, guid: 2f0c0c510b8dc59458f01e6748f0c9fa, type: 3}
+  m_PrefabInstance: {fileID: 623665419}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1635244259
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23735,6 +23748,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1796969693}
   m_Mesh: {fileID: -4343838675172041327, guid: 754388836e755e94a962db6720f22786, type: 3}
+--- !u!4 &1797738132 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6653745159915978140, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
+  m_PrefabInstance: {fileID: 627894598}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1799849595 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5830356199124142047, guid: 7f14146ae8928de4797fb9dbb0d04016, type: 3}
