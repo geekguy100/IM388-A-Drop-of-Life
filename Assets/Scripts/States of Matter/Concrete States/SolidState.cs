@@ -19,6 +19,8 @@ namespace GoofyGhosts
         /// </summary>
         private GameObject movementCamera;
 
+        private bool isActive;
+
         /// <summary>
         /// The default layer the player is on;
         /// the layer the player is on in their default state.
@@ -76,6 +78,10 @@ namespace GoofyGhosts
 
             manager.DecreaseMeterBy(requiredHydration);
 
+            isActive = true;
+
+            motor.SetJumped(true, 0.5f, true);
+
             // TODO: Camera shake.
         }
 
@@ -86,18 +92,36 @@ namespace GoofyGhosts
             gasCamera.SetActive(false);
 
             gameObject.layer = LayerMask.NameToLayer(DEFAULT_LAYER);
+
+            isActive = false;
         }
         #endregion
 
         public override void OnGrounded()
         {
             base.OnGrounded();
+            print("Grouned");
+            PerformRaycast();
+
             // TODO: Camera shake.
         }
 
         public override StateOfMatterEnum GetNextState()
         {
             return StateOfMatterEnum.DEFAULT;
+        }
+
+        /// <summary>
+        /// Performs a raycast to check for any breakable objects.
+        /// </summary>
+        private void PerformRaycast()
+        {
+            Ray ray = new Ray(transform.position, Vector3.down);
+            if (Physics.Raycast(ray, out RaycastHit hit, 1f, whatIsBreakable))
+            {
+                BreakableObstacle obstacle = hit.transform.GetComponent<BreakableObstacle>();
+                obstacle.Break();
+            }
         }
     }
 }
