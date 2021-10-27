@@ -31,11 +31,10 @@ namespace GoofyGhosts
         /// Turn waterfall camera on and movement cam off.
         /// </summary>
         /// <param name="player">The player GameObject.</param>
-        public void Activate(GameObject player)
+        public void Activate()
         {
             movementCamera.SetActive(false);
             waterfallCamera.SetActive(true);
-
         }
 
         /// <summary>

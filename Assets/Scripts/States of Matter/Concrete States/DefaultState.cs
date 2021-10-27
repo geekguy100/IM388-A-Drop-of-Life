@@ -11,23 +11,25 @@ namespace GoofyGhosts
     /// <summary>
     /// The default state the player is in.
     /// </summary>
+    [RequireComponent(typeof(SolidState))]
     public class DefaultState : IMatterState
     {
         [SerializeField] private DisplayNotifChannelSO displayNotifChannel;
         private DisplayNotif gasNotif;
-
-        private StateOfMatterEnum nextState;
 
         [ShowInInspector] [ReadOnly] private bool active;
         private bool inAir;
 
         private StateSwapper hitSwapper;
 
+        private SolidState solidState;
+
         #region -- // Initialization // --
         protected override void Awake()
         {
             base.Awake();
-            nextState = StateOfMatterEnum.NULL;
+            solidState = GetComponent<SolidState>();
+
             active = true;
             gasNotif = new DisplayNotif("Press 'LEFT SHIFT' to transform into a gas.");
         }
@@ -60,7 +62,7 @@ namespace GoofyGhosts
         #region -- // Check for nearby state swappers // --
         /// <summary>
         /// Assign the next state to swap to if 
-        /// nearby any state swappers.
+        /// any state swappers are nearby.
         /// </summary>
         /// <param name="other">The Collider that entered the trigger.</param>
         private void OnTriggerStay(Collider other)
@@ -68,7 +70,7 @@ namespace GoofyGhosts
             if (!active || inAir)
                 return;
 
-            if ((((1 << other.gameObject.layer) & whatIsStateSwapping) > 0) && hitSwapper == null)
+            if ((((1 << other.gameObject.layer) & whatIsStateSwapping) > 0))
             {
                 SetSwapper(other.GetComponent<StateSwapper>());
             }
@@ -87,7 +89,6 @@ namespace GoofyGhosts
             // Run only if we exited the trigger of the current swapper.
             if ((((1 << other.gameObject.layer) & whatIsStateSwapping) > 0))
             {
-                nextState = StateOfMatterEnum.NULL;
                 hitSwapper = null;
                 HideNotif();
             }
@@ -99,7 +100,6 @@ namespace GoofyGhosts
         /// <param name="swapper">The StateSwapper to cache.</param>
         private void SetSwapper(StateSwapper swapper)
         {
-            nextState = swapper.GetState();
             DisplayNotif(swapper.GetDisplayNotif());
             hitSwapper = swapper;
         }
@@ -113,7 +113,6 @@ namespace GoofyGhosts
         public override void Jump(int count)
         {
             inAir = true;
-            nextState = StateOfMatterEnum.GAS;
 
             if (active)
                 DisplayNotif(gasNotif);
@@ -125,7 +124,6 @@ namespace GoofyGhosts
         public override void OnGrounded()
         {
             inAir = false;
-            nextState = StateOfMatterEnum.NULL;
 
             if (active)
                 HideNotif();
@@ -146,7 +144,31 @@ namespace GoofyGhosts
 
         public override StateOfMatterEnum GetNextState()
         {
-            return nextState;
+            // If we are in the air, transition to gas.
+            if (inAir)
+            {
+                return StateOfMatterEnum.GAS;
+            }
+            // If we have a nearby state swapper, transition to its state.
+            else if (hitSwapper != null)
+            {
+                return hitSwapper.GetState();
+            }
+            // If we are not in air and have no nearby swappers,
+            // check to see if we can transition to the solid state.
+            else if (manager.GetHydrationValue() >= solidState.RequiredHydration)
+            {
+                return StateOfMatterEnum.ICE;
+            }
+            // If none of the above conditions could be met, 
+            // don't transition to anything.
+            else
+            {
+                // TODO: Play animation on hydration bar signifying that we couldn't 
+                // transition to it??
+
+                return StateOfMatterEnum.NULL;
+            }
         }
 
         public override StateSwapper GetSwapper()

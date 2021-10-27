@@ -4,6 +4,7 @@
 *    Date Created: 10/6/2021
 *******************************************************************/
 using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,42 @@ namespace GoofyGhosts
     [RequireComponent(typeof(DefaultState))]
     public class MatterStateManager : MonoBehaviour
     {
+        /// <summary>
+        /// Reference to the CharacterController component.
+        /// </summary>
+        private CharacterController characterController;
+
+        /// <summary>
+        /// Reference to the HydrationMeter component.
+        /// </summary>
+        private HydrationMeter hydrationMeter;
+        public UnityAction OnMeterDepleted
+        {
+            get
+            {
+                return hydrationMeter.OnDepleted;
+            }
+
+            set
+            {
+                hydrationMeter.OnDepleted = value;
+            }
+        }
+        public UnityAction OnMeterFilled
+        {
+            get
+            {
+                return hydrationMeter.OnFilled;
+            }
+
+            set
+            {
+                hydrationMeter.OnFilled = value;
+            }
+        }
+
+        [SerializeField] private GameObject currentModel;
+
         #region -- // State Fields // --
         [Tooltip("The current state of matter.")]
         [SerializeField] private IMatterState currentState;
@@ -37,13 +74,6 @@ namespace GoofyGhosts
         [SerializeField] private StateEnumChannelSO swapStateChannel;
         #endregion
 
-        /// <summary>
-        /// Reference to the CharacterController component.
-        /// </summary>
-        private CharacterController characterController;
-
-        [SerializeField] private GameObject currentModel;
-
 
         #region // -- Initialization -- //
         /// <summary>
@@ -52,6 +82,8 @@ namespace GoofyGhosts
         private void Awake()
         {
             characterController = GetComponent<CharacterController>();
+            hydrationMeter = GetComponent<HydrationMeter>();
+
             states = new List<IMatterState>();
 
             // Store all of the states of matter we can swap to in the list.
@@ -95,6 +127,7 @@ namespace GoofyGhosts
         }
         #endregion
 
+        #region -- // Swapping States // --
         /// <summary>
         /// Swaps the current state.
         /// </summary>
@@ -188,5 +221,43 @@ namespace GoofyGhosts
             //print("Attempting to swap to next state: " + GetNextState() + " from " + currentState.Data.name);
             SwapState(GetNextState());
         }
+        #endregion
+
+        #region -- // Hydration Meter // --
+        public void DecreaseMeter()
+        {
+            hydrationMeter.StartDecrease();
+        }
+
+        public void IncreaseMeter()
+        {
+            hydrationMeter.StartIncrease();
+        }
+
+        /// <summary>
+        /// Decreases the hydration meter by a set amount.
+        /// </summary>
+        /// <param name="amount">The amount to decrease the hydration meter by.</param>
+        public void DecreaseMeterBy(float amount)
+        {
+            hydrationMeter.DecreaseBy(amount);
+        }
+
+        public void StopMeterChange()
+        {
+            hydrationMeter.StopChange();
+        }
+
+        public float GetHydrationValue()
+        {
+            return hydrationMeter.CurrentValue;
+        }
+
+        public bool IsMeterDepleted()
+        {
+            return hydrationMeter.isDepleted;
+        }
+
+        #endregion
     }
 }

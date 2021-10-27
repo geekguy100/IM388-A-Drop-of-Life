@@ -394,6 +394,7 @@ GameObject:
   - component: {fileID: 627894602}
   - component: {fileID: 627894603}
   - component: {fileID: 2696086731074256943}
+  - component: {fileID: 5809828293919367484}
   m_Layer: 10
   m_Name: Player Character
   m_TagString: Player
@@ -494,9 +495,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8958cc305c2ec1468ef1227c3e85500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentModel: {fileID: 1449672241854535731}
   currentState: {fileID: 0}
   swapStateChannel: {fileID: 11400000, guid: cf5dd6bdef0c30e4eac1dcec60decfb0, type: 2}
-  currentModel: {fileID: 1449672241854535731}
 --- !u!114 &627894606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,6 +527,7 @@ MonoBehaviour:
   whatIsStateSwapping:
     serializedVersion: 2
     m_Bits: 8192
+  requiredHydration: 20
 --- !u!114 &1208082473769351561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,6 +545,7 @@ MonoBehaviour:
   whatIsStateSwapping:
     serializedVersion: 2
     m_Bits: 8192
+  propelGravity: -4
 --- !u!114 &627894602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,6 +598,24 @@ MonoBehaviour:
   whatIsStateSwapping:
     serializedVersion: 2
     m_Bits: 8192
+--- !u!114 &5809828293919367484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653745159915978130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1910eb45cb701004698a0540e4549276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data:
+    maxValue: 100
+    currentValue: 0
+  hydrationMeterChannel: {fileID: 11400000, guid: 75935ddb9ccea124d9d12e8805bdf918, type: 2}
+  decreaseRate: 25
+  increaseRate: 40
 --- !u!1001 &9156492664631938111
 PrefabInstance:
   m_ObjectHideFlags: 0

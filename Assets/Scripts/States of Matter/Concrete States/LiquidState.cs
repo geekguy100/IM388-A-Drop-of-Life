@@ -11,12 +11,22 @@ namespace GoofyGhosts
 {
     public class LiquidState : IMatterState
     {
+        /// <summary>
+        /// True if the player can swap back to default 
+        /// state from this state.
+        /// </summary>
         private bool canSwap;
+        /// <summary>
+        /// True if this is the state in use.
+        /// </summary>
+        private bool isActive;
 
         #region -- // Activation / Deactivation // --
         public override void Activate(StateSwapper swapper)
         {
             base.Activate(swapper);
+
+            isActive = true;
             StartCoroutine(WaitThenEnable());
 
 
@@ -30,6 +40,10 @@ namespace GoofyGhosts
         public override void Deactivate()
         {
             base.Deactivate();
+
+            manager.StopMeterChange();
+
+            isActive = false;
             canSwap = false;
         }
         #endregion
@@ -46,12 +60,13 @@ namespace GoofyGhosts
         /// <param name="other">The Collider that exited the trigger.</param>
         private void OnTriggerExit(Collider other)
         {
-            if (!canSwap)
+            if (!canSwap || !isActive)
                 return;
 
             // Only swap back if we exit the liquid trigger.
             if (((1 << other.gameObject.layer) & whatIsStateSwapping) > 0)
             {
+                manager.StopMeterChange();
                 manager.SwapToNextState();
             }
         }
@@ -60,12 +75,16 @@ namespace GoofyGhosts
         /// Fills up hydration meter if in trigger.
         /// </summary>
         /// <param name="other">The Collider we are colliding with.</param>
-        private void OnTriggerStay(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
+            if (!isActive)
+                return;
+
             // Only swap back if we exit the liquid trigger.
             if (((1 << other.gameObject.layer) & whatIsStateSwapping) > 0)
             {
-                // Fill up hydration meter.
+                // Start filling up hydration meter.
+                manager.IncreaseMeter();
             }
         }
     }
