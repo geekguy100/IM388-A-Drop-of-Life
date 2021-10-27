@@ -234,11 +234,24 @@ namespace GoofyGhosts
             hydrationMeter.StartIncrease();
         }
 
+        /// <summary>
+        /// Decreases the hydration meter by a set amount.
+        /// </summary>
+        /// <param name="amount">The amount to decrease the hydration meter by.</param>
+        public void DecreaseMeterBy(float amount)
+        {
+            hydrationMeter.DecreaseBy(amount);
+        }
+
         public void StopMeterChange()
         {
             hydrationMeter.StopChange();
         }
 
+        public float GetHydrationValue()
+        {
+            return hydrationMeter.CurrentValue;
+        }
 
         public bool IsMeterDepleted()
         {

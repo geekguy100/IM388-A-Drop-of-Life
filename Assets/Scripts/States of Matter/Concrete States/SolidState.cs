@@ -19,6 +19,19 @@ namespace GoofyGhosts
         /// </summary>
         private GameObject movementCamera;
 
+        [Tooltip("The amount of hydration required to transition to this state.")]
+        [SerializeField] private float requiredHydration;
+        /// <summary>
+        /// The amount of hydration required to transition to this state.
+        /// </summary>
+        public float RequiredHydration
+        {
+            get
+            {
+                return requiredHydration;
+            }
+        }
+
         #region -- // Init // --
         /// <summary>
         /// Finding cameras.
@@ -45,6 +58,8 @@ namespace GoofyGhosts
             base.Activate(swapper);
             movementCamera.SetActive(false);
             gasCamera.SetActive(true);
+
+            manager.DecreaseMeterBy(requiredHydration);
 
             // TODO: Camera shake.
         }

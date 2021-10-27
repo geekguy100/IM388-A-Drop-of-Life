@@ -527,6 +527,7 @@ MonoBehaviour:
   whatIsStateSwapping:
     serializedVersion: 2
     m_Bits: 8192
+  requiredHydration: 20
 --- !u!114 &1208082473769351561
 MonoBehaviour:
   m_ObjectHideFlags: 0

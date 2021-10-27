@@ -39,6 +39,16 @@ namespace GoofyGhosts
 
         [SerializeField] private HydrationMeterData data;
         [SerializeField] private HydrationDataChannel hydrationMeterChannel;
+        /// <summary>
+        /// The current value of the hydration meter.
+        /// </summary>
+        public float CurrentValue
+        {
+            get
+            {
+                return data.currentValue;
+            }
+        }
 
         [Tooltip("Rate of decrease per second.")]
         [SerializeField] private float decreaseRate;
@@ -66,6 +76,16 @@ namespace GoofyGhosts
 
             changing = true;
             StartCoroutine(Decrease());
+        }
+
+        /// <summary>
+        /// Decreases the hydration meter by a value.
+        /// </summary>
+        /// <param name="value">The value to decrease the hydration meter by.</param>
+        public void DecreaseBy(float value)
+        {
+            data.currentValue -= value;
+            hydrationMeterChannel.RaiseEvent(data);
         }
 
         /// <summary>
