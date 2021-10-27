@@ -27,7 +27,7 @@ namespace GoofyGhosts
         /// <summary>
         /// The layer the player is on when in the solid state.
         /// </summary>
-        private const string SOLID_LAYER = "Solid";
+        private const string SOLID_LAYER = "Solid State";
 
         [Tooltip("The amount of hydration required to transition to this state.")]
         [SerializeField] private float requiredHydration;
