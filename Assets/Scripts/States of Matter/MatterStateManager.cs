@@ -4,6 +4,7 @@
 *    Date Created: 10/6/2021
 *******************************************************************/
 using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,34 @@ namespace GoofyGhosts
         /// </summary>
         private CharacterController characterController;
 
+        /// <summary>
+        /// Reference to the HydrationMeter component.
+        /// </summary>
         private HydrationMeter hydrationMeter;
+        public UnityAction OnMeterDepleted
+        {
+            get
+            {
+                return hydrationMeter.OnDepleted;
+            }
+
+            set
+            {
+                hydrationMeter.OnDepleted = value;
+            }
+        }
+        public UnityAction OnMeterFilled
+        {
+            get
+            {
+                return hydrationMeter.OnFilled;
+            }
+
+            set
+            {
+                hydrationMeter.OnFilled = value;
+            }
+        }
 
         [SerializeField] private GameObject currentModel;
 
@@ -209,6 +237,12 @@ namespace GoofyGhosts
         public void StopMeterChange()
         {
             hydrationMeter.StopChange();
+        }
+
+
+        public bool IsMeterDepleted()
+        {
+            return hydrationMeter.isDepleted;
         }
 
         #endregion

@@ -520,6 +520,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1208082473769351561, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
+      propertyPath: propelGravity
+      value: -4
+      objectReference: {fileID: 0}
     - target: {fileID: 6653745159915978130, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
       propertyPath: m_Name
       value: Player

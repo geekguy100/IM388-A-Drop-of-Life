@@ -4,6 +4,7 @@
 *    Date Created: 
 *******************************************************************/
 using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 
 namespace GoofyGhosts
@@ -11,6 +12,30 @@ namespace GoofyGhosts
     public class HydrationMeter : MonoBehaviour
     {
         private bool changing;
+
+        /// <summary>
+        /// Returns true if the meter is depleted.
+        /// </summary>
+        public bool isDepleted
+        {
+            get
+            {
+                return data.currentValue <= 0;
+            }
+        }
+        /// <summary>
+        /// Returns true if the meter is full.
+        /// </summary>
+        public bool isFull
+        {
+            get
+            {
+                return data.currentValue >= data.maxValue;
+            }
+        }
+
+        public UnityAction OnDepleted;
+        public UnityAction OnFilled;
 
         [SerializeField] private HydrationMeterData data;
         [SerializeField] private HydrationDataChannel hydrationMeterChannel;
@@ -21,6 +46,8 @@ namespace GoofyGhosts
         [Tooltip("Rate of increase per second.")]
         [SerializeField] private float increaseRate;
 
+
+
         private void Start()
         {
             data.currentValue = data.maxValue;
@@ -28,18 +55,35 @@ namespace GoofyGhosts
         }
 
         #region -- // Public Methods // --
+        /// <summary>
+        /// Start decreasing the meter.
+        /// </summary>
         public void StartDecrease()
         {
+            // Don't bother decreasing if already depleted.
+            if (isDepleted)
+                return;
+
             changing = true;
             StartCoroutine(Decrease());
         }
 
+        /// <summary>
+        /// Start increasing the meter.
+        /// </summary>
         public void StartIncrease()
         {
+            // Don't bother increasing if already full.
+            if (isFull)
+                return;
+
             changing = true;
             StartCoroutine(Increase());
         }
 
+        /// <summary>
+        /// Stop increasing or decreasing the meter.
+        /// </summary>
         public void StopChange()
         {
             changing = false;
@@ -55,6 +99,16 @@ namespace GoofyGhosts
                 data.currentValue = Mathf.Clamp(data.currentValue, 0, data.maxValue);
 
                 hydrationMeterChannel.RaiseEvent(data);
+
+                // If we ran out of hydration,
+                // invoke the OnDepleted event 
+                // and stop depleting.
+                if (isDepleted)
+                {
+                    changing = false;
+                    OnDepleted?.Invoke();
+                }
+
                 yield return null;
             }
         }
@@ -67,6 +121,16 @@ namespace GoofyGhosts
                 data.currentValue = Mathf.Clamp(data.currentValue, 0, data.maxValue);
 
                 hydrationMeterChannel.RaiseEvent(data);
+
+                // If the meter is full,
+                // invoke the OnFilled event and
+                // stop filling.
+                if (isFull)
+                {
+                    changing = false;
+                    OnFilled?.Invoke();
+                }
+
                 yield return null;
             }
         }
