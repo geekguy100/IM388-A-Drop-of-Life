@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: LiquidState
   m_EditorClassIdentifier: 
   stateName: Water
-  enumValue: 1
+  enumValue: 2
+  model: {fileID: 2716838348271379321, guid: f6f34f6d36babe9439a5e1194b3cee39, type: 3}
   motorData: {fileID: 11400000, guid: cb60f2ed73bda964a903591bdcacc57f, type: 2}
   characterControllerData:
     slopeLimit: 45

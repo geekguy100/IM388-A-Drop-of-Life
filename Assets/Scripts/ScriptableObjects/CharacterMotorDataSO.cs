@@ -6,6 +6,7 @@
 // Brief Description : A data container that stores a Character's movement fields.
 *****************************************************************************/
 using UnityEngine;
+using System.Collections;
 
 [CreateAssetMenu(menuName = "Character Data/Motor Data", fileName = "New Character Motor Data")]
 public class CharacterMotorDataSO : ScriptableObject
@@ -49,6 +50,15 @@ public class CharacterMotorDataSO : ScriptableObject
         {
             return _gravity;
         }
+    }
+
+    /// <summary>
+    /// Sets the gravity to the value provided.
+    /// </summary>
+    /// <param name="value">The new gravity value.</param>
+    public void SetGravity(float value)
+    {
+        _gravity = value;
     }
 
     [Tooltip("The amount of air control the character has. A larger value means" +

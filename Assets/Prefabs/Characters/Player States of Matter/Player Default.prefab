@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8036767976005552190}
   - component: {fileID: 7967806583358260275}
   - component: {fileID: 6451187121730189681}
-  - component: {fileID: 3066512358685167104}
   m_Layer: 10
   m_Name: Player Default
   m_TagString: Untagged
@@ -83,19 +82,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3066512358685167104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7713576174678479884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a40c396c45409224b9714cb8d674f902, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioClip: {fileID: 0}
-  audioSourcePrefab: {fileID: 0}
-  data: {fileID: 11400000, guid: bd0286cf75b1aa14e9bbded1abc201c1, type: 2}
-  particleSpawnOffset: {x: 0, y: 0, z: 0}

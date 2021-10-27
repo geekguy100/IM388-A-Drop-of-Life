@@ -18,7 +18,7 @@ public class CharacterMotor : MonoBehaviour
     [SerializeField] private CharacterMotorDataSO motorData;
 
     public UnityAction<int> OnJumpCountChange;
-    public UnityAction OnJumpAttempt;
+    public UnityAction OnGrounded;
 
     /// <summary>
     /// True if the character is on the ground.
@@ -112,7 +112,7 @@ public class CharacterMotor : MonoBehaviour
             {
                 currentJumps = 0;
                 jumpedFromGround = false;
-                OnJumpCountChange?.Invoke(currentJumps);
+                OnGrounded?.Invoke();
             }
         }
 
@@ -133,9 +133,18 @@ public class CharacterMotor : MonoBehaviour
                 ++currentJumps;
             }
 
+            // Set movement direction to 0 
+            // to remove any momentum we may have had
+            // before gravity change.
+            if (motorData.gravity == 0)
+            {
+                movementDirection.y = 0;
+            }
+
             // Slowly bring our movement towards the user's desired input,
             // but preserve our current y-direction so that the arc of the jump is preserved.
             vel.y = movementDirection.y;
+
             movementDirection = Vector3.Lerp(movementDirection, vel, motorData.airControl * Time.deltaTime);
         }
 
@@ -183,8 +192,6 @@ public class CharacterMotor : MonoBehaviour
 
             OnJumpCountChange?.Invoke(currentJumps);
         }
-
-        OnJumpAttempt?.Invoke();
 
         jumped = false;
     }
