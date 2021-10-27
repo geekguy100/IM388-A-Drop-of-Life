@@ -19,6 +19,16 @@ namespace GoofyGhosts
         /// </summary>
         private GameObject movementCamera;
 
+        /// <summary>
+        /// The default layer the player is on;
+        /// the layer the player is on in their default state.
+        /// </summary>
+        private const string DEFAULT_LAYER = "Player";
+        /// <summary>
+        /// The layer the player is on when in the solid state.
+        /// </summary>
+        private const string SOLID_LAYER = "Solid";
+
         [Tooltip("The amount of hydration required to transition to this state.")]
         [SerializeField] private float requiredHydration;
         /// <summary>
@@ -31,6 +41,9 @@ namespace GoofyGhosts
                 return requiredHydration;
             }
         }
+
+        [Tooltip("All layers which can be broken by this state.")]
+        [SerializeField] private LayerMask whatIsBreakable;
 
         #region -- // Init // --
         /// <summary>
@@ -59,6 +72,8 @@ namespace GoofyGhosts
             movementCamera.SetActive(false);
             gasCamera.SetActive(true);
 
+            gameObject.layer = LayerMask.NameToLayer(SOLID_LAYER);
+
             manager.DecreaseMeterBy(requiredHydration);
 
             // TODO: Camera shake.
@@ -69,6 +84,8 @@ namespace GoofyGhosts
             base.Deactivate();
             movementCamera.SetActive(true);
             gasCamera.SetActive(false);
+
+            gameObject.layer = LayerMask.NameToLayer(DEFAULT_LAYER);
         }
         #endregion
 
