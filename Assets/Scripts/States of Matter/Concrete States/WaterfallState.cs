@@ -4,7 +4,6 @@
 *    Date Created: 
 *******************************************************************/
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace GoofyGhosts
@@ -12,7 +11,6 @@ namespace GoofyGhosts
     public class WaterfallState : IMatterState
     {
         private WaterfallSwapper waterfall;
-
         private bool canSwap;
 
         #region -- // Activation / Deactivation // --

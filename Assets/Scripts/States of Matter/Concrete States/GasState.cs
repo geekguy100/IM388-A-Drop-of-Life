@@ -13,8 +13,35 @@ namespace GoofyGhosts
     {
         private GameObject gasCamera;
         private GameObject movementCamera;
+        private PlayerControls controls;
+
+        private bool isActive;
 
         #region -- // Initialization // --
+        protected override void Awake()
+        {
+            base.Awake();
+
+            isActive = false;
+            controls = new PlayerControls();
+        }
+
+        private void OnEnable()
+        {
+            controls.Player.Jump.performed += _ => OnPropelPressed();
+            controls.Player.Jump.canceled += _ => OnPropelReleased();
+
+            controls.Player.Jump.Enable();
+        }
+
+        private void OnDisable()
+        {
+            controls.Player.Jump.Disable();
+        }
+
+        /// <summary>
+        /// Finding cameras.
+        /// </summary>
         private void Start()
         {
             gasCamera = GameObject.FindGameObjectWithTag("GasCamera");
@@ -37,6 +64,7 @@ namespace GoofyGhosts
             base.Activate(swapper);
             movementCamera.SetActive(false);
             gasCamera.SetActive(true);
+            isActive = true;
         }
 
         public override void Deactivate()
@@ -44,6 +72,7 @@ namespace GoofyGhosts
             base.Deactivate();
             movementCamera.SetActive(true);
             gasCamera.SetActive(false);
+            isActive = false;
         }
         #endregion
 
@@ -53,9 +82,23 @@ namespace GoofyGhosts
             return StateOfMatterEnum.DEFAULT;
         }
 
-        public override void Jump(int jumpCount)
+        /// <summary>
+        /// Propels the player into the air on jump.
+        /// </summary>
+        private void OnPropelPressed()
         {
-            // Propel player.
+            if (!isActive)
+                return;
+
+            manager.DecreaseMeter();
+        }
+
+        private void OnPropelReleased()
+        {
+            if (!isActive)
+                return;
+
+            manager.StopMeterChange();
         }
     }
 }
