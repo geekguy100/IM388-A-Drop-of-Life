@@ -544,7 +544,7 @@ MonoBehaviour:
   whatIsStateSwapping:
     serializedVersion: 2
     m_Bits: 8192
-  propelGravity: -1
+  propelGravity: -4
 --- !u!114 &627894602
 MonoBehaviour:
   m_ObjectHideFlags: 0

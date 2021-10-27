@@ -12,14 +12,23 @@ namespace GoofyGhosts
     {
         private WaterfallSwapper waterfall;
         private bool canSwap;
+        private bool isActive;
 
         #region -- // Activation / Deactivation // --
         public override void Activate(StateSwapper swapper)
         {
             base.Activate(swapper);
 
+            isActive = true;
+
             waterfall = swapper.GetComponent<WaterfallSwapper>();
-            waterfall.Activate(gameObject);
+            waterfall.Activate();
+
+            // Disable mouse look.
+            if (TryGetComponent(out MouseLook mouseLook))
+            {
+                mouseLook.enabled = false;
+            }
 
             SetRotation(transform, waterfall.transform.forward);
 
@@ -34,7 +43,17 @@ namespace GoofyGhosts
         public override void Deactivate()
         {
             base.Deactivate();
-            waterfall.Deactivate(gameObject);
+            manager.StopMeterChange();
+
+            isActive = false;
+
+            waterfall.Deactivate();
+
+            // Reenable mouse look.
+            if (TryGetComponent(out MouseLook mouseLook))
+            {
+                mouseLook.enabled = true;
+            }
 
             SetRotation(transform, Vector3.forward);
             waterfall = null;
@@ -63,7 +82,20 @@ namespace GoofyGhosts
             // Only swap back if we exit the waterfall trigger.
             if (((1 << other.gameObject.layer) & whatIsStateSwapping) > 0)
             {
+                manager.StopMeterChange();
                 manager.SwapToNextState();
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!isActive)
+                return;
+
+            // Start increasing the meter.
+            if (((1 << other.gameObject.layer) & whatIsStateSwapping) > 0)
+            {
+                manager.IncreaseMeter();
             }
         }
 
