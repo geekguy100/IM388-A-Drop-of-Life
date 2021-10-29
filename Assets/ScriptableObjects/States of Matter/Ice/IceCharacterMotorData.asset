@@ -16,5 +16,5 @@ MonoBehaviour:
   _jumpHeight: 2
   _gravity: 90
   _airControl: 5
-  maxJumps: 0
+  maxJumps: 1
   waterfallMovement: 0
