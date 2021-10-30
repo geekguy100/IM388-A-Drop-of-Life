@@ -463,6 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motorData: {fileID: 11400000, guid: 064289693931d214f9edd8fe2c7801eb, type: 2}
+  animator: {fileID: 7816627368445412634}
 --- !u!114 &6079211951182225159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,6 +529,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8192
   requiredHydration: 20
+  whatIsBreakable:
+    serializedVersion: 2
+    m_Bits: 32768
 --- !u!114 &1208082473769351561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -680,6 +684,11 @@ PrefabInstance:
 --- !u!4 &1196321927804781569 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8036767976005552190, guid: 9ba6a2db49b6f9343b5de36e23b97588, type: 3}
+  m_PrefabInstance: {fileID: 9156492664631938111}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7816627368445412634 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1398465256595015973, guid: 9ba6a2db49b6f9343b5de36e23b97588, type: 3}
   m_PrefabInstance: {fileID: 9156492664631938111}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1449672241854535731 stripped

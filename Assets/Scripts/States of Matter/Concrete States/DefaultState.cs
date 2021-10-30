@@ -47,6 +47,9 @@ namespace GoofyGhosts
                 DisplayNotif(gasNotif);
             }
 
+            // Setting the Animator to the DefaultState model's attached Animator.
+            motor.SetAnimator(manager.CurrentModel.GetComponentInChildren<Animator>());
+
             motor.SetJumped(true, 1f, true);
         }
 
@@ -55,6 +58,9 @@ namespace GoofyGhosts
             base.Deactivate();
             active = false;
             hitSwapper = null;
+
+            motor.SetAnimator(null);
+
             HideNotif();
         }
         #endregion
