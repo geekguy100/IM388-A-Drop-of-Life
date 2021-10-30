@@ -17,6 +17,11 @@ public class CharacterMotor : MonoBehaviour
     [Tooltip("The character's motor data.")]
     [SerializeField] private CharacterMotorDataSO motorData;
 
+    /// <summary>
+    /// Reference to the Animator component.
+    /// </summary>
+    [SerializeField]private Animator animator;
+
     public UnityAction<int> OnJumpCountChange;
     public UnityAction OnGrounded;
 
@@ -74,6 +79,7 @@ public class CharacterMotor : MonoBehaviour
     private void Awake()
     {
         characterController = GetComponent<CharacterController>();
+
         currentJumps = 0;
         heightMultiplier = 1;
         takeJumpAway = true;
@@ -156,6 +162,7 @@ public class CharacterMotor : MonoBehaviour
 
         // Apply the movement to the character.
         characterController.Move(movementDirection * Time.deltaTime);
+        animator?.SetFloat("Speed", Mathf.Abs(movementDirection.x + movementDirection.z));
     }
 
     /// <summary>
@@ -165,6 +172,15 @@ public class CharacterMotor : MonoBehaviour
     public bool GetJumped()
     {
         return jumped;
+    }
+
+    /// <summary>
+    /// Sets the motor's Animator component to the provided Animator.
+    /// </summary>
+    /// <param name="animator">The Animator to update the motor with.</param>
+    public void SetAnimator(Animator animator)
+    {
+        this.animator = animator;
     }
 
     /// <summary>
