@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 1481.7754, g: 1835.8867, b: 2430.4492, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -564,6 +564,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 678134712, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
+      propertyPath: interactableChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: b9e3ffd088b2a5c46afcacc06f5c164c, type: 2}
     - target: {fileID: 6653745159915978130, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1595,6 +1599,14 @@ PrefabInstance:
     - target: {fileID: 2769613456184085889, guid: a78ee19fc8e5b1b43ac6371a20f628c3, type: 3}
       propertyPath: m_Name
       value: Flower_Wilted
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938328703128957682, guid: a78ee19fc8e5b1b43ac6371a20f628c3, type: 3}
+      propertyPath: m_Size.y
+      value: 0.4550612
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938328703128957682, guid: a78ee19fc8e5b1b43ac6371a20f628c3, type: 3}
+      propertyPath: m_Center.y
+      value: -2.1724696
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a78ee19fc8e5b1b43ac6371a20f628c3, type: 3}

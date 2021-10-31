@@ -25,6 +25,7 @@ namespace GoofyGhosts
         public void Interact(Interactor interactor)
         {
             WaterFlower();
+            interactor.UnassignInteractable();
         }
 
         /// <summary>
