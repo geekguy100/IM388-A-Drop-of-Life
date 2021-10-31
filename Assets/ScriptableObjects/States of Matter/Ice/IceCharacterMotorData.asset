@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IceCharacterMotorData
   m_EditorClassIdentifier: 
   _movementSpeed: 0
-  _jumpHeight: 2
+  _jumpHeight: 5
   _gravity: 90
   _airControl: 5
   maxJumps: 0

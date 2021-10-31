@@ -54,6 +54,7 @@ namespace GoofyGhosts
         public UnityAction<StateOfMatterEnum> OnStateSwapped;
 
         [SerializeField] private GameObject currentModel;
+        public GameObject CurrentModel { get { return currentModel; } }
 
         #region -- // State Fields // --
         [Tooltip("The current state of matter.")]

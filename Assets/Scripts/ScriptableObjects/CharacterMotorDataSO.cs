@@ -91,6 +91,11 @@ public class CharacterMotorDataSO : ScriptableObject
         }
     }
 
+    public void SetMaxJumps(int maxJumps)
+    {
+        this.maxJumps = maxJumps;
+    }
+
     [SerializeField] private bool waterfallMovement;
     public bool WaterfallMovement
     {

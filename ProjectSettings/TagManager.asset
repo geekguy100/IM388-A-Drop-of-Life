@@ -9,6 +9,7 @@ TagManager:
   - Water
   - GasCamera
   - FollowTarget
+  - Flower
   layers:
   - Default
   - TransparentFX
@@ -24,8 +25,8 @@ TagManager:
   - Enemy
   - Interactable
   - State Swapper
-  - 
-  - 
+  - Solid State
+  - Breakable
   - 
   - 
   - 

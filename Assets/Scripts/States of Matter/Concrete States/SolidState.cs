@@ -27,7 +27,7 @@ namespace GoofyGhosts
         /// <summary>
         /// The layer the player is on when in the solid state.
         /// </summary>
-        private const string SOLID_LAYER = "Solid";
+        private const string SOLID_LAYER = "Solid State";
 
         [Tooltip("The amount of hydration required to transition to this state.")]
         [SerializeField] private float requiredHydration;
@@ -44,6 +44,8 @@ namespace GoofyGhosts
 
         [Tooltip("All layers which can be broken by this state.")]
         [SerializeField] private LayerMask whatIsBreakable;
+
+        [SerializeField] private GameObject groundedParticles;
 
         #region -- // Init // --
         /// <summary>
@@ -76,6 +78,11 @@ namespace GoofyGhosts
 
             manager.DecreaseMeterBy(requiredHydration);
 
+            // Setting max jumps to 1 temporarily
+            // so we can get the hopping effect.
+            Data.MotorData.SetMaxJumps(1);
+            motor.SetJumped(true, 1f, true);
+
             // TODO: Camera shake.
         }
 
@@ -92,12 +99,32 @@ namespace GoofyGhosts
         public override void OnGrounded()
         {
             base.OnGrounded();
+
+            // Setting max jumps to 0 so we can't actually perform a jump.
+            Data.MotorData.SetMaxJumps(0);
+
+            Instantiate(groundedParticles, transform.position + particleSpawnOffset, Quaternion.identity);
+            PerformRaycast();
+
             // TODO: Camera shake.
         }
 
         public override StateOfMatterEnum GetNextState()
         {
             return StateOfMatterEnum.DEFAULT;
+        }
+
+        /// <summary>
+        /// Performs a raycast to check for any breakable objects.
+        /// </summary>
+        private void PerformRaycast()
+        {
+            Ray ray = new Ray(transform.position, Vector3.down);
+            if (Physics.Raycast(ray, out RaycastHit hit, 1f, whatIsBreakable))
+            {
+                BreakableObstacle obstacle = hit.transform.GetComponent<BreakableObstacle>();
+                obstacle.Break();
+            }
         }
     }
 }
