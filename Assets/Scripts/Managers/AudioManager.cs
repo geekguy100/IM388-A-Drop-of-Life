@@ -13,6 +13,8 @@ public class AudioManager : MonoBehaviour
     [Tooltip("Channel that accepts and broadcasts requests for playing SFX.")]
     [SerializeField] private AudioClipChannelSO sfxChannel;
 
+    private static AudioManager instance;
+
     /// <summary>
     /// A list of AudioPair structs that continas the clips to play
     /// and the AudioSources that play them.
@@ -21,6 +23,15 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+            instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        DontDestroyOnLoad(gameObject);
         sfxPairs = new List<AudioPair>();
     }
 

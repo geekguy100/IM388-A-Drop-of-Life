@@ -14,5 +14,10 @@ namespace GoofyGhosts
         {
             SceneManager.LoadScene(name);
         }
+
+        public void ExitGame()
+        {
+            Application.Quit();
+        }
     }
 }
