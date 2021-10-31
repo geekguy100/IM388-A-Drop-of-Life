@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4938328703128957682}
   m_Layer: 12
   m_Name: Flower_Wilted
-  m_TagString: Untagged
+  m_TagString: Flower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wateredModel: {fileID: 2896765716577627250, guid: 3ccbe34b185015448ba1ec69dd5759f8, type: 3}
+  flowerCollectionChannel: {fileID: 11400000, guid: f1cbd916e7c794448ac32e0210d94977, type: 2}
 --- !u!65 &4938328703128957682
 BoxCollider:
   m_ObjectHideFlags: 0

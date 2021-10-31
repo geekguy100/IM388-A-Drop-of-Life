@@ -10,15 +10,44 @@ using UnityEngine;
 
 namespace GoofyGhosts
 {
+    public enum GameState { PAUSED, PLAYING }
+
     public class GameManager : MonoBehaviour
     {
         private PlayerControls controls;
+        private GameState gameState;
+
+        public GameState GameState
+        {
+            get
+            {
+                return gameState;
+            }
+
+            set
+            {
+                gameState = value;
+            }
+        }
+
+        public static GameManager instance;
 
         private void Awake()
         {
+            if (instance == null)
+            {
+                instance = this;
+            }
+            else
+            {
+                Destroy(this);
+            }
+
             controls = new PlayerControls();
+            gameState = GameState.PLAYING;
         }
 
+        #region -- // Subbing / Unsubbing // --
         private void OnEnable()
         {
             controls.Settings.Reload.performed += _ => SceneManager.LoadScene(1);
@@ -31,5 +60,6 @@ namespace GoofyGhosts
         {
             controls.Settings.Disable();
         }
+        #endregion
     }
 }

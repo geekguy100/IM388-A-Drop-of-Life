@@ -10,6 +10,7 @@ namespace GoofyGhosts
     public class FlowerInteractable : MonoBehaviour, IInteractableDisplay
     {
         [SerializeField] private GameObject wateredModel;
+        [SerializeField] private VoidChannelSO flowerCollectionChannel;
 
         public string GetDisplayInfo()
         {
@@ -39,7 +40,9 @@ namespace GoofyGhosts
             // any future interactions.
             gameObject.layer = 0;
             gameObject.name = "Flower_Watered";
-            
+
+            flowerCollectionChannel.RaiseEvent();
+
             // TODO: Play SFX.
         }
     }
