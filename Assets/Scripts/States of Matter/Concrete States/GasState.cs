@@ -19,6 +19,11 @@ namespace GoofyGhosts
 
         [SerializeField][MaxValue(0)] private float propelGravity;
 
+        [FoldoutGroup("Audio Fields")]
+        [SerializeField] private AudioClipSO poofSFX;
+        [FoldoutGroup("Audio Fields")]
+        [SerializeField] private AudioClipChannelSO sfxChannel;
+
         #region -- // Initialization // --
         protected override void Awake()
         {
@@ -66,6 +71,8 @@ namespace GoofyGhosts
         public override void Activate(StateSwapper swapper)
         {
             base.Activate(swapper);
+
+            sfxChannel.RaiseEvent(poofSFX);
 
             movementCamera.SetActive(false);
             gasCamera.SetActive(true);
