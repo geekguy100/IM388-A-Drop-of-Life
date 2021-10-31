@@ -266,15 +266,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
             ""id"": ""09405efd-813b-40a9-aaf4-0a863712a36b"",
             ""actions"": [
                 {
-                    ""name"": ""Reload"",
-                    ""type"": ""Button"",
-                    ""id"": ""ad09eb6b-0c2f-4fb9-8920-4c48c5501d6f"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Menu"",
+                    ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""ad3cc891-d96f-4a5d-bb35-d3fbc06ec8a8"",
                     ""expectedControlType"": ""Button"",
@@ -285,23 +277,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""e14f030f-3394-4a1d-a2df-197650cf0824"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Reload"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""89f138ca-5ac0-4fc6-ac05-90464ffa7616"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Menu"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -329,8 +310,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Interaction_Interact = m_Interaction.FindAction("Interact", throwIfNotFound: true);
         // Settings
         m_Settings = asset.FindActionMap("Settings", throwIfNotFound: true);
-        m_Settings_Reload = m_Settings.FindAction("Reload", throwIfNotFound: true);
-        m_Settings_Menu = m_Settings.FindAction("Menu", throwIfNotFound: true);
+        m_Settings_Pause = m_Settings.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -552,14 +532,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     // Settings
     private readonly InputActionMap m_Settings;
     private ISettingsActions m_SettingsActionsCallbackInterface;
-    private readonly InputAction m_Settings_Reload;
-    private readonly InputAction m_Settings_Menu;
+    private readonly InputAction m_Settings_Pause;
     public struct SettingsActions
     {
         private @PlayerControls m_Wrapper;
         public SettingsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Reload => m_Wrapper.m_Settings_Reload;
-        public InputAction @Menu => m_Wrapper.m_Settings_Menu;
+        public InputAction @Pause => m_Wrapper.m_Settings_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Settings; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -569,22 +547,16 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_SettingsActionsCallbackInterface != null)
             {
-                @Reload.started -= m_Wrapper.m_SettingsActionsCallbackInterface.OnReload;
-                @Reload.performed -= m_Wrapper.m_SettingsActionsCallbackInterface.OnReload;
-                @Reload.canceled -= m_Wrapper.m_SettingsActionsCallbackInterface.OnReload;
-                @Menu.started -= m_Wrapper.m_SettingsActionsCallbackInterface.OnMenu;
-                @Menu.performed -= m_Wrapper.m_SettingsActionsCallbackInterface.OnMenu;
-                @Menu.canceled -= m_Wrapper.m_SettingsActionsCallbackInterface.OnMenu;
+                @Pause.started -= m_Wrapper.m_SettingsActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_SettingsActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_SettingsActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_SettingsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Reload.started += instance.OnReload;
-                @Reload.performed += instance.OnReload;
-                @Reload.canceled += instance.OnReload;
-                @Menu.started += instance.OnMenu;
-                @Menu.performed += instance.OnMenu;
-                @Menu.canceled += instance.OnMenu;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -612,7 +584,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     }
     public interface ISettingsActions
     {
-        void OnReload(InputAction.CallbackContext context);
-        void OnMenu(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

@@ -19,8 +19,6 @@ namespace GoofyGhosts
         /// </summary>
         private GameObject movementCamera;
 
-        private bool isActive;
-
         /// <summary>
         /// The default layer the player is on;
         /// the layer the player is on in their default state.
@@ -46,6 +44,8 @@ namespace GoofyGhosts
 
         [Tooltip("All layers which can be broken by this state.")]
         [SerializeField] private LayerMask whatIsBreakable;
+
+        [SerializeField] private GameObject groundedParticles;
 
         #region -- // Init // --
         /// <summary>
@@ -78,9 +78,10 @@ namespace GoofyGhosts
 
             manager.DecreaseMeterBy(requiredHydration);
 
-            isActive = true;
-
-            motor.SetJumped(true, 0.5f, true);
+            // Setting max jumps to 1 temporarily
+            // so we can get the hopping effect.
+            Data.MotorData.SetMaxJumps(1);
+            motor.SetJumped(true, 1f, true);
 
             // TODO: Camera shake.
         }
@@ -92,15 +93,17 @@ namespace GoofyGhosts
             gasCamera.SetActive(false);
 
             gameObject.layer = LayerMask.NameToLayer(DEFAULT_LAYER);
-
-            isActive = false;
         }
         #endregion
 
         public override void OnGrounded()
         {
             base.OnGrounded();
-            print("Grouned");
+
+            // Setting max jumps to 0 so we can't actually perform a jump.
+            Data.MotorData.SetMaxJumps(0);
+
+            Instantiate(groundedParticles, transform.position + particleSpawnOffset, Quaternion.identity);
             PerformRaycast();
 
             // TODO: Camera shake.

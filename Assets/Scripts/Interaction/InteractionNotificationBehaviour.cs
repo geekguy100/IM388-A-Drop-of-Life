@@ -16,6 +16,7 @@ namespace GoofyGhosts
     public class InteractionNotificationBehaviour : MonoBehaviour
     {
         [SerializeField] private DisplayNotifChannelSO displayChannel;
+        [SerializeField] private IInteractableChannel interactableChannel;
 
         private bool isDisplaying;
 
@@ -40,11 +41,13 @@ namespace GoofyGhosts
         private void OnEnable()
         {
             displayChannel.OnEventRaised += DisplayNotif;
+            interactableChannel.OnEventRaised += DisplayNotif;
         }
 
         private void OnDisable()
         {
             displayChannel.OnEventRaised -= DisplayNotif;
+            interactableChannel.OnEventRaised -= DisplayNotif;
         }
 
         private void Awake()
@@ -85,6 +88,32 @@ namespace GoofyGhosts
                 anim.ResetTrigger("FadeOut");
                 anim.SetTrigger("Expand");
                 StartCoroutine(Rotate());
+            }
+        }
+
+        /// <summary>
+        /// Displays a notification for an interactable.
+        /// </summary>
+        /// <param name="interactable">The interactable to display a notification for.</param>
+        /// <param name="display">True if the notification should be displayed.</param>
+        private void DisplayNotif(IInteractable interactable, bool display)
+        {
+            IInteractableDisplay interactableDisplay = interactable as IInteractableDisplay;
+            if (interactableDisplay == null)
+                return;
+
+            if (display)
+            {
+                isDisplaying = true;
+                displayText.text = interactableDisplay.GetDisplayInfo();
+                anim.ResetTrigger("FadeOut");
+                anim.SetTrigger("Expand");
+                StartCoroutine(Rotate());
+            }
+            else if (displayText.text == interactableDisplay.GetDisplayInfo())
+            {
+                isDisplaying = false;
+                anim.SetTrigger("FadeOut");
             }
         }
 

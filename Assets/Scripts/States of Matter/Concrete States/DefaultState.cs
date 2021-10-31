@@ -14,15 +14,17 @@ namespace GoofyGhosts
     [RequireComponent(typeof(SolidState))]
     public class DefaultState : IMatterState
     {
-        [SerializeField] private DisplayNotifChannelSO displayNotifChannel;
-        private DisplayNotif gasNotif;
-
         [ShowInInspector] [ReadOnly] private bool active;
         private bool inAir;
 
-        private StateSwapper hitSwapper;
+        private Animator anim;
 
+        private StateSwapper hitSwapper;
         private SolidState solidState;
+
+        [SerializeField] private DisplayNotifChannelSO displayNotifChannel;
+        private DisplayNotif gasNotif;
+
 
         #region -- // Initialization // --
         protected override void Awake()
@@ -47,8 +49,14 @@ namespace GoofyGhosts
                 DisplayNotif(gasNotif);
             }
 
+            // Initializing anim.
+            if (anim == null)
+            {
+                anim = manager.CurrentModel.GetComponentInChildren<Animator>();
+            }
+
             // Setting the Animator to the DefaultState model's attached Animator.
-            motor.SetAnimator(manager.CurrentModel.GetComponentInChildren<Animator>());
+            motor.SetAnimator(anim);
 
             motor.SetJumped(true, 1f, true);
         }

@@ -37,7 +37,6 @@ namespace GoofyGhosts
         private void OnEnable()
         {
             controls.Interaction.Interact.performed += _ => interactor.PerformInteraction();
-            controls.Interaction.InteractStateSwap.performed += _ => interactor.PerformStateSwapInteraction();
 
             controls.Interaction.Enable();
         }
