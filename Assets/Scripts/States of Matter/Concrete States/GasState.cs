@@ -84,6 +84,7 @@ namespace GoofyGhosts
         public override void Deactivate()
         {
             base.Deactivate();
+            OnPropelReleased();
             movementCamera.SetActive(true);
             gasCamera.SetActive(false);
             isActive = false;

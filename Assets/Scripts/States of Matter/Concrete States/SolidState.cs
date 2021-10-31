@@ -82,7 +82,10 @@ namespace GoofyGhosts
 
             isActive = true;
 
-            motor.SetJumped(true, 0.5f, true);
+            // Setting max jumps to 1 temporarily
+            // so we can get the hopping effect.
+            Data.MotorData.SetMaxJumps(1);
+            motor.SetJumped(true, 1f, true);
 
             // TODO: Camera shake.
         }
@@ -102,7 +105,10 @@ namespace GoofyGhosts
         public override void OnGrounded()
         {
             base.OnGrounded();
-            print("Grounded");
+
+            // Setting max jumps to 0 so we can't actually perform a jump.
+            Data.MotorData.SetMaxJumps(0);
+
             Instantiate(groundedParticles, transform.position + particleSpawnOffset, Quaternion.identity);
             PerformRaycast();
 
