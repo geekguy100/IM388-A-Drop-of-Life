@@ -23,6 +23,7 @@ namespace GoofyGhosts
         [SerializeField] private AudioClipSO poofSFX;
         [FoldoutGroup("Audio Fields")]
         [SerializeField] private AudioClipChannelSO sfxChannel;
+        private Animator anim;
 
         #region -- // Initialization // --
         protected override void Awake()
@@ -73,6 +74,8 @@ namespace GoofyGhosts
             base.Activate(swapper);
 
             sfxChannel.RaiseEvent(poofSFX);
+            anim = manager.CurrentModel.GetComponentInChildren<Animator>();
+            anim.speed = 0.5f;
 
             movementCamera.SetActive(false);
             gasCamera.SetActive(true);
@@ -89,6 +92,7 @@ namespace GoofyGhosts
 
             sfxChannel.RaiseEvent(poofSFX);
 
+            OnPropelReleased();
             movementCamera.SetActive(true);
             gasCamera.SetActive(false);
             isActive = false;
@@ -111,6 +115,8 @@ namespace GoofyGhosts
 
             manager.DecreaseMeter();
             ChangeGravity(propelGravity);
+
+            anim.speed = 2;
         }
 
         /// <summary>
@@ -123,6 +129,8 @@ namespace GoofyGhosts
 
             manager.StopMeterChange();
             ChangeGravity(0);
+
+            anim.speed = 0.5f;
         }
 
         private void ChangeGravity(float value)

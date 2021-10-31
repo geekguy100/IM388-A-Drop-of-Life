@@ -26,11 +26,21 @@ namespace GoofyGhosts
         [SerializeField] private AudioClipSO splashSFX;
         [FoldoutGroup("Audio Fields")]
         [SerializeField] private AudioClipChannelSO sfxChannel;
+        private Animator anim;
+
 
         #region -- // Activation / Deactivation // --
         public override void Activate(StateSwapper swapper)
         {
             base.Activate(swapper);
+            
+            // Initializing the anim field.
+            if (anim == null)
+            {
+                anim = manager.CurrentModel.GetComponentInChildren<Animator>();
+            }
+
+            motor.SetAnimator(anim);
 
             sfxChannel.RaiseEvent(splashSFX);
 
@@ -49,6 +59,7 @@ namespace GoofyGhosts
         {
             base.Deactivate();
 
+            motor.SetAnimator(null);
             manager.StopMeterChange();
 
             isActive = false;

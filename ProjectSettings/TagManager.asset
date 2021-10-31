@@ -9,6 +9,7 @@ TagManager:
   - Water
   - GasCamera
   - FollowTarget
+  - Flower
   layers:
   - Default
   - TransparentFX

@@ -162,7 +162,9 @@ public class CharacterMotor : MonoBehaviour
 
         // Apply the movement to the character.
         characterController.Move(movementDirection * Time.deltaTime);
-        animator?.SetFloat("Speed", Mathf.Abs(movementDirection.x + movementDirection.z));
+
+        if (animator != null)
+            animator.SetFloat("Speed", Mathf.Abs(movementDirection.x + movementDirection.z));
     }
 
     /// <summary>
