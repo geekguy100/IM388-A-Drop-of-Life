@@ -45,6 +45,8 @@ namespace GoofyGhosts
         [Tooltip("All layers which can be broken by this state.")]
         [SerializeField] private LayerMask whatIsBreakable;
 
+        [SerializeField] private GameObject groundedParticles;
+
         #region -- // Init // --
         /// <summary>
         /// Finding cameras.
@@ -76,7 +78,10 @@ namespace GoofyGhosts
 
             manager.DecreaseMeterBy(requiredHydration);
 
-            motor.SetJumped(true, 0.5f, true);
+            // Setting max jumps to 1 temporarily
+            // so we can get the hopping effect.
+            Data.MotorData.SetMaxJumps(1);
+            motor.SetJumped(true, 1f, true);
 
             // TODO: Camera shake.
         }
@@ -94,7 +99,11 @@ namespace GoofyGhosts
         public override void OnGrounded()
         {
             base.OnGrounded();
-            print("Grouned");
+
+            // Setting max jumps to 0 so we can't actually perform a jump.
+            Data.MotorData.SetMaxJumps(0);
+
+            Instantiate(groundedParticles, transform.position + particleSpawnOffset, Quaternion.identity);
             PerformRaycast();
 
             // TODO: Camera shake.
