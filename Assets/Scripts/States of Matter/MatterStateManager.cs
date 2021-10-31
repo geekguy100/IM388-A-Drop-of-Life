@@ -51,6 +51,8 @@ namespace GoofyGhosts
             }
         }
 
+        public UnityAction<StateOfMatterEnum> OnStateSwapped;
+
         [SerializeField] private GameObject currentModel;
 
         #region -- // State Fields // --
@@ -189,6 +191,8 @@ namespace GoofyGhosts
 
                     currentModel = Instantiate(currentState.Data.Model, transform);
                     currentState.Activate(hitSwapper);
+
+                    OnStateSwapped?.Invoke(CurrentState);
                 }
             }
             else
