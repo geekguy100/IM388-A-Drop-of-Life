@@ -43,9 +43,5 @@ namespace GoofyGhosts
 
         public abstract void UnassignInteractable();
         public abstract void AssignInteractable(IInteractable interactable);
-
-        public virtual void PerformStateSwapInteraction()
-        {
-        }
     }
 }

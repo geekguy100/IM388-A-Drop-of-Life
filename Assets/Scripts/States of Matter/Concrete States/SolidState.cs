@@ -19,8 +19,6 @@ namespace GoofyGhosts
         /// </summary>
         private GameObject movementCamera;
 
-        private bool isActive;
-
         /// <summary>
         /// The default layer the player is on;
         /// the layer the player is on in their default state.
@@ -80,8 +78,6 @@ namespace GoofyGhosts
 
             manager.DecreaseMeterBy(requiredHydration);
 
-            isActive = true;
-
             // Setting max jumps to 1 temporarily
             // so we can get the hopping effect.
             Data.MotorData.SetMaxJumps(1);
@@ -97,8 +93,6 @@ namespace GoofyGhosts
             gasCamera.SetActive(false);
 
             gameObject.layer = LayerMask.NameToLayer(DEFAULT_LAYER);
-
-            isActive = false;
         }
         #endregion
 
