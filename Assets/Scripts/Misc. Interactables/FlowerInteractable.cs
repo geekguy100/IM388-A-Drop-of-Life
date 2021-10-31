@@ -4,6 +4,7 @@
 *    Date Created: 10/18/2021
 *******************************************************************/
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace GoofyGhosts
 {
@@ -11,6 +12,11 @@ namespace GoofyGhosts
     {
         [SerializeField] private GameObject wateredModel;
         [SerializeField] private VoidChannelSO flowerCollectionChannel;
+
+        [FoldoutGroup("Audio Fields")]
+        [SerializeField] private AudioClipChannelSO sfxChannel;
+        [FoldoutGroup("Audio Fields")]
+        [SerializeField] private AudioClipSO wateredClip;
 
         public string GetDisplayInfo()
         {
@@ -42,9 +48,9 @@ namespace GoofyGhosts
             gameObject.layer = 0;
             gameObject.name = "Flower_Watered";
 
-            flowerCollectionChannel.RaiseEvent();
+            sfxChannel.RaiseEvent(wateredClip);
 
-            // TODO: Play SFX.
+            flowerCollectionChannel.RaiseEvent();
         }
     }
 }
