@@ -14,15 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateName: Gas
   enumValue: 4
-  model: {fileID: 2716838348271379321, guid: 83f4fbfc6d6bdc44d925060de62392c2, type: 3}
+  model: {fileID: 2816010268665567904, guid: bf9976f104956104292f6368a56756ab, type: 3}
   motorData: {fileID: 11400000, guid: eb78aab305b767a4b90db3686761ace5, type: 2}
   characterControllerData:
     slopeLimit: 45
     slopeOffset: 0.3
     skinWidth: 0.036
     minMoveDistance: 0.001
-    center: {x: 0, y: 0, z: 0}
-    radius: 0.36
+    center: {x: 0.1, y: 0, z: 0}
+    radius: 1.3
     height: 0.5
   transitionParticleEffect: {fileID: 3491040316778908203, guid: bbb012ca932c21a42a53811443db9c63, type: 3}
   transitionFromParticleEffect: {fileID: 3491040316778908203, guid: bbb012ca932c21a42a53811443db9c63, type: 3}
