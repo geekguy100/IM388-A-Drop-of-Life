@@ -8373,6 +8373,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
+--- !u!1 &627894599 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6653745159915978130, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
+  m_PrefabInstance: {fileID: 627894598}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &627894600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627894599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39a897864ab5a4ff0afa2e356e61b67a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waterIcon: {fileID: 807284078578356093}
+  iceIcon: {fileID: 807284078578356092}
+  steamIcon: {fileID: 807284078578356091}
+  anim: {fileID: 5405108640299107095}
 --- !u!1001 &633589959
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28418,6 +28439,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11f72b0f8b07b4222a13c339df900402, type: 3}
+--- !u!1 &807284078578356091 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 807284079060670060, guid: 11f72b0f8b07b4222a13c339df900402, type: 3}
+  m_PrefabInstance: {fileID: 807284078578356090}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &807284078578356092 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 807284079437459740, guid: 11f72b0f8b07b4222a13c339df900402, type: 3}
+  m_PrefabInstance: {fileID: 807284078578356090}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &807284078578356093 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 807284078261709727, guid: 11f72b0f8b07b4222a13c339df900402, type: 3}
+  m_PrefabInstance: {fileID: 807284078578356090}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5405108640299107094
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28475,6 +28511,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59465ab3eb7f34849ba1d103f526b877, type: 3}
+--- !u!95 &5405108640299107095 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5405108639365761586, guid: 59465ab3eb7f34849ba1d103f526b877, type: 3}
+  m_PrefabInstance: {fileID: 5405108640299107094}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6296928861291381999
 PrefabInstance:
   m_ObjectHideFlags: 0
