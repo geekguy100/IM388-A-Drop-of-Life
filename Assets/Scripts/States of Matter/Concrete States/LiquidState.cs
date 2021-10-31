@@ -6,6 +6,7 @@
 *******************************************************************/
 using UnityEngine;
 using System.Collections;
+using Sirenix.OdinInspector;
 
 namespace GoofyGhosts
 {
@@ -21,6 +22,10 @@ namespace GoofyGhosts
         /// </summary>
         private bool isActive;
 
+        [FoldoutGroup("Audio Fields")]
+        [SerializeField] private AudioClipSO splashSFX;
+        [FoldoutGroup("Audio Fields")]
+        [SerializeField] private AudioClipChannelSO sfxChannel;
         private Animator anim;
 
 
@@ -36,6 +41,8 @@ namespace GoofyGhosts
             }
 
             motor.SetAnimator(anim);
+
+            sfxChannel.RaiseEvent(splashSFX);
 
             isActive = true;
             StartCoroutine(WaitThenEnable());

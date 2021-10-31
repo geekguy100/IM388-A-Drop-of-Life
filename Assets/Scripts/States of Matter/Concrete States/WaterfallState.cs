@@ -5,6 +5,7 @@
 *******************************************************************/
 using System.Collections;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace GoofyGhosts
 {
@@ -14,10 +15,17 @@ namespace GoofyGhosts
         private bool canSwap;
         private bool isActive;
 
+        [FoldoutGroup("Audio Fields")]
+        [SerializeField] private AudioClipSO splashSFX;
+        [FoldoutGroup("Audio Fields")]
+        [SerializeField] private AudioClipChannelSO sfxChannel;
+
         #region -- // Activation / Deactivation // --
         public override void Activate(StateSwapper swapper)
         {
             base.Activate(swapper);
+
+            sfxChannel.RaiseEvent(splashSFX);
 
             isActive = true;
 
