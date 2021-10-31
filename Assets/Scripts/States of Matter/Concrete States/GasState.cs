@@ -86,6 +86,9 @@ namespace GoofyGhosts
         public override void Deactivate()
         {
             base.Deactivate();
+
+            sfxChannel.RaiseEvent(poofSFX);
+
             movementCamera.SetActive(true);
             gasCamera.SetActive(false);
             isActive = false;
