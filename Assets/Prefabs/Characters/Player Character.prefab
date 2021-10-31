@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayChannel: {fileID: 11400000, guid: dc9dc8c556fae104fb01ad9b136bf3b5, type: 2}
+  interactableChannel: {fileID: 11400000, guid: b9e3ffd088b2a5c46afcacc06f5c164c, type: 2}
   canvas: {fileID: 339070174}
   displayText: {fileID: 1053859068}
 --- !u!95 &1327633429
@@ -609,6 +610,8 @@ MonoBehaviour:
   whatIsStateSwapping:
     serializedVersion: 2
     m_Bits: 8192
+  splashSFX: {fileID: 11400000, guid: 1ba6c59d46c36e24282b117186bddbc0, type: 2}
+  sfxChannel: {fileID: 11400000, guid: 8e372117a574ccb4f85ab2afb5fd3b2f, type: 2}
 --- !u!114 &5809828293919367484
 MonoBehaviour:
   m_ObjectHideFlags: 0
