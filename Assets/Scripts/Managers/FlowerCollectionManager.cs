@@ -25,6 +25,9 @@ namespace GoofyGhosts
         [Tooltip("Channel used to receive flower collection events from.")]
         [SerializeField] private VoidChannelSO flowerCollectionChannel;
 
+        [Tooltip("Channel used to invoke the completion of collecting the flowers.")]
+        [SerializeField] private VoidChannelSO collectionCompleteChannel;
+
         #region -- // Subbing / Unsubbing // --
         private void OnEnable()
         {
@@ -56,7 +59,8 @@ namespace GoofyGhosts
             ++flowersCollected;
             if (flowersCollected >= requiredNumFlowers)
             {
-
+                print("Finished collecting");
+                collectionCompleteChannel.RaiseEvent();
             }
         }
     }
