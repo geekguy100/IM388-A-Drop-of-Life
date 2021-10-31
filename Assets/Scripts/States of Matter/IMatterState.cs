@@ -31,7 +31,7 @@ namespace GoofyGhosts
             }
         }
 
-        [SerializeField] private Vector3 particleSpawnOffset;
+        [SerializeField] protected Vector3 particleSpawnOffset;
 
         [SerializeField] protected LayerMask whatIsStateSwapping;
         #endregion
