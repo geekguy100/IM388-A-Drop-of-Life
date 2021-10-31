@@ -9,14 +9,15 @@ namespace GoofyGhosts
 
         public GameObject waterIcon, iceIcon, steamIcon;
 
-        public Animator anim;
+        private Animator anim;
 
         private MatterStateManager matterStateManager;
 
         void Awake()
         {
             matterStateManager = GetComponent<MatterStateManager>();
-            anim = GetComponent<Animator>();
+            GameObject temp = GameObject.Find("Transform Icons");
+            anim = temp.GetComponent<Animator>();
         }
 
         #region -- // Event Subscribing / Unsubscribing // --
@@ -41,17 +42,22 @@ namespace GoofyGhosts
             switch (state)
             {
                 case StateOfMatterEnum.DEFAULT:
-                    // PUT CODE HERE FOR DEFAULT STATE.
+                    waterIcon.SetActive(false);
+                    iceIcon.SetActive(false);
+                    steamIcon.SetActive(false);
                     break;
                 case StateOfMatterEnum.LIQUID:
                 case StateOfMatterEnum.WATERFALL:
-                    // PUT CODE HERE FOR LIQUID STATE.
+                    waterIcon.SetActive(true);
+                    anim.SetTrigger("Water");
                     break;
                 case StateOfMatterEnum.GAS:
-                    // PUT CODE HERE FOR GAS STATE.
+                    steamIcon.SetActive(true);
+                    anim.SetTrigger("Steam");
                     break;
                 case StateOfMatterEnum.ICE:
-                    // PUT CODE HERE FOR ICE/SOLID STATE.
+                    iceIcon.SetActive(true);
+                    anim.SetTrigger("Ice");
                     break;
             }
         }
