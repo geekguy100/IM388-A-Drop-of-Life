@@ -47,6 +47,8 @@ namespace GoofyGhosts
         [Tooltip("All layers which can be broken by this state.")]
         [SerializeField] private LayerMask whatIsBreakable;
 
+        [SerializeField] private GameObject groundedParticles;
+
         #region -- // Init // --
         /// <summary>
         /// Finding cameras.
@@ -100,7 +102,8 @@ namespace GoofyGhosts
         public override void OnGrounded()
         {
             base.OnGrounded();
-            print("Grouned");
+            print("Grounded");
+            Instantiate(groundedParticles, transform.position + particleSpawnOffset, Quaternion.identity);
             PerformRaycast();
 
             // TODO: Camera shake.
