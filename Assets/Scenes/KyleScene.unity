@@ -1504,6 +1504,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gas_Form
       objectReference: {fileID: 0}
+    - target: {fileID: 2816010268665567904, guid: bf9976f104956104292f6368a56756ab, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3197462036310753306, guid: bf9976f104956104292f6368a56756ab, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1542,7 +1546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3197462036310753306, guid: bf9976f104956104292f6368a56756ab, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3197462036310753306, guid: bf9976f104956104292f6368a56756ab, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
