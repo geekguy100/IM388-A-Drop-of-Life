@@ -53,6 +53,8 @@ namespace GoofyGhosts
             base.Deactivate();
             manager.StopMeterChange();
 
+            sfxChannel.RaiseEvent(splashSFX);
+
             isActive = false;
 
             waterfall.Deactivate();
