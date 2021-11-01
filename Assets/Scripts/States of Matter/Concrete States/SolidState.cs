@@ -50,6 +50,9 @@ namespace GoofyGhosts
 
         [SerializeField] private GameObject groundedParticles;
 
+        [SerializeField] private AudioClipSO thudSFX;
+        [SerializeField] private AudioClipChannelSO sfxChannel;
+
         #region -- // Init // --
 
         protected override void Awake()
@@ -110,6 +113,7 @@ namespace GoofyGhosts
 
             // Camera shake.
             impulseSource.GenerateImpulse(movementCamera.transform.forward);
+            sfxChannel.RaiseEvent(thudSFX);
 
             // Setting max jumps to 0 so we can't actually perform a jump.
             Data.MotorData.SetMaxJumps(0);
