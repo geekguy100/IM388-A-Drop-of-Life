@@ -43,7 +43,7 @@ namespace GoofyGhosts
             StartCoroutine(WaitThenEnable());
             IEnumerator WaitThenEnable()
             {
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(0.5f);
                 canSwap = true;
             }
         }
@@ -52,6 +52,8 @@ namespace GoofyGhosts
         {
             base.Deactivate();
             manager.StopMeterChange();
+
+            sfxChannel.RaiseEvent(splashSFX);
 
             isActive = false;
 

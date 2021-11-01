@@ -4,6 +4,7 @@
 *    Date Created: 
 *******************************************************************/
 using UnityEngine;
+using Cinemachine;
 
 namespace GoofyGhosts
 {
@@ -18,6 +19,8 @@ namespace GoofyGhosts
         /// Reference to the movement camera.
         /// </summary>
         private GameObject movementCamera;
+
+        private CinemachineImpulseSource impulseSource;
 
         /// <summary>
         /// The default layer the player is on;
@@ -47,7 +50,19 @@ namespace GoofyGhosts
 
         [SerializeField] private GameObject groundedParticles;
 
+        [SerializeField] private AudioClipSO thudSFX;
+        [SerializeField] private AudioClipSO activateSFX;
+        [SerializeField] private AudioClipSO poofSFX;
+        [SerializeField] private AudioClipChannelSO sfxChannel;
+
         #region -- // Init // --
+
+        protected override void Awake()
+        {
+            base.Awake();
+            impulseSource = GetComponent<CinemachineImpulseSource>();
+        }
+
         /// <summary>
         /// Finding cameras.
         /// </summary>
@@ -74,6 +89,8 @@ namespace GoofyGhosts
             movementCamera.SetActive(false);
             gasCamera.SetActive(true);
 
+            sfxChannel.RaiseEvent(activateSFX);
+
             gameObject.layer = LayerMask.NameToLayer(SOLID_LAYER);
 
             manager.DecreaseMeterBy(requiredHydration);
@@ -82,8 +99,6 @@ namespace GoofyGhosts
             // so we can get the hopping effect.
             Data.MotorData.SetMaxJumps(1);
             motor.SetJumped(true, 1f, true);
-
-            // TODO: Camera shake.
         }
 
         public override void Deactivate()
@@ -91,6 +106,8 @@ namespace GoofyGhosts
             base.Deactivate();
             movementCamera.SetActive(true);
             gasCamera.SetActive(false);
+
+            sfxChannel.RaiseEvent(poofSFX);
 
             gameObject.layer = LayerMask.NameToLayer(DEFAULT_LAYER);
         }
@@ -100,13 +117,15 @@ namespace GoofyGhosts
         {
             base.OnGrounded();
 
+            // Camera shake.
+            impulseSource.GenerateImpulse(movementCamera.transform.forward);
+            sfxChannel.RaiseEvent(thudSFX);
+
             // Setting max jumps to 0 so we can't actually perform a jump.
             Data.MotorData.SetMaxJumps(0);
 
             Instantiate(groundedParticles, transform.position + particleSpawnOffset, Quaternion.identity);
             PerformRaycast();
-
-            // TODO: Camera shake.
         }
 
         public override StateOfMatterEnum GetNextState()

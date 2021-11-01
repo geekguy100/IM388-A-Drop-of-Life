@@ -124,6 +124,11 @@ namespace GoofyGhosts
             currentState.OnGrounded();
         }
 
+        public void OnUnGrounded()
+        {
+            currentState.OnUnGrounded();
+        }
+
         public StateOfMatterEnum GetNextState()
         {
             return currentState.GetNextState();

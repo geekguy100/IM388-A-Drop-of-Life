@@ -24,6 +24,7 @@ public class CharacterMotor : MonoBehaviour
 
     public UnityAction<int> OnJumpCountChange;
     public UnityAction OnGrounded;
+    public UnityAction OnUnGrounded;
 
     /// <summary>
     /// True if the character is on the ground.
@@ -73,6 +74,8 @@ public class CharacterMotor : MonoBehaviour
     /// </summary>
     private bool takeJumpAway;
 
+    private bool wasGrounded;
+
     /// <summary>
     /// Getting components.
     /// </summary>
@@ -83,6 +86,7 @@ public class CharacterMotor : MonoBehaviour
         currentJumps = 0;
         heightMultiplier = 1;
         takeJumpAway = true;
+        wasGrounded = true;
     }
 
     /// <summary>
@@ -118,6 +122,11 @@ public class CharacterMotor : MonoBehaviour
             {
                 currentJumps = 0;
                 jumpedFromGround = false;
+            }
+
+            if (!wasGrounded)
+            {
+                wasGrounded = true;
                 OnGrounded?.Invoke();
             }
         }
@@ -152,6 +161,14 @@ public class CharacterMotor : MonoBehaviour
             vel.y = movementDirection.y;
 
             movementDirection = Vector3.Lerp(movementDirection, vel, motorData.airControl * Time.deltaTime);
+
+            // If we were previously grounded, 
+            // update wasGrounded to false and invoke the OnUnGrounded event.
+            if (wasGrounded)
+            {
+                wasGrounded = false;
+                OnUnGrounded?.Invoke();
+            }
         }
 
         // Subtracting gravity from the movement direction; taking gravity into account.

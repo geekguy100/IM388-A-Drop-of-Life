@@ -399,6 +399,7 @@ GameObject:
   - component: {fileID: 4608653068470116465}
   - component: {fileID: 2417477995784512680}
   - component: {fileID: 4117559170046538659}
+  - component: {fileID: 2170702160627198592}
   m_Layer: 10
   m_Name: Player Character
   m_TagString: Player
@@ -538,6 +539,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 32768
   groundedParticles: {fileID: 574445519189694738, guid: 882e14e9abab74a189b354eb9e8df918, type: 3}
+  thudSFX: {fileID: 11400000, guid: 32c11d93d11b4df4381f17a477d81a27, type: 2}
+  activateSFX: {fileID: 11400000, guid: 6c2f31fe16ae74a45bbc5c10bc8af0de, type: 2}
+  poofSFX: {fileID: 11400000, guid: 3e98725e65ca8bb48b7f66fa21fbe369, type: 2}
+  sfxChannel: {fileID: 11400000, guid: 8e372117a574ccb4f85ab2afb5fd3b2f, type: 2}
 --- !u!114 &1208082473769351561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,6 +680,48 @@ MonoBehaviour:
   waterIcon: {fileID: 0}
   iceIcon: {fileID: 0}
   steamIcon: {fileID: 0}
+--- !u!114 &2170702160627198592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653745159915978130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_RawSignal: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+    m_AmplitudeGain: 5
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 1000
+    m_PropagationSpeed: 343
 --- !u!1001 &5666071235749024861
 PrefabInstance:
   m_ObjectHideFlags: 0

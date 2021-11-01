@@ -579,6 +579,10 @@ PrefabInstance:
       propertyPath: interactableChannel
       value: 
       objectReference: {fileID: 11400000, guid: b9e3ffd088b2a5c46afcacc06f5c164c, type: 2}
+    - target: {fileID: 4117559170046538659, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6653745159915978130, guid: f6b75c6a35d12ef40b33620794dbd6e4, type: 3}
       propertyPath: m_Name
       value: Player
