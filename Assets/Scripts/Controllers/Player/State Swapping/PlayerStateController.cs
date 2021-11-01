@@ -44,6 +44,7 @@ namespace GoofyGhosts
 
             motor.OnJumpCountChange += manager.Jump;
             motor.OnGrounded += manager.OnGrounded;
+            motor.OnUnGrounded += manager.OnUnGrounded;
         }
 
         private void OnDisable()
@@ -52,6 +53,7 @@ namespace GoofyGhosts
 
             motor.OnJumpCountChange -= manager.Jump;
             motor.OnGrounded -= manager.OnGrounded;
+            motor.OnUnGrounded -= manager.OnUnGrounded;
         }
         #endregion
     }

@@ -133,6 +133,14 @@ namespace GoofyGhosts
                 DisplayNotif(gasNotif);
         }
 
+        public override void OnUnGrounded()
+        {
+            inAir = true;
+
+            if (active)
+                DisplayNotif(gasNotif);
+        }
+
         /// <summary>
         /// Invoked when the player lands on the ground.
         /// </summary>

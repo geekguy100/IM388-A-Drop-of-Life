@@ -14,6 +14,7 @@ namespace GoofyGhosts
         // Abstract / Virtual methods
         public virtual void Jump(int jumpCount) { }
         public virtual void OnGrounded() { }
+        public virtual void OnUnGrounded() { }
         public abstract StateOfMatterEnum GetNextState();
         public virtual StateSwapper GetSwapper() { return null; }
 
