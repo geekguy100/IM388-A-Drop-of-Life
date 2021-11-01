@@ -14,8 +14,11 @@ namespace GoofyGhosts
         private GameObject gasCamera;
         private GameObject movementCamera;
         private PlayerControls controls;
-
+        private Animator anim;
         private bool isActive;
+
+        private const string GAS_LAYER = "Gas";
+        private const string DEFAULT_LAYER = "Player";
 
         [SerializeField][MaxValue(0)] private float propelGravity;
 
@@ -23,7 +26,6 @@ namespace GoofyGhosts
         [SerializeField] private AudioClipSO poofSFX;
         [FoldoutGroup("Audio Fields")]
         [SerializeField] private AudioClipChannelSO sfxChannel;
-        private Animator anim;
 
         #region -- // Initialization // --
         protected override void Awake()
@@ -73,6 +75,8 @@ namespace GoofyGhosts
         {
             base.Activate(swapper);
 
+            gameObject.layer = LayerMask.NameToLayer(GAS_LAYER);
+
             sfxChannel.RaiseEvent(poofSFX);
             anim = manager.CurrentModel.GetComponentInChildren<Animator>();
             anim.speed = 0.5f;
@@ -89,6 +93,8 @@ namespace GoofyGhosts
         public override void Deactivate()
         {
             base.Deactivate();
+
+            gameObject.layer = LayerMask.NameToLayer(DEFAULT_LAYER);
 
             sfxChannel.RaiseEvent(poofSFX);
 

@@ -9809,6 +9809,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grate
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 61dede408d6ba4b4dacaae484a183e68, type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 61dede408d6ba4b4dacaae484a183e68, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61dede408d6ba4b4dacaae484a183e68, type: 3}
 --- !u!1001 &674513691
