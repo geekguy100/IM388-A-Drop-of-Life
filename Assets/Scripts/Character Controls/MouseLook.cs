@@ -8,7 +8,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Sirenix.OdinInspector;
-
+using GoofyGhosts;
 /// <summary>
 /// Rotates the character GameObject via the mouse.
 /// </summary>
@@ -138,8 +138,8 @@ public class MouseLook : MonoBehaviour
     {
         // Perform rotation.
         // Obtain rotation amounts taking sensitivity and delta time into consideration.
-        float horizontalRot = mouseDelta.x * Time.deltaTime * yawSensitivity;
-        float verticalRot = mouseDelta.y * Time.deltaTime * pitchSensitivity;
+        float horizontalRot = mouseDelta.x * Time.deltaTime * yawSensitivity * SensitivitySettings.instance.sensitivity;
+        float verticalRot = mouseDelta.y * Time.deltaTime * pitchSensitivity * SensitivitySettings.instance.sensitivity;
 
         // Add our inputs to the yaw and pitch.
         yaw += horizontalRot;
