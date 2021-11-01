@@ -5,6 +5,7 @@
 *******************************************************************/
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System.Collections;
 
 namespace GoofyGhosts
 {
@@ -86,7 +87,6 @@ namespace GoofyGhosts
 
             if ((((1 << other.gameObject.layer) & whatIsStateSwapping) > 0))
             {
-                print("Colliding with state swapper");
                 SetSwapper(other.GetComponent<StateSwapper>());
             }
         }
@@ -135,10 +135,13 @@ namespace GoofyGhosts
 
         public override void OnUnGrounded()
         {
-            inAir = true;
-
-            if (active)
-                DisplayNotif(gasNotif);
+            Ray ray = new Ray(transform.position, Vector3.down);
+            Debug.DrawRay(transform.position, Vector3.down * 3f, Color.red, 2f);
+            if (!Physics.Raycast(ray, 3f))
+            {
+                // If we did not hit anything, set inAir to true.
+                Jump(0);
+            }
         }
 
         /// <summary>
