@@ -540,6 +540,8 @@ MonoBehaviour:
     m_Bits: 32768
   groundedParticles: {fileID: 574445519189694738, guid: 882e14e9abab74a189b354eb9e8df918, type: 3}
   thudSFX: {fileID: 11400000, guid: 32c11d93d11b4df4381f17a477d81a27, type: 2}
+  activateSFX: {fileID: 11400000, guid: 6c2f31fe16ae74a45bbc5c10bc8af0de, type: 2}
+  poofSFX: {fileID: 11400000, guid: 3e98725e65ca8bb48b7f66fa21fbe369, type: 2}
   sfxChannel: {fileID: 11400000, guid: 8e372117a574ccb4f85ab2afb5fd3b2f, type: 2}
 --- !u!114 &1208082473769351561
 MonoBehaviour:

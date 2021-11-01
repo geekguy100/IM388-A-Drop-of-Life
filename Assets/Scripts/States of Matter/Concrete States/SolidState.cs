@@ -51,6 +51,8 @@ namespace GoofyGhosts
         [SerializeField] private GameObject groundedParticles;
 
         [SerializeField] private AudioClipSO thudSFX;
+        [SerializeField] private AudioClipSO activateSFX;
+        [SerializeField] private AudioClipSO poofSFX;
         [SerializeField] private AudioClipChannelSO sfxChannel;
 
         #region -- // Init // --
@@ -87,6 +89,8 @@ namespace GoofyGhosts
             movementCamera.SetActive(false);
             gasCamera.SetActive(true);
 
+            sfxChannel.RaiseEvent(activateSFX);
+
             gameObject.layer = LayerMask.NameToLayer(SOLID_LAYER);
 
             manager.DecreaseMeterBy(requiredHydration);
@@ -102,6 +106,8 @@ namespace GoofyGhosts
             base.Deactivate();
             movementCamera.SetActive(true);
             gasCamera.SetActive(false);
+
+            sfxChannel.RaiseEvent(poofSFX);
 
             gameObject.layer = LayerMask.NameToLayer(DEFAULT_LAYER);
         }
