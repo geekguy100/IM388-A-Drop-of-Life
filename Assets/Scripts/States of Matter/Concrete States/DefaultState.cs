@@ -86,6 +86,7 @@ namespace GoofyGhosts
 
             if ((((1 << other.gameObject.layer) & whatIsStateSwapping) > 0))
             {
+                print("Colliding with state swapper");
                 SetSwapper(other.GetComponent<StateSwapper>());
             }
         }
@@ -97,7 +98,7 @@ namespace GoofyGhosts
         /// <param name="other">The Collider that exited the trigger.</param>
         private void OnTriggerExit(Collider other)
         {
-            if (!active || inAir)
+            if (!active)
                 return;
 
             // Run only if we exited the trigger of the current swapper.

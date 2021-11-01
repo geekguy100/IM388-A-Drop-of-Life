@@ -47,10 +47,9 @@ namespace GoofyGhosts
             isActive = true;
             StartCoroutine(WaitThenEnable());
 
-
             IEnumerator WaitThenEnable()
             {
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(0.5f);
                 canSwap = true;
             }
         }
