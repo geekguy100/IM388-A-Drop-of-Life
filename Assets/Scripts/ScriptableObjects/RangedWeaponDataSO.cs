@@ -7,7 +7,6 @@
 *****************************************************************************/
 using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEditor;
 
 /// <summary>
 /// Holds a ranged weapon's data.
@@ -60,7 +59,6 @@ public class RangedWeaponDataSO : IWeaponDataSO
         if (shootingType == ShootingType.RAYCAST)
         {
             const string PATH = "Assets/Prefabs/Weapons/RaycastBullet";
-            bulletPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(PATH);
             if (bulletPrefab == null)
             {
                 Debug.LogWarning("[RangedWeaponDataSO]: Could not retrieve raycast bullet! Check that path is correct: " + PATH);
