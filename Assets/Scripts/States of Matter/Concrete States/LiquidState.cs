@@ -59,6 +59,8 @@ namespace GoofyGhosts
         {
             base.Deactivate();
 
+            sfxChannel.RaiseEvent(splashSFX);
+
             motor.SetAnimator(null);
             manager.StopMeterChange();
 
